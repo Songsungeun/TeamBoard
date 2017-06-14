@@ -3284,7 +3284,7 @@
 		-webkit-flex-wrap: wrap;
 		-ms-flex-wrap: wrap;
 		flex-wrap: wrap;
-		margin: 0 0 2em -6em;
+		margin: 0 0 2em -3em;
 		width: calc(100% + 6em);
 	}
 
@@ -3307,10 +3307,10 @@
 				content: '';
 				display: block;
 				height: calc(100% + 6em);
-				left: -3em;
+				left: -6em;
 				position: absolute;
 				top: 0;
-				width: 1px;
+				width: 0px;
 			}
 
 			.posts div:after {
@@ -3318,7 +3318,7 @@
 				bottom: -3em;
 				content: '';
 				display: block;
-				height: 1px;
+				height: 0px;
 				position: absolute;
 				right: 0;
 				width: calc(100% + 6em);
@@ -4068,6 +4068,10 @@
 /* home notice */
 .home-notice-list {
 	
+}
+
+.etc-area > ul {
+	margin-left : -3em;
 }
 
 home-notice-list a p {
