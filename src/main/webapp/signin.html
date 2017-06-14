@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>    
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>HQTech 1Team | Login</title>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!--     <link href="../Contents/Font-awesome/css/font-awesome.css" rel="stylesheet"/> -->
+    <link href="lib/css/animate.css" rel="stylesheet"/>
+    <link href="lib/css/style.css" rel="stylesheet"/>
+<!--     <script src="../Contents/Scripts/jquery.blockUI.js"></script> -->
+<!--     <script src="../Contents/Scripts/jquery-ui-1.10.4.min.js"></script> -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<!--     <script src="../Contents/Scripts/Common.js"></script> -->
+<!--     <script src="../Contents/Scripts/Huma.Framework.V1.Script.js"></script> -->
+    
+<style>
+.hqttable {
+  background-color: #E6E6E6;
+  margin: 0 auto; 
+  width: 350px;
+  /* border: 1px soild white; */
+  border-collapse: collapse;
+
+}
+.hqttr {
+  height: 50px;
+  border-bottom: 1px solid white;
+}
+.hqttd1 {
+  width: 35%;
+  padding-left: 10px;
+}
+.hqttd2 {
+  width: 65%;
+  padding-left: 10px;
+}
+
+.signbtn {
+  background-color: #A0C0D7; 
+  margin: 0 auto; 
+  width: 350px; 
+  border: 0; 
+  outline: 0;
+  color: white;
+  height: 30px;
+}
+
+</style>
+</head>
+<body class="gray-bg">
+    
+     <div class="middle-box text-center loginscreen animated fadeInDown" style="padding-top: 0; padding-bottom: 30px;">        
+        <div>
+                <h1 class="logo-name">Hi+</h1>
+        </div>
+    </div>
+    <table class="hqttable">
+      <tr class="hqttr">
+        <td class="hqttd1">아이디</td>
+        <td class="hqttd2"><input type="text" id="id" style="padding-left: 5px;"></td>
+      </tr>
+   
+      <tr class="hqttr" style="background-color: #F0F0F0;">
+        <td class="hqttd1">이름</td>
+        <td class="hqttd2"><input type="text" id="name" style="padding-left: 5px;"></td>
+      </tr>
+      
+      <tr class="hqttr">
+        <td class="hqttd1">비밀번호</td>
+        <td class="hqttd2"><input type="password" id="password" style="padding-left: 5px;"></td>
+      </tr>
+      
+      <tr class="hqttr" style="background-color: #F0F0F0;">
+        <td class="hqttd1">부서</td>
+        <td class="hqttd2">
+          <select style="width:73%; height: 25px;">
+            <option>-</option>
+            <option>AV팀</option>
+            <option>TV팀</option>
+            <option>APP팀</option>
+            <option>LFD팀</option>
+          </select>
+        </td>
+      </tr>
+      
+      <tr class="hqttr">
+        <td class="hqttd1">직급</td>
+        <td class="hqttd2">
+          <select style="width:73%; height: 25px;">
+            <option>-</option>
+            <option>팀장</option>
+            <option>수석</option>
+            <option>책임</option>
+            <option>선임</option>
+            <option>주임</option>
+            <option>사원</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <br>
+    <div style="margin: 0 auto; width: 350px;">
+      <button type="submit" class="signbtn" onclick="javascript:fnLogin();">회원가입</button>
+    </div>
+</body>
+</html>
