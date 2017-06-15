@@ -1,10 +1,284 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>1팀 게시판</title>
-</head>
-<body>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>    
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+    <title>MainPage</title>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="lib/css/animate.css" rel="stylesheet"/>
+    <link href="lib/css/style.css" rel="stylesheet"/>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+<style>
+.sideTable {
+  background-color: #E6E6E6;
+  float : left; 
+  width: 20%; 
+  height: 100%
+  
+}
+
+.sidetr {
+  height: 10%
+  border-bottom: 1px solid white;
+  font-size: small; 
+  font-weight: bold;
+}
+.sidetd {
+  padding-left: 30px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #A0C0D7;
+    min-width: 20%;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+#noticemenu:hover, noticemenu:focus {
+  /* background-color: #A0C0D7; */
+  color: #FF8000; 
+}
+.dropdown-content2 {
+    display: none;
+    position: absolute;
+    background-color: #A0C0D7;
+    min-width: 20%;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content2 a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+#noticemenu2:hover, noticemenu2:focus {
+  /* background-color: #A0C0D7; */
+  color: #FF8000; 
+}
+#myDropdown a:hover {
+  color: white;
+}
+#myDropdown2 a:hover {
+  color: white;
+}
+</style>
+</head>
+<body class="gray-bg">
+
+  <table class="sideTable">
+    <tr class="sidetr" style="border-bottom: 1px solid #E6E6E6">
+      <td class="sidetd">
+        <section id="search" class="alt">
+        <form method="post" action="#">
+        <input type="text" name="query" id="query" placeholder="Search" />
+        </form>
+        </section>
+      </td>
+    </tr>
+    <tr class="sidetr">
+      <td class="sidetd"></td>
+    </tr>
+    <tr class="sidetr">
+      <td class="sidetd" style="background-color: #F0F0F0; font-size: large;">
+      <img src="home.png" width="25xp;" style="padding-bottom: 5px;">
+      Home
+      </td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td id="noticemenu" class="sidetd" style="cursor: pointer;" onClick="myFunction()">
+      공지사항
+      </td>
+    </tr>
+    <tr id="myDropdown" class="dropdown-content" style="width: 20%;">
+      <td style="width: 100%;">
+      <a href="#" style="padding-left: 50px;">> 팀 내부 공지사항</a>
+      <a href="#" style="padding-left: 50px;">> 업무 관련 공지사항</a>
+      </td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td class="sidetd" style="background-color: #F0F0F0;">시장이슈</td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td id="noticemenu2" class="sidetd" style="cursor: pointer;" onClick="myFunction2()">제품별 사양 및 이슈</td>
+    </tr>
+    <tr id="myDropdown2" class="dropdown-content2" style="width: 20%;">
+      <td style="width: 100%;">
+      <a href="#" style="padding-left: 50px;">> SAT</a>
+      <a href="#" style="padding-left: 50px;">> ROOM SPEAKER</a>
+      <a href="#" style="padding-left: 50px;">> MULTIROOM APP</a>
+      <a href="#" style="padding-left: 50px;">> BAND APP</a>
+      <a href="#" style="padding-left: 50px;">> BD/HES</a>
+      <a href="#" style="padding-left: 50px;">> PVR</a>
+      <a href="#" style="padding-left: 50px;">> SAMSUNG CONNECT</a>
+      <a href="#" style="padding-left: 50px;">> CONVERGENCE</a>
+      </td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td class="sidetd" style="background-color: #F0F0F0;">업무 프로세스</td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td class="sidetd">제품 관련 용어 정리</td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td class="sidetd" style="background-color: #F0F0F0;">익명 게시판</td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td class="sidetd">PC 도움방</td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td class="sidetd" style="background-color: #F0F0F0;">업무 관련 사이트</td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td class="sidetd">내공간</td>
+    </tr>
+    
+  </table>
+
+  <!-- <div style="float: left; width:300px; boarder: 1px solid black;">
+          <div>
+  
+            Search
+         <section id="search" class="alt">
+           <form method="post" action="#">
+             <input type="text" name="query" id="query" placeholder="Search" />
+           </form>
+         </section>
+  
+       Menu
+         <nav id="menu">
+           <header class="major">
+             <h2>Menu</h2>
+           </header>
+           <ul>
+             <li><a href="index.html">Home</a></li>
+             <li>
+               <span class="opener">공지사항</span>
+               <ul>
+                 <li><a href="#">팀 내부 공지사항</a></li>
+                 <li><a href="#">업무 관련 공지사항</a></li>
+               </ul>
+             </li>
+             <li><a href="#">시장 이슈</a></li>
+             <li>
+               <span class="opener">제품별 사양 및 이슈</span>
+               <ul>
+                 <li><a href="#">SAT</a></li>
+                 <li><a href="#">ROOM SPEAKER</a></li>
+                 <li><a href="#">MULTIROOM APP</a></li>
+                 <li><a href="#">BAND APP</a></li>
+                 <li><a href="#">BD/HES</a></li>
+                 <li><a href="#">PVR</a></li>
+                 <li><a href="#">SAMSUNG CONNECT</a></li>
+                 <li><a href="#">CONVERGENCE</a></li>
+               </ul>
+             </li>
+             <li><a href="#">업무 프로세스</a></li>
+             <li><a href="#">제품 관련 용어 정리</a></li>
+             <li><a href="#">PC 도움방</a></li>
+             <li><a href="#">업무 관련 사이트</a></li>
+           </ul>
+         </nav>
+  
+  제품별 사양 및 이슈
+        SAT (제목 카테고리 - 공통 15 16 17 선택 가능)
+        Roomspeaker (제목 카테고리 - 공통 15 16 17 선택 가능)
+        MULTIROOM APP (제목 카테고리 - 공통 15 16 17 선택 가능)
+        BAND APP
+        BD/HES (제목 카테고리 - 공통 BD HES 15 16 17 선택 가능)
+        PVR (제목 카테고리 - 공통 15 16 17 선택 가능)
+        Samsung Connect
+        Convergence
+  
+  시장이슈
+         카테고리 제품 별 선택 가능하게끔
+  
+  업무 프로세스
+  
+  제품 관련 용어 정리
+  
+  PC 도움방
+  
+  업무 관련사이트 (링크 되게끔)
+  
+       Footer
+         <footer id="footer">
+           <p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+         </footer>
+  
+     </div>
+   </div> -->
+
+
+    
+  <div class="middle-box text-center loginscreen animated fadeInDown" style="padding-top: 0; padding-bottom: 0px;">        
+      <div>
+              <h1 class="logo-name">Hi+</h1>
+      </div>
+      <!-- <h3>Welcome to AV Team+</h3> -->
+  </div>
+    
+
+    
+    
+    
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function myFunction2() {
+    document.getElementById("myDropdown2").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('#noticemenu')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+  
+  if (!event.target.matches('#noticemenu2')) {
+
+	    var dropdowns = document.getElementsByClassName("dropdown-content2");
+	    var i;
+	    for (i = 0; i < dropdowns.length; i++) {
+	      var openDropdown = dropdowns[i];
+	      if (openDropdown.classList.contains('show')) {
+	        openDropdown.classList.remove('show');
+	      }
+	    }
+	  }
+}
+</script>
+    
 </body>
 </html>
