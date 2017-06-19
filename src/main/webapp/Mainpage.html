@@ -16,19 +16,20 @@
 .sideTable {
   background-color: #E6E6E6;
   float : left; 
-  width: 20%; 
-  height: 100%
+  width: 300px; 
+  /* height: 100%; */
   
 }
 
 .sidetr {
-  height: 10%
+  height: 50px;
   border-bottom: 1px solid white;
   font-size: small; 
   font-weight: bold;
 }
 .sidetd {
   padding-left: 30px;
+  width: 100%;
 }
 .dropdown-content {
     display: none;
@@ -44,7 +45,7 @@
     text-decoration: none;
     display: block;
 }
-#noticemenu:hover, noticemenu:focus {
+#noticemenu:hover, #noticemenu:focus {
   /* background-color: #A0C0D7; */
   color: #FF8000; 
 }
@@ -72,18 +73,92 @@
 #myDropdown2 a:hover {
   color: #FF8000;
 }
+.sptTable {
+  width: 40%;
+  background-color: #E6E6E6;
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+.sptTable tr td {
+  width: 800px;
+  height: 30px;
+  border: 1px solid white;
+}
+
+#tabTable {
+  width: 100%;
+  background-color: #E6E6E6;
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+#tabTable tr td {
+  height: 30px;
+  border: 1px solid white;
+}
+ul.tabs {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    height: 32px;
+    border-bottom: 1px solid #eee;
+    border-left: 1px solid #eee;
+    width: 100%;
+    font-size:10px;
+}
+ul.tabs li {
+    float: left;
+    text-align:center;
+    cursor: pointer;
+    width:10.5%;
+    height: 31px;
+    line-height: 31px;
+    border: 1px solid #eee;
+    border-left: none;
+    font-weight: bold;
+    background: #E6E6E6;
+    overflow: hidden;
+    position: relative;
+}
+ul.tabs li.active {
+    background: #FDBBE1;
+    border-bottom: 1px solid #FFFFFF;
+}
+.tab_container {
+    border: 1px solid #eee;
+    border-top: none;
+    float: left;
+    width: 84%;
+    background: #F0F0F0;
+}
+.tab_content {
+    padding: 5px;
+    font-size: 12px;
+    display: none;
+    border: 1px solid white;
+}
+.tab_container .tab_content ul {
+    width:100%;
+    margin:0px;
+    padding:0px;
+    
+}
+.tab_container .tab_content ul li {
+    padding:5px;
+    list-style:none;
+}
+;
+ #container {
+    width: 249px;
+    margin: 0 auto;
+}
 </style>
 </head>
 <body class="gray-bg">
 
   <table class="sideTable">
     <tr class="sidetr" style="border-bottom: 1px solid #E6E6E6">
-      <td class="sidetd">
-        <section id="search" class="alt">
-        <form method="post" action="#">
-        <input type="text" name="query" id="query" placeholder="Search" />
-        </form>
-        </section>
+      <td class="sidetd"> <span>AV팀</span> <span>양찬</span> <span>주임</span>님 환영합니다!　　<span>Logout</span>
       </td>
     </tr>
     <tr class="sidetr">
@@ -101,9 +176,9 @@
       공지사항 ▼
       </td>
     </tr>
-    <tr id="myDropdown" class="dropdown-content" style="width: 20%;">
-      <td style="width: 100%;">
-      <a href="#" style="padding-left: 50px;">> 팀 내부 공지사항</a>
+    <tr id="myDropdown" class="dropdown-content" style="width: 200px;">
+      <td style="width: 200px;">
+      <a href="noticeBoard.html" style="padding-left: 50px;">> 팀 내부 공지사항</a>
       <a href="#" style="padding-left: 50px;">> 업무 관련 공지사항</a>
       </td>
     </tr>
@@ -152,89 +227,251 @@
       <td class="sidetd">내공간</td>
     </tr>
     
-  </table>
-
-  <!-- <div style="float: left; width:300px; boarder: 1px solid black;">
-          <div>
-  
-            Search
-         <section id="search" class="alt">
-           <form method="post" action="#">
-             <input type="text" name="query" id="query" placeholder="Search" />
-           </form>
-         </section>
-  
-       Menu
-         <nav id="menu">
-           <header class="major">
-             <h2>Menu</h2>
-           </header>
-           <ul>
-             <li><a href="index.html">Home</a></li>
-             <li>
-               <span class="opener">공지사항</span>
-               <ul>
-                 <li><a href="#">팀 내부 공지사항</a></li>
-                 <li><a href="#">업무 관련 공지사항</a></li>
-               </ul>
-             </li>
-             <li><a href="#">시장 이슈</a></li>
-             <li>
-               <span class="opener">제품별 사양 및 이슈</span>
-               <ul>
-                 <li><a href="#">SAT</a></li>
-                 <li><a href="#">ROOM SPEAKER</a></li>
-                 <li><a href="#">MULTIROOM APP</a></li>
-                 <li><a href="#">BAND APP</a></li>
-                 <li><a href="#">BD/HES</a></li>
-                 <li><a href="#">PVR</a></li>
-                 <li><a href="#">SAMSUNG CONNECT</a></li>
-                 <li><a href="#">CONVERGENCE</a></li>
-               </ul>
-             </li>
-             <li><a href="#">업무 프로세스</a></li>
-             <li><a href="#">제품 관련 용어 정리</a></li>
-             <li><a href="#">PC 도움방</a></li>
-             <li><a href="#">업무 관련 사이트</a></li>
-           </ul>
-         </nav>
-  
-  제품별 사양 및 이슈
-        SAT (제목 카테고리 - 공통 15 16 17 선택 가능)
-        Roomspeaker (제목 카테고리 - 공통 15 16 17 선택 가능)
-        MULTIROOM APP (제목 카테고리 - 공통 15 16 17 선택 가능)
-        BAND APP
-        BD/HES (제목 카테고리 - 공통 BD HES 15 16 17 선택 가능)
-        PVR (제목 카테고리 - 공통 15 16 17 선택 가능)
-        Samsung Connect
-        Convergence
-  
-  시장이슈
-         카테고리 제품 별 선택 가능하게끔
-  
-  업무 프로세스
-  
-  제품 관련 용어 정리
-  
-  PC 도움방
-  
-  업무 관련사이트 (링크 되게끔)
-  
-       Footer
-         <footer id="footer">
-           <p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-         </footer>
-  
-     </div>
-   </div> -->
-
-
+    <tr class="sidetr" style="height: 300px;">
+      <td class="sidetd" style="background-color: #F0F0F0;"></td>
+    </tr>
     
-  <div class="middle-box text-center loginscreen animated fadeInDown" style="padding-top: 0; padding-bottom: 0px;">        
-      <div>
-              <h1 class="logo-name">Hi+</h1>
-      </div>
-      <!-- <h3>Welcome to AV Team+</h3> -->
+  </table>
+  
+    <div class="middle-box text-center loginscreen animated fadeInDown" style="padding-top: 0; padding-bottom: 0px; min-width: 1280px;">        
+      <h1 class="logo-name" style="font-size: 150px;">AV+</h1>
+    </div>
+  
+  <div style="margin-left: 400px;">
+<!--     <h2 style="font-weight: bold; font-family: sans-serif;">Notice</h2>
+    <hr style="border:3px solid #96D2FF;"> -->
+    <br>
+    <br>
+    <br>
+    
+    <!-- 공지사항 게시판 -->
+    <table class="sptTable" style="display: inline-block;">
+      <tr>
+        <td colspan="3" style="padding-left: 10px; font-weight: bold; background-color: #A0C0D7; color: white;">* 공지사항</td>
+      </tr>
+    
+      <tr style="background-color: #F0F0F0;">
+        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조1</a></td>
+        <td style="width: 15%; text-align: center;">관리자</td>
+        <td style="width: 15%; text-align: center;">06-18</td>
+      </tr>
+    
+      <tr>
+        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조2</a></td>
+        <td style="width: 15%; text-align: center;">관리자</td>
+        <td style="width: 15%; text-align: center;">06-18</td>
+      </tr>
+    
+      <tr style="background-color: #F0F0F0;">
+        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조3</a></td>
+        <td style="width: 15%; text-align: center;">관리자</td>
+        <td style="width: 15%; text-align: center;">06-18</td>
+      </tr>
+    
+      <tr>
+        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조4</a></td>
+        <td style="width: 15%; text-align: center;">관리자</td>
+        <td style="width: 15%; text-align: center;">06-18</td>
+      </tr>
+    
+      <tr style="background-color: #F0F0F0;">
+        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조5</a></td>
+        <td style="width: 15%; text-align: center;">관리자</td>
+        <td style="width: 15%; text-align: center;">06-18</td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" style="text-align: right; padding-right: 15px;"><a href="#">More</a></td>
+      </tr>
+    </table>
+    <!-- 공지사항 게시판 끝-->
+    <!-- 이슈사항 게시판 -->
+    <table class="sptTable" style="margin-left: 50px; display: inline-block;">
+      <tr>
+        <td colspan="3" style="padding-left: 10px; font-weight: bold; background-color: #A3D8C4; color: white;">* 시장이슈</td>
+      </tr>
+    
+      <tr style="background-color: #F0F0F0;">
+        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조1</a></td>
+        <td style="width: 15%; text-align: center;">관리자</td>
+        <td style="width: 15%; text-align: center;">06-18</td>
+      </tr>
+    
+      <tr>
+        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조2</a></td>
+        <td style="width: 15%; text-align: center;">관리자</td>
+        <td style="width: 15%; text-align: center;">06-18</td>
+      </tr>
+    
+      <tr style="background-color: #F0F0F0;">
+        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조3</a></td>
+        <td style="width: 15%; text-align: center;">관리자</td>
+        <td style="width: 15%; text-align: center;">06-18</td>
+      </tr>
+    
+      <tr>
+        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조4</a></td>
+        <td style="width: 15%; text-align: center;">관리자</td>
+        <td style="width: 15%; text-align: center;">06-18</td>
+      </tr>
+    
+      <tr style="background-color: #F0F0F0;">
+        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조5</a></td>
+        <td style="width: 15%; text-align: center;">관리자</td>
+        <td style="width: 15%; text-align: center;">06-18</td>
+      </tr>
+      
+      <tr>
+        <td colspan="3" style="text-align: right; padding-right: 15px;"><a href="#">More</a></td>
+      </tr>
+    </table>
+    <!-- 이슈사항 게시판 끝-->
+    
+    <br><br><br><br>
+  
+  <!-- 제품별 사양 및 이슈 게시판 -->
+  <div style="font-weight: bold;">*제품별 사양 및 이슈</div>
+  <div id="container">
+    <ul class="tabs">
+        <li class="active" rel="tab1">SAT</li>
+        <li rel="tab2">ROOM SPEAKER</li>
+        <li rel="tab3">MULTIROOM APP</li>
+        <li rel="tab4">BAND APP</li>
+        <li rel="tab5">BD/HES</li>
+        <li rel="tab6">PVR</li>
+        <li rel="tab7">SAMSUNG CONNECT</li>
+        <li rel="tab8">CONVERGENCE</li>
+    </ul>
+    <div class="tab_container">
+        <div id="tab1" class="tab_content">
+        
+	        <table id="tabTable">
+	    
+			      <tr style="background-color: #F0F0F0;">
+			        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조1</a></td>
+			        <td style="width: 15%; text-align: center;">관리자</td>
+			        <td style="width: 15%; text-align: center;">2017-06-18</td>
+			      </tr>
+			    
+			      <tr>
+			        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조2</a></td>
+			        <td style="width: 15%; text-align: center;">관리자</td>
+			        <td style="width: 15%; text-align: center;">2017-06-18</td>
+			      </tr>
+			    
+			      <tr style="background-color: #F0F0F0;">
+			        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조3</a></td>
+			        <td style="width: 15%; text-align: center;">관리자</td>
+			        <td style="width: 15%; text-align: center;">2017-06-18</td>
+			      </tr>
+			    
+			      <tr>
+			        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조4</a></td>
+			        <td style="width: 15%; text-align: center;">관리자</td>
+			        <td style="width: 15%; text-align: center;">2017-06-18</td>
+			      </tr>
+			    
+			      <tr style="background-color: #F0F0F0;">
+			        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조5</a></td>
+			        <td style="width: 15%; text-align: center;">관리자</td>
+			        <td style="width: 15%; text-align: center;">2017-06-18</td>
+			      </tr>
+			      
+			      <tr>
+			        <td colspan="3" style="text-align: right; padding-right: 15px;"><a href="#">More</a></td>
+			      </tr>
+			    </table>
+			    
+        </div>
+        <!-- #tab1 -->
+        <div id="tab2" class="tab_content">
+          <table id="tabTable">
+      
+            <tr style="background-color: #F0F0F0;">
+              <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조1</a></td>
+              <td style="width: 15%; text-align: center;">관리자</td>
+              <td style="width: 15%; text-align: center;">2017-06-18</td>
+            </tr>
+          
+            <tr>
+              <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조2</a></td>
+              <td style="width: 15%; text-align: center;">관리자</td>
+              <td style="width: 15%; text-align: center;">2017-06-18</td>
+            </tr>
+          
+            <tr style="background-color: #F0F0F0;">
+              <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조3</a></td>
+              <td style="width: 15%; text-align: center;">관리자</td>
+              <td style="width: 15%; text-align: center;">2017-06-18</td>
+            </tr>
+          
+            <tr>
+              <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조4</a></td>
+              <td style="width: 15%; text-align: center;">관리자</td>
+              <td style="width: 15%; text-align: center;">2017-06-18</td>
+            </tr>
+          
+            <tr style="background-color: #F0F0F0;">
+              <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조5</a></td>
+              <td style="width: 15%; text-align: center;">관리자</td>
+              <td style="width: 15%; text-align: center;">2017-06-18</td>
+            </tr>
+            
+            <tr>
+              <td colspan="3" style="text-align: right; padding-right: 15px;"><a href="#">More</a></td>
+            </tr>
+          </table>
+        </div>
+        <!-- #tab2 -->
+        <div id="tab3" class="tab_content">
+          <table id="tabTable">
+      
+            <tr style="background-color: #F0F0F0;">
+              <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조1</a></td>
+              <td style="width: 15%; text-align: center;">관리자</td>
+              <td style="width: 15%; text-align: center;">2017-06-18</td>
+            </tr>
+          
+            <tr>
+              <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조2</a></td>
+              <td style="width: 15%; text-align: center;">관리자</td>
+              <td style="width: 15%; text-align: center;">2017-06-18</td>
+            </tr>
+          
+            <tr style="background-color: #F0F0F0;">
+              <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조3</a></td>
+              <td style="width: 15%; text-align: center;">관리자</td>
+              <td style="width: 15%; text-align: center;">2017-06-18</td>
+            </tr>
+          
+            <tr>
+              <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조4</a></td>
+              <td style="width: 15%; text-align: center;">관리자</td>
+              <td style="width: 15%; text-align: center;">2017-06-18</td>
+            </tr>
+          
+            <tr style="background-color: #F0F0F0;">
+              <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조5</a></td>
+              <td style="width: 15%; text-align: center;">관리자</td>
+              <td style="width: 15%; text-align: center;">2017-06-18</td>
+            </tr>
+            
+            <tr>
+              <td colspan="3" style="text-align: right; padding-right: 15px;"><a href="#">More</a></td>
+            </tr>
+          </table>
+        </div>
+        <!-- #tab3 -->
+        <div id="tab4" class="tab_content"></div>
+        <div id="tab5" class="tab_content"></div>
+        <div id="tab6" class="tab_content"></div>
+        <div id="tab7" class="tab_content"></div>
+        <div id="tab8" class="tab_content"></div>
+    </div>
+    <!-- .tab_container -->
+</div>
+<!-- #container -->
+    
   </div>
     
 
@@ -278,6 +515,22 @@ window.onclick = function(event) {
 	    }
 	  }
 }
+
+$(function () {
+
+    $(".tab_content").hide();
+    $(".tab_content:first").show();
+
+    $("ul.tabs li").click(function () {
+        $("ul.tabs li").removeClass("active").css("color", "#333");
+        //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
+        $(this).addClass("active").css("color", "white");
+        $(".tab_content").hide()
+        var activeTab = $(this).attr("rel");
+        $("#" + activeTab).fadeIn()
+    });
+});
+
 </script>
     
 </body>

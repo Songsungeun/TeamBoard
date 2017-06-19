@@ -1,106 +1,352 @@
-<!DOCTYPE HTML>
-
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Editorial by HTML5 UP</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-  </head>
-  <body>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>    
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <div style="float: right; width: 1000px; height: 1000px;">
-  <table>
-    <tr>
-      <td>1</td>
+    <title>MainPage</title>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="lib/css/animate.css" rel="stylesheet"/>
+    <link href="lib/css/style.css" rel="stylesheet"/>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+<style>
+.sideTable {
+  background-color: #E6E6E6;
+  float : left; 
+  width: 300px; 
+  /* height: 100%; */
+  
+}
+
+.sidetr {
+  height: 50px;
+  border-bottom: 1px solid white;
+  font-size: small; 
+  font-weight: bold;
+}
+.sidetd {
+  padding-left: 30px;
+  width: 100%;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #F0F0F0;
+    min-width: 20%;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+#noticemenu:hover, #noticemenu:focus {
+  /* background-color: #A0C0D7; */
+  color: #FF8000; 
+}
+.dropdown-content2 {
+    display: none;
+    position: absolute;
+    background-color: #F0F0F0;
+    min-width: 20%;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content2 a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+#noticemenu2:hover, noticemenu2:focus {
+  /* background-color: #A0C0D7; */
+  color: #FF8000; 
+}
+#myDropdown a:hover {
+  color: #FF8000;
+}
+#myDropdown2 a:hover {
+  color: #FF8000;
+}
+
+#teamNoticeBoard {
+  margin-left: 30%;
+  width: 800px;
+  background-color: #E6E6E6;
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+#teamNoticeBoard tr td {
+  height: 40px;
+  border: 1px solid white;
+  text-align: center;
+}
+#teamNoticeBoard th {
+  height: 40px;
+  border: 1px solid white;
+  text-align: center;
+  background-color: #A0C0D7;
+  color: white;
+}
+#searchTable {
+  margin-left: 30%;
+  width: 800px;
+  background-color: #E6E6E6;
+  border: 1px solid white;
+  border-collapse: collapse;
+  font-weight: bold;
+}
+#searchTable tr td {
+  height: 30px;
+  border: 1px solid white;
+  padding-left: 10px;
+}
+</style>
+</head>
+<body class="gray-bg">
+
+  <table class="sideTable">
+    <tr class="sidetr" style="border-bottom: 1px solid #E6E6E6">
+      <td class="sidetd"> <span>AV팀</span> <span>양찬</span> <span>주임</span>님 환영합니다!　　<span>Logout</span>
+      </td>
     </tr>
+    <tr class="sidetr">
+      <td class="sidetd"></td>
+    </tr>
+    <tr class="sidetr">
+      <td class="sidetd" style="background-color: #F0F0F0; font-size: large;">
+      <img src="home.png" width="25xp;" style="padding-bottom: 5px;">
+      <a href="Mainpage.html">Home</a>
+      </td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td id="noticemenu" class="sidetd" style="cursor: pointer;" onClick="myFunction()">
+      공지사항 ▼
+      </td>
+    </tr>
+    <tr id="myDropdown" class="dropdown-content" style="width: 200px;">
+      <td style="width: 200px;">
+      <a href="#" style="padding-left: 50px;">> 팀 내부 공지사항</a>
+      <a href="#" style="padding-left: 50px;">> 업무 관련 공지사항</a>
+      </td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td class="sidetd" style="background-color: #F0F0F0;">시장이슈</td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td id="noticemenu2" class="sidetd" style="cursor: pointer;" onClick="myFunction2()">제품별 사양 및 이슈 ▼</td>
+    </tr>
+    <tr id="myDropdown2" class="dropdown-content2" style="width: 20%;">
+      <td style="width: 100%;">
+      <a href="#" style="padding-left: 50px;">> SAT</a>
+      <a href="#" style="padding-left: 50px;">> ROOM SPEAKER</a>
+      <a href="#" style="padding-left: 50px;">> MULTIROOM APP</a>
+      <a href="#" style="padding-left: 50px;">> BAND APP</a>
+      <a href="#" style="padding-left: 50px;">> BD/HES</a>
+      <a href="#" style="padding-left: 50px;">> PVR</a>
+      <a href="#" style="padding-left: 50px;">> SAMSUNG CONNECT</a>
+      <a href="#" style="padding-left: 50px;">> CONVERGENCE</a>
+      </td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td class="sidetd" style="background-color: #F0F0F0;">업무 프로세스</td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td class="sidetd">제품 관련 용어 정리</td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td class="sidetd" style="background-color: #F0F0F0;">익명 게시판</td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td class="sidetd">PC 도움방</td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td class="sidetd" style="background-color: #F0F0F0;">업무 관련 사이트</td>
+    </tr>
+    
+    <tr class="sidetr">
+      <td class="sidetd">내공간</td>
+    </tr>
+    
+    <tr class="sidetr" style="height: 300px;">
+      <td class="sidetd" style="background-color: #F0F0F0;"></td>
+    </tr>
+    
   </table>
-  </div>
-
-
-<!-- Sidebar -->
-  <div id="sidebar">
-    <div class="inner">
-
-      <!-- Search -->
-        <section id="search" class="alt">
-          <form method="post" action="#">
-            <input type="text" name="query" id="query" placeholder="Search" />
-          </form>
-        </section>
-
-      <!-- Menu -->
-        <nav id="menu">
-          <header class="major">
-            <h2>Menu</h2>
-          </header>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li>
-              <span class="opener">공지사항</span>
-              <ul>
-                <li><a href="#">팀 내부 공지사항</a></li>
-                <li><a href="#">업무 관련 공지사항</a></li>
-              </ul>
-            </li>
-            <li><a href="#">시장 이슈</a></li>
-            <li>
-              <span class="opener">제품별 사양 및 이슈</span>
-              <ul>
-                <li><a href="#">SAT</a></li>
-                <li><a href="#">ROOM SPEAKER</a></li>
-                <li><a href="#">MULTIROOM APP</a></li>
-                <li><a href="#">BAND APP</a></li>
-                <li><a href="#">BD/HES</a></li>
-                <li><a href="#">PVR</a></li>
-                <li><a href="#">SAMSUNG CONNECT</a></li>
-                <li><a href="#">CONVERGENCE</a></li>
-              </ul>
-            </li>
-            <li><a href="#">업무 프로세스</a></li>
-            <li><a href="#">제품 관련 용어 정리</a></li>
-            <li><a href="#">PC 도움방</a></li>
-            <li><a href="#">업무 관련 사이트</a></li>
-          </ul>
-        </nav>
-
-<!-- 제품별 사양 및 이슈 -->
-<!--       SAT (제목 카테고리 - 공통 15 16 17 선택 가능) -->
-<!--       Roomspeaker (제목 카테고리 - 공통 15 16 17 선택 가능) -->
-<!--       MULTIROOM APP (제목 카테고리 - 공통 15 16 17 선택 가능) -->
-<!--       BAND APP -->
-<!--       BD/HES (제목 카테고리 - 공통 BD HES 15 16 17 선택 가능) -->
-<!--       PVR (제목 카테고리 - 공통 15 16 17 선택 가능) -->
-<!--       Samsung Connect -->
-<!--       Convergence -->
-
-<!-- 시장이슈 -->
-<!--        카테고리 제품 별 선택 가능하게끔 -->
-
-<!-- 업무 프로세스 -->
-
-<!-- 제품 관련 용어 정리 -->
-
-<!-- PC 도움방 -->
-
-<!-- 업무 관련사이트 (링크 되게끔) -->
-
-      <!-- Footer -->
-        <footer id="footer">
-          <p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-        </footer>
-
+  
+    <div class="middle-box text-center loginscreen animated fadeInDown" style="padding-top: 0; padding-bottom: 0px; min-width: 1280px;"> 
+      <div>       
+        <h1 class="logo-name" style="font-size: 150px;">AV+</h1>
+      </div>
+    <h3>팀 내부 공지사항+</h3>
     </div>
-  </div>
+    <br><br><br>
+    
+    <div style="width: 100%;">
+      
+      <table id="searchTable">
+        <tr>
+          <td colspan="4" style="background-color: #D7BBFD; color: white;">* 검색 조건</td>
+        </tr>
+        
+        <tr>
+          <td style="width: 15%">* 제목</td>
+          <td style="width: 35%; background-color: #F0F0F0;"><input type="text"></td>
+          <td style="width: 15%">* 이름</td>
+          <td style="width: 35%; background-color: #F0F0F0;"><input type="text"></td>
+        </tr>
+        
+        <tr>
+          <td style="width: 15%">* 날짜</td>
+          <td style="width: 35%; background-color: #F0F0F0;">
+            <input type="text" style="width: 100px;"> ~ <input type="text" style="width: 100px;">
+          </td>
+          <td style="width: 15%"></td>
+          <td style="width: 35%; background-color: #F0F0F0;"></td>
+        </tr>
+        
+        <tr>
+          <td colspan="4"></td>
+        </tr>
+      </table>
+      <br>
+      <table id="teamNoticeBoard">
+        <thead>
+	        <tr style="background-color: #F0F0F0;">
+	          <th style="width: 10%;">번호</th>
+	          <th style="width: 60%;">제목</th>
+	          <th style="width: 15%;">이름</th>
+	          <th style="width: 15%;">날짜</th>
+	        </tr>
+        </thead>
+          <tr>
+            <td>10</td>
+            <td><a href="#">팀내 공지사항 입니다!</a></td>
+            <td>양희영</td>
+            <td>2017-06-18</td>
+          </tr>
+          
+          <tr style="background-color: #F0F0F0;">
+            <td>9</td>
+            <td>팀내 공지사항 입니다!</td>
+            <td>양희영</td>
+            <td>2017-06-18</td>
+          </tr>
+          
+          <tr>
+            <td>8</td>
+            <td>팀내 공지사항 입니다!</td>
+            <td>양희영</td>
+            <td>2017-06-18</td>
+          </tr>
+          
+          <tr style="background-color: #F0F0F0;">
+            <td>7</td>
+            <td>팀내 공지사항 입니다!</td>
+            <td>양희영</td>
+            <td>2017-06-18</td>
+          </tr>
+          
+          <tr>
+            <td>6</td>
+            <td>팀내 공지사항 입니다!</td>
+            <td>양희영</td>
+            <td>2017-06-18</td>
+          </tr>
+          
+          <tr style="background-color: #F0F0F0;">
+            <td>5</td>
+            <td>팀내 공지사항 입니다!</td>
+            <td>양희영</td>
+            <td>2017-06-18</td>
+          </tr>
+          
+          <tr>
+            <td>4</td>
+            <td>팀내 공지사항 입니다!</td>
+            <td>양희영</td>
+            <td>2017-06-18</td>
+          </tr>
+          
+          <tr style="background-color: #F0F0F0;">
+            <td>3</td>
+            <td>팀내 공지사항 입니다!</td>
+            <td>양희영</td>
+            <td>2017-06-18</td>
+          </tr>
+          
+          <tr>
+            <td>2</td>
+            <td>팀내 공지사항 입니다!</td>
+            <td>양희영</td>
+            <td>2017-06-18</td>
+          </tr>
+          
+          <tr style="background-color: #F0F0F0;">
+            <td>1</td>
+            <td>팀내 공지사항 입니다!</td>
+            <td>양희영</td>
+            <td>2017-06-18</td>
+          </tr>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  
+    
+    
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
 
+function myFunction2() {
+    document.getElementById("myDropdown2").classList.toggle("show");
+}
 
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('#noticemenu')) {
 
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/skel.min.js"></script>
-<script src="assets/js/util.js"></script>
-<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-<script src="assets/js/main.js"></script>
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+  
+  if (!event.target.matches('#noticemenu2')) {
 
-  </body>
+      var dropdowns = document.getElementsByClassName("dropdown-content2");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+}
+
+</script>
+    
+</body>
 </html>
