@@ -19,7 +19,7 @@ public class User {
 	protected String department;
 	protected String position;
 	protected String name;
-	protected boolean admin;
+	protected String admin;
 	protected boolean permission;
 	
 }

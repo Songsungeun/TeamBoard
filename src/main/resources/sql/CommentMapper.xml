@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teamboard.dao.CommentDao">
+
+  <resultMap type="Comment" id="commentMap">
+    <id column="board_no" property="commentNo"/>
+    <result column="title" property="commentDescription"/>
+    <result column="descripition" property="userNo"/>
+    <result column="user_no" property="boardNo"/>
+  </resultMap>
+  
+  <insert id="insertComment" parameterType="Comment">
+		insert into board(title, descripition, userNo, boardType, category, date)
+		values(#{title}, #{descripition}, #{user_no}, #{board_type}, #{category}, now())
+  </insert>
+
+  <update id="updateComment" parameterType="Comment">
+    update board set
+    title=#{title},
+    descripition=#{descripition},
+    boardType=#{board_type},
+    category=#{category},
+    date=now()
+    where board_no=#{boardNo}
+  </update>
+  
+  <delete id="deleteComment" parameterType="int">
+		delete from Board
+		where board_no=#{value}
+  </delete>
+  
+  <select id="getCommentListbyBoardNo" resultMap="boardMap" parameterType="int">
+    select board_no,title,descripition,user_no,board_type,category, date
+		from board
+		where board_no = #{value}
+  </select>
+  
+</mapper>

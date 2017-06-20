@@ -18,5 +18,4 @@ public interface UserDao {
 	User findOnebyUserNo(int userNo); 
 	User findOnebyID(String userId); 
 	List<User> findAll();
-	User checkID(String id);
 }

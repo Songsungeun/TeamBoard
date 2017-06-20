@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User checkID(String userId) {
-		User user = userDao.checkID(userId);
+		User user = userDao.findOnebyID(userId);
 		if (user != null) {
 			return user;
 		} else {

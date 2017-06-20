@@ -20,17 +20,17 @@ public class CommentServiceImpl implements CommentService {
 	
 	@Override
 	public void insertComment(Comment comment) throws Exception {
-		commentDao.insert(comment);
+		commentDao.insertComment(comment);
 	}
 
 	@Override
 	public void updateComment(Comment comment, int commentNo) throws Exception {
-		commentDao.update(comment, commentNo);
+		commentDao.updateComment(comment, commentNo);
 	}
 
 	@Override
 	public void deleteComment(int commentNo) throws Exception {
-		commentDao.delete(commentNo);
+		commentDao.deleteComment(commentNo);
 	}
 
 	@Override

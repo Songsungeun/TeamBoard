@@ -13,9 +13,9 @@ import com.teamboard.vo.Comment;
 
 public interface CommentDao {
 
-	int insert(Comment comment) throws Exception;
-	int update(Comment comment, int commentNo) throws Exception;
-	int delete(int commentNo);
+	int insertComment(Comment comment) throws Exception;
+	int updateComment(Comment comment, int commentNo) throws Exception;
+	int deleteComment(int commentNo);
 	
 	List<Comment>getCommentListbyBoardNo(int boardNo);
 	
