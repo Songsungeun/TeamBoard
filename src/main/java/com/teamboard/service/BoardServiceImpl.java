@@ -1,12 +1,12 @@
 package com.teamboard.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.teamboard.dao.BoardDao;
 import com.teamboard.vo.Board;
-import com.teamboard.vo.CategoryType;
+import com.teamboard.vo.common.Category;
+import com.teamboard.vo.common.Type;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class BoardServiceImpl implements BoardService{
 
@@ -24,8 +24,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void updateBoard(int boardNo) throws Exception {
-		boardDao.updateBoard(boardNo);
+	public void updateBoard(Board board) throws Exception {
+		boardDao.updateBoard(board);
 	}
 
 	@Override
@@ -35,13 +35,13 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Board> findBoardListbyType(CategoryType categoryType) {
-		List<Board> boardList = boardDao.findAllbyType(categoryType);
+	public List<Board> findBoardListbyType(Type type) {
+		List<Board> boardList = boardDao.findAllbyType(type);
 		return boardList;
 	}
 
 	@Override
-	public List<Board> findBoardListbyCategory(CategoryType category) {
+	public List<Board> findBoardListbyCategory(Category category) {
 		List<Board> boardList = boardDao.findAllbyCategory(category);
 		return boardList;
 	}

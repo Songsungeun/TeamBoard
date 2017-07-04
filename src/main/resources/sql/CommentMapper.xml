@@ -31,10 +31,11 @@
 		where board_no=#{value}
   </delete>
   
-  <select id="getCommentListbyBoardNo" resultMap="boardMap" parameterType="int">
+  <select id="getCommentListbyBoardNo" resultMap="boardMap" parameterType="map">
     select board_no,title,descripition,user_no,board_type,category, date
 		from board
 		where board_no = #{value}
+		ORDER  BY limit #{startIndex}, #{length}
   </select>
   
 </mapper>

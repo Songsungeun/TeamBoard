@@ -1,8 +1,9 @@
 package com.teamboard.dao;
 
-import java.util.List;
-
 import com.teamboard.vo.Comment;
+
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -14,9 +15,9 @@ import com.teamboard.vo.Comment;
 public interface CommentDao {
 
 	int insertComment(Comment comment) throws Exception;
-	int updateComment(Comment comment, int commentNo) throws Exception;
+	int updateComment(Comment comment) throws Exception;
 	int deleteComment(int commentNo);
 	
-	List<Comment>getCommentListbyBoardNo(int boardNo);
+	List<Comment>getCommentListbyBoardNo(Map<String, Object> commentMap);
 	
 }

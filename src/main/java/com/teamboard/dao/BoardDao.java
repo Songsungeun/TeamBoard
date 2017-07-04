@@ -1,9 +1,10 @@
 package com.teamboard.dao;
 
-import java.util.List;
-
 import com.teamboard.vo.Board;
-import com.teamboard.vo.CategoryType;
+import com.teamboard.vo.common.Category;
+import com.teamboard.vo.common.Type;
+
+import java.util.List;
 
 
 /**
@@ -15,11 +16,11 @@ import com.teamboard.vo.CategoryType;
 public interface BoardDao {
 
 	int insertBoard(Board board) throws Exception;
-	int updateBoard(int boardNo) throws Exception;
+	int updateBoard(Board board) throws Exception;
 	int deleteBoard(int boardNo);
 	Board findOne(int boardNo);
 	
 	List<Board> findAll();
-	List<Board> findAllbyType(CategoryType categoryType);
-	List<Board> findAllbyCategory(CategoryType categoryType);
+	List<Board> findAllbyType(Type type);
+	List<Board> findAllbyCategory(Category category);
 } 
