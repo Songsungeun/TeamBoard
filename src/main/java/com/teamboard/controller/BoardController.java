@@ -3,6 +3,8 @@ package com.teamboard.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -34,6 +36,8 @@ public class BoardController {
 	@Autowired
 	CommentService commentService;
 
+	Logger logger = LoggerFactory.getLogger(UserController.class);
+	
 	@RequestMapping(path = "add")
 	public Object insertBoard(Board board) {
 
@@ -42,7 +46,7 @@ public class BoardController {
 			board.setUserNo(((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getMemberNo());*/
 			boardService.saveBoard(board);
 		} catch (Exception e) {
-			log.error("{}", e);
+			logger.error("{}", e);
 			return JsonResult.error(e.getMessage());
 		}
 
@@ -55,7 +59,7 @@ public class BoardController {
 		try {
 			boardService.updateBoard(board);
 		} catch (Exception e) {
-			log.error("{}", e);
+			logger.error("{}", e);
 			return JsonResult.error(e.getMessage());
 		}
 
@@ -74,7 +78,7 @@ public class BoardController {
 			boardService.removeBoard(boardNo);
 
 		} catch (Exception e ) {
-			log.error("{}", e);
+			logger.error("{}", e);
 			return JsonResult.error(e.getMessage());
 		}
 
@@ -93,7 +97,7 @@ public class BoardController {
 			return JsonResult.success(board);
 
 		} catch (RuntimeException e) {
-			log.error("{}", e);
+			logger.error("{}", e);
 			return JsonResult.error(e.getMessage());
 		}
 	}
@@ -107,7 +111,7 @@ public class BoardController {
 			boardListByCategory = boardService.findBoardListbyCategory(category);
 
 		} catch (RuntimeException e) {
-			log.error("{}", e);
+			logger.error("{}", e);
 			return JsonResult.error(e.getMessage());
 		}
 
@@ -123,7 +127,7 @@ public class BoardController {
 			boardListByType = boardService.findBoardListbyType(type);
 
 		} catch (RuntimeException e) {
-			log.error("{}", e);
+			logger.error("{}", e);
 			return JsonResult.error(e.getMessage());
 		}
 
@@ -149,7 +153,7 @@ public class BoardController {
 		try {
 			commentService.insertComment(comment);
 		} catch (Exception e) {
-			log.error("{}", e);
+			logger.error("{}", e);
 			return JsonResult.error(e.getMessage());
 		}
 
@@ -161,7 +165,7 @@ public class BoardController {
 		try {
 			commentService.updateComment(comment);
 		} catch (Exception e) {
-			log.error("{}", e);
+			logger.error("{}", e);
 			return JsonResult.error(e.getMessage());
 		}
 
@@ -173,7 +177,7 @@ public class BoardController {
 		try {
 			commentService.deleteComment(commentNo);
 		} catch (Exception e) {
-			log.error("{}", e);
+			logger.error("{}", e);
 			return JsonResult.error(e.getMessage());
 		}
 

@@ -1,5 +1,7 @@
 package com.teamboard.vo;
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,5 +13,6 @@ public class Comment {
 	protected String commentDescription;
 	protected int userNo;
 	protected int boardNo;
+	protected Date cre_dt;
 	
 }
