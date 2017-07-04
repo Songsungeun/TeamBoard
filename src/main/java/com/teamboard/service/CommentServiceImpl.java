@@ -1,11 +1,13 @@
 package com.teamboard.service;
 
-import com.teamboard.dao.CommentDao;
-import com.teamboard.vo.Comment;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.HashMap;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.teamboard.dao.CommentDao;
+import com.teamboard.vo.Comment;
 
 /**
  * @author : Songsungeun
@@ -13,6 +15,7 @@ import java.util.List;
  * @description : TODO
  */
 
+@Service
 public class CommentServiceImpl implements CommentService {
 
 	@Autowired

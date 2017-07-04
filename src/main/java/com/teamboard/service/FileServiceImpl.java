@@ -3,6 +3,7 @@ package com.teamboard.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.teamboard.Exception.FileNotFoundException;
 import com.teamboard.dao.FileDao;
@@ -14,6 +15,7 @@ import com.teamboard.vo.AttachFile;
  * @description : TODO
  */
 
+@Service
 public class FileServiceImpl implements FileService {
 
 	@Autowired

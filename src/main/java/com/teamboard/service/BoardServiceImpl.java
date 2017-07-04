@@ -1,13 +1,16 @@
 package com.teamboard.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.teamboard.dao.BoardDao;
 import com.teamboard.vo.Board;
 import com.teamboard.vo.common.Category;
 import com.teamboard.vo.common.Type;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-
+@Service
 public class BoardServiceImpl implements BoardService{
 
 	@Autowired

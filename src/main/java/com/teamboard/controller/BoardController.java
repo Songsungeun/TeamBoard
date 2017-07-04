@@ -1,5 +1,14 @@
 package com.teamboard.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.teamboard.service.BoardService;
 import com.teamboard.service.CommentService;
 import com.teamboard.vo.Board;
@@ -7,14 +16,8 @@ import com.teamboard.vo.Comment;
 import com.teamboard.vo.common.Category;
 import com.teamboard.vo.common.JsonResult;
 import com.teamboard.vo.common.Type;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Created by SSE on 2017-07-04.
