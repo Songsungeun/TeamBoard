@@ -1,9 +1,10 @@
 package com.teamboard.vo;
 
-import java.util.Date;
-
+import com.teamboard.vo.common.Category;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Date;
 
 
 /**
@@ -21,7 +22,7 @@ public class Board {
 	protected String descripition;
 	protected int userNo;
 	protected String boardType;
-	protected String category;
+	protected Category category;
 	protected Date date;
 	
 }

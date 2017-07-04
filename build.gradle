@@ -26,11 +26,6 @@ dependencies {
   compile group: 'org.mybatis', name: 'mybatis', version: '3.4.1'
   compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.39'
   
-  // spring-webmvc �씪�씠釉뚮윭由щ�� 異붽��븳�떎硫� spring-context �씪�씠釉뚮윭由щ뒗 異붽��븯吏� �븡�븘�룄 �맂�떎.
-  // �솢�깘�븯硫� spring-context�뒗 spring-webmvc�쓽 �쓽議� �씪�씠釉뚮윭由ъ씠湲� �븣臾몄씠�떎.
-  // �쓽議� �씪�씠釉뚮윭由щ뒗 �옄�룞�쑝濡� �룷�븿�맂�떎. 
-  //compile group: 'org.springframework', name: 'spring-context', version: '4.3.2.RELEASE'
-  
   compile group: 'org.mybatis', name: 'mybatis-spring', version: '1.3.0'
   compile group: 'org.springframework', name: 'spring-jdbc', version: '4.3.2.RELEASE'
   compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.2.RELEASE'
@@ -45,14 +40,13 @@ dependencies {
   compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.5'
   compile group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
   
-  // 媛쒕컻�븯�뒗 �룞�븞 �씪�씠釉뚮윭由щ�� �궗�슜�븯怨�, 媛쒕컻�씠 �걹�궃 �썑 諛곗튂�뿉�꽌 �젣�쇅�빐�빞 �븯�뒗 �씪�씠釉뚮윭由щ뒗
-  // providedCompile �샃�뀡�쓣 �궗�슜�븯�씪!
   providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
   compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.2'
   compile group: 'org.springframework', name: 'spring-aop', version: '4.3.2.RELEASE'
   compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.8.9'
   compile group: 'log4j', name: 'log4j', version: '1.2.17'
-    
+  compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+  testCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
 }
 
 

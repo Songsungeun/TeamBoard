@@ -3,6 +3,7 @@ package com.teamboard.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.teamboard.Exception.UserNotFoundException;
 import com.teamboard.dao.UserDao;
@@ -14,6 +15,7 @@ import com.teamboard.vo.User;
  * @description : TODO
  */
 
+@Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired

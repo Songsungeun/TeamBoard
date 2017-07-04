@@ -45,13 +45,13 @@
 		from board
   </select>
 	
-  <select id="findAllbyType" resultMap="boardMap" parameterType="String">
+  <select id="findAllbyType" resultMap="boardMap" parameterType="Type">
     select board_no,title,descripition,user_no,board_type,category, date
 		from board
 		where board_type = #{value}
   </select>
   
-  <select id="findAllbyCategory" resultMap="boardMap" parameterType="String">
+  <select id="findAllbyCategory" resultMap="boardMap" parameterType="Category">
     select board_no,title,descripition,user_no,board_type,category, date
 		from board
 		where category = #{value}
