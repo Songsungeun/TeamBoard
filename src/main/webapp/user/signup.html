@@ -6,11 +6,12 @@
 
     <title>HQTech AV Team | SingUp</title>
 
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="lib/css/animate.css" rel="stylesheet"/>
-    <link href="lib/css/style.css" rel="stylesheet"/>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../lib/css/animate.css" rel="stylesheet"/>
+    <link href="../lib/css/style.css" rel="stylesheet"/>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../lib/js/user.js"></script>
     
 <style>
 .hqttable {
@@ -57,28 +58,28 @@
     <table class="hqttable">
       <tr class="hqttr">
         <td class="hqttd1">아이디</td>
-        <td class="hqttd2"><input type="text" id="id" style="padding-left: 5px;"></td>
+        <td class="hqttd2"><input type="text" id="user_id" style="padding-left: 5px;"></td>
       </tr>
    
       <tr class="hqttr" style="background-color: #F0F0F0;">
         <td class="hqttd1">이름</td>
-        <td class="hqttd2"><input type="text" id="name" style="padding-left: 5px;"></td>
+        <td class="hqttd2"><input type="text" id="user_name" style="padding-left: 5px;"></td>
       </tr>
       
       <tr class="hqttr">
         <td class="hqttd1">비밀번호</td>
-        <td class="hqttd2"><input type="password" id="password" style="padding-left: 5px;"></td>
+        <td class="hqttd2"><input type="password" id="user_password" style="padding-left: 5px;"></td>
       </tr>
       
       <tr class="hqttr" style="background-color: #F0F0F0;">
         <td class="hqttd1">부서</td>
         <td class="hqttd2">
-          <select style="width:73%; height: 25px;">
-            <option>-</option>
-            <option>AV팀</option>
-            <option>TV팀</option>
-            <option>APP팀</option>
-            <option>LFD팀</option>
+          <select id="user_department" style="width:73%; height: 25px;">
+            <option value=0>-</option>
+            <option value=1>AV팀</option>
+            <option value=2>TV팀</option>
+            <option value=3>APP팀</option>
+            <option value=4>LFD팀</option>
           </select>
         </td>
       </tr>
@@ -86,14 +87,14 @@
       <tr class="hqttr">
         <td class="hqttd1">직급</td>
         <td class="hqttd2">
-          <select style="width:73%; height: 25px;">
-            <option>-</option>
-            <option>팀장</option>
-            <option>수석</option>
-            <option>책임</option>
-            <option>선임</option>
-            <option>주임</option>
-            <option>사원</option>
+          <select id="user_position" style="width:73%; height: 25px;">
+            <option value=0>-</option>
+            <option value=1>팀장</option>
+            <option value=2>수석</option>
+            <option value=3>책임</option>
+            <option value=4>선임</option>
+            <option value=5>주임</option>
+            <option value=6>사원</option>
           </select>
         </td>
       </tr>

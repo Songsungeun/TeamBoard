@@ -42,8 +42,6 @@ public class BoardController {
 	public Object insertBoard(Board board) {
 
 		try {
-			/*Spring Security 적용 후 사용
-			board.setUserNo(((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getMemberNo());*/
 			boardService.saveBoard(board);
 		} catch (Exception e) {
 			logger.error("{}", e);
