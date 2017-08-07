@@ -101,9 +101,10 @@ tinyMCE.init({
     // General options
     mode : "textareas", // 위지웍 에디터로 사용할 HTML 요소는 textarea로 지정한다.
     theme : "modern", // TinyMCE는 여러가지 테마를 지원해준다. 그중 advanced 테마를 사용
-    plugins : "noneditable,autosave,fullpage,help,image,hr,link,contextmenu,textcolor,textpattern,save,preview",
-    toolbar: "forecolor backcolor",
-    skin : "lightgray",
+    plugins : "noneditable,autosave,fullpage,help,link,contextmenu,textcolor,textpattern,save,preview,charmap",
+    toolbar: "newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyf,cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,imagepop,cleanup,|,insertdate,inserttime,preview,|,forecolor,backcolor,|,font",
+    //skin : "lightgray",
+    forced_root_block : false,
     language: "ko_KR", // 사용할 언어는 한국어로 지정
     height : "350",
     width : "830",
@@ -245,7 +246,9 @@ tinyMCE.init({
         <!-- 게시판 상세페이지 -->
         <tr style="background-color: #A0C0D7; color: white; font-weight: bold;">
           <td style="width: 15%;">제목</td>
-          <td colspan="3" style="width: 65%; ">팀내 공지사항 입니다!</td>
+          <td colspan="3" style="width: 65%; ">
+            <input type="text" id="title" name="title" style="width:90%;color:black;height: 75%;">
+          </td>
           <td style="width: 20%;"><a href="noticeBoard.html">팀 내부 공지사항</a></td>
         </tr>
         <tr>
@@ -253,7 +256,16 @@ tinyMCE.init({
           <td style="width: 25%;">양희영(yan***)</td>
           <td style="width: 20%;">작성일</td>
           <td>2016-06-18</td>
-          <td>0</td>
+          <td>
+            <select style="width:85%; height: 70%;">
+              <option>--카테고리 선택--</option>
+              <option>공지사항</option>
+              <option>시장이슈</option>
+              <option>제품별 시장 이슈</option>
+              <option>업무프로세스</option>
+              <option>PC 도움방</option>
+            </select>
+          </td>
         </tr>
         <tr style="background-color: #F0F0F0;"><td colspan="5"></td></tr>
         <tr>
