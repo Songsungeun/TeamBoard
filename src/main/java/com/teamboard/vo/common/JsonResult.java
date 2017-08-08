@@ -3,7 +3,7 @@ package com.teamboard.vo.common;
 /**
  * Created by SSE on 2017-07-04.
  */
-public class JsonResult {
+public class JsonResult{
 
 	String state;
 	Object data;

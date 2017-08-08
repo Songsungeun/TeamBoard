@@ -1,5 +1,7 @@
 package com.teamboard.vo;
 
+import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +13,11 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class User {
+public class User implements Serializable{
 
+	
+	private static final long serialVersionUID = 1L;
+	
 	protected int memberNo;
 	protected String userID;
 	protected String password;

@@ -26,7 +26,7 @@ public class UserController {
 	
 	@RequestMapping(path="signUp")
 	public Object signUpMember(User user) throws Exception {
-
+		System.out.println("hello");
 		try {
 			userService.signUpUser(user);
 		} catch (Exception e) {
