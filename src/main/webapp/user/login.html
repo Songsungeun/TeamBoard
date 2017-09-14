@@ -8,54 +8,26 @@
 
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<!--     <link href="../Contents/Font-awesome/css/font-awesome.css" rel="stylesheet"/> -->
     <link href="../lib/css/animate.css" rel="stylesheet"/>
     <link href="../lib/css/style.css" rel="stylesheet"/>
-<!--     <script src="../Contents/Scripts/jquery.blockUI.js"></script> -->
-<!--     <script src="../Contents/Scripts/jquery-ui-1.10.4.min.js"></script> -->
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<!--     <script src="../Contents/Scripts/Common.js"></script> -->
-<!--     <script src="../Contents/Scripts/Huma.Framework.V1.Script.js"></script> -->
-    
+    <script src="../lib/js/common.js"></script>
+	<script src="../lib/js/user.js"></script>    
     <script type="text/javascript">
 
-         $(document).ready(function () {
-             $("#txtPassword").keypress(function (e) {
+    $(document).ready(function () {
+        $("#txtPassword").keypress(function (e) {
 
-                 if (e.keyCode == 13) {
-                     fnLogin();
-                 }
-             });
-         });
-
-        function fnLogin() {
-            if ($("#txtLoginId").val() == "") {
-                alert("로그인 아이디를 입력하세요.");
-                return;
+            if (e.keyCode == 13) {
+                fnLogin();
             }
-            if ($("#txtPassword").val() == "") {
-                alert("로그인 비밀번호를 입력하세요.");
-                return;
-            }
+        });
+        
+//         $("#login_btn").click(function(e) {
+//         	fnCheck();
+//         })
+    });
 
-//             var proxy = new Huma.Proxy("/Svc/AccountService.asmx");            
-//             var jData = {};
-//             jData.LoginID = $("#txtLoginId").val();
-//             jData.LoginPw = $("#txtPassword").val();
-
-//             proxy.WebMethod("Login", jData, function (fn, data) {               
-
-//                 if (data.d.ResultCode < 0) {                    
-//                     $(".no_data_txt").css("display", "block");
-//                     alert("잘못된 아이디 or 비밀번호 입니다.")
-//                 }
-//                 else {                    
-//                     location.href = "../index.aspx";
-//                 }
-
-//             }, function (fn, data) { });
-
-        }
     </script>
 </head>
 <body class="gray-bg">
@@ -73,7 +45,7 @@
             <div class="form-group">
                 <input type="password" class="form-control" placeholder="비밀번호" required="" id="txtPassword" />
             </div>
-            <button type="submit" class="btn btn-primary block full-width m-b" onclick="location.href='Mainpage.html'<!-- javascript:fnLogin() -->;">로그인</button>
+            <input type="button" class="btn btn-primary block full-width m-b login_btn" onclick="javascript:fnLogin();" value="로그인">
             <button type="button" class="btn btn-primary block full-width m-b" onclick="location.href='signup.html';" style="background-color: #A0C0D7; border : 1px solid #A0C0D7 ">회원가입</button>
             </form>
             <p class="m-t"> <small>sse & yc &copy; 2017</small> </p>

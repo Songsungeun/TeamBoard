@@ -11,8 +11,6 @@ import lombok.Setter;
  * @date : 2017. 6. 16.
  * @description : TODO
  */
-@Getter
-@Setter
 public class User implements Serializable{
 
 	
@@ -26,5 +24,54 @@ public class User implements Serializable{
 	protected String name;
 	protected String admin;
 	protected boolean permission;
+	public int getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAdmin() {
+		return admin;
+	}
+	public void setAdmin(String admin) {
+		this.admin = admin;
+	}
+	public boolean isPermission() {
+		return permission;
+	}
+	public void setPermission(boolean permission) {
+		this.permission = permission;
+	}
+	
 	
 }
