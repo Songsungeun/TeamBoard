@@ -59,19 +59,24 @@ public class UserController {
 //	}
 	
 	@RequestMapping(value = "/login")
-	public Object login(
+	public Object login (
 			HttpSession session,
-			String id, String password) {
+			User userData) throws Exception {
 
-		User user = userService.findOnebyID(id);
-		
 		try {
 			
-			if(user.getPassword() == password) {
+			User user = userService.findOnebyID(userData.getUserID());
+			if (user != null) {
+				if (user.getPassword() != userData.getPassword()) {
+					return JsonResult.fail("Password를 확인하세요.");
+				}
+				
 				session.setAttribute("user", user);
+				
 			} else {
-				return JsonResult.fail("비밀번호를 확인하세요.");
+				return JsonResult.fail("존재하지 않는 회원입니다.");
 			}
+			
 		} catch (UserNotFoundException e) {
 			return JsonResult.fail(e.getMessage());
 		}
@@ -80,6 +85,15 @@ public class UserController {
 		return JsonResult.success();
 
 	}	
+	
+	public Object logOut(HttpSession session) throws Exception {
+		try {
+			session.invalidate();
+			return JsonResult.success();
+		} catch (Exception e) {
+			return JsonResult.error(e.getMessage());
+		}
+	}
 
 
 }

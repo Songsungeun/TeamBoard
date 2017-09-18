@@ -93,6 +93,9 @@
   background-color: #A0C0D7;
   color: white;
 }
+.btn_area .btn {
+  float: right;
+}
 </style>
 <script type="text/javascript" src="tinymce/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">
@@ -270,7 +273,14 @@ tinyMCE.init({
         <tr style="background-color: #F0F0F0;"><td colspan="5"></td></tr>
         <tr>
           <td colspan="5" style="text-align: left; padding: 30px 15px 30px 15px;">
-          <textarea></textarea>
+          <textarea class="write_desc_area"></textarea>
+          </td>
+        </tr>
+        <tr class="btn_area">
+          <td colspan="3">
+	        <input type="submit" class="btn btn-danger delete_btn" onclick="" value="삭제">
+	        <input type="submit" class="btn btn-info modify_btn" onclick="" value="수정">
+			<input type="submit" class="btn btn-success write_btn" onclick="" value="작성">	          
           </td>
         </tr>
       </table>
