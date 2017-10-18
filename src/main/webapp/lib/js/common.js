@@ -4,7 +4,9 @@
 
 const DEBUG = true;
 
-
+$(document).ready( function() {
+	$("#nav_bar").load("common/nav_bar.html");
+});
 
 
 function ajaxRequest(formData, url) {

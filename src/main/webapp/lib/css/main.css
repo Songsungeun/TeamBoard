@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+
+.sptTable {
+  width: 40%;
+  background-color: #E6E6E6;
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+.sptTable tr td {
+  width: 800px;
+  height: 30px;
+  border: 1px solid white;
+}
+
+#tabTable {
+  width: 100%;
+  background-color: #E6E6E6;
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+#tabTable tr td {
+  height: 30px;
+  border: 1px solid white;
+}
+ul.tabs {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    height: 32px;
+    border-bottom: 1px solid #eee;
+    border-left: 1px solid #eee;
+    width: 100%;
+    font-size:10px;
+}
+ul.tabs li {
+    float: left;
+    text-align:center;
+    cursor: pointer;
+    width:10.5%;
+    height: 31px;
+    line-height: 31px;
+    border: 1px solid #eee;
+    border-left: none;
+    font-weight: bold;
+    background: #E6E6E6;
+    overflow: hidden;
+    position: relative;
+}
+ul.tabs li.active {
+    background: #FDBBE1;
+    border-bottom: 1px solid #FFFFFF;
+}
+.tab_container {
+    border: 1px solid #eee;
+    border-top: none;
+    float: left;
+    width: 84%;
+    background: #F0F0F0;
+}
+.tab_content {
+    padding: 5px;
+    font-size: 12px;
+    display: none;
+    border: 1px solid white;
+}
+.tab_container .tab_content ul {
+    width:100%;
+    margin:0px;
+    padding:0px;
+    
+}
+.tab_container .tab_content ul li {
+    padding:5px;
+    list-style:none;
+}
+;
+ #container {
+    width: 249px;
+    margin: 0 auto;
+}
