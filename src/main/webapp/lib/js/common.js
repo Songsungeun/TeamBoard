@@ -5,7 +5,7 @@
 const DEBUG = true;
 
 $(document).ready( function() {
-	$("#nav_bar").load("common/nav_bar.html");
+	$("#nav_bar").load("../common_html/nav_bar.html");
 });
 
 

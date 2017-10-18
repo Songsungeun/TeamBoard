@@ -88,6 +88,10 @@ h5 {
   padding: 20px 10px;
   min-height: 50px;
 }
+#nav_bar {
+	height: 100%;
+	display: initial;
+}
 .dropdown-menu {
   border: medium none;
   border-radius: 3px;
