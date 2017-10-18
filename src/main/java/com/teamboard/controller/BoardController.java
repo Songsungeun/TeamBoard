@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 @Controller
-@RequestMapping(value = "/board/*/")
+@RequestMapping(value = "/board/")
 @Slf4j
 public class BoardController {
 
@@ -41,7 +41,9 @@ public class BoardController {
 	@RequestMapping(path = "add")
 	public Object insertBoard(Board board) {
 
+		System.out.println("please");
 		try {
+			System.out.println("hello");
 			boardService.saveBoard(board);
 		} catch (Exception e) {
 			logger.error("{}", e);

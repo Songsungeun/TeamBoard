@@ -91,6 +91,7 @@ h5 {
 #nav_bar {
 	height: 100%;
 	display: initial;
+	top: 0;
 }
 .dropdown-menu {
   border: medium none;

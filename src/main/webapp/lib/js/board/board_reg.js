@@ -4,9 +4,13 @@
 
 $(document).ready(function() {
 	initTinyMCE();
+	chained();
 	
 })
 
+function chained() {
+	$("#category_list").chained("#board_type");
+}
 function initTinyMCE() {
 	//TinyMCE 사용을 위한 설정 정의
 	tinyMCE.init({
@@ -63,4 +67,21 @@ function initTinyMCE() {
 	                  ]
 
 	});
+}
+
+function write_add() {
+	var formData = new FormData();
+	var url = "add.json";
+	
+	formData.append("title", $("#title").val());
+	formData.append("descripition", tinyMCE.activeEditor.getContent())
+	formData.append("boardType", $("#board_type option:selected").val());
+	formData.append("category", $("#category_list option:selected").val());
+	
+	DEBUG && console.log("title : " + formData.get("title"));
+	DEBUG && console.log("descripition : " + formData.get("descripition"));
+	DEBUG && console.log("boardType : " + formData.get("boardType"));
+	DEBUG && console.log("category : " + formData.get("category"));
+	
+	ajaxRequest(formData, url);
 }

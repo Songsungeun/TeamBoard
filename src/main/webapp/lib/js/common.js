@@ -17,11 +17,14 @@ function ajaxRequest(formData, url) {
 		contentType: false,
 		type: "POST",
 		success : function(obj) {
-			   var result = obj.jsonResult
-			   if (result.state != "success") {
-			    console.log(result.data)
-			    return
-			   }
-			  }
+			var result = obj.jsonResult
+			if (result.state != "success") {
+				console.log(result.data)
+			}
+		},
+		error : function(err) {
+			alert("오류 발생");
+			console.log("err message : " + err);
+		}
 	})
 }

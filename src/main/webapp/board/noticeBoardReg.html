@@ -1,77 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>    
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>MainPage</title>
+<title>MainPage</title>
 
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../lib/js/common.js"></script>
-    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../lib/css/animate.css" rel="stylesheet"/>
-    <link href="../lib/css/style.css" rel="stylesheet"/>
-    <link href="../lib/css/board/board_reg.css" rel="stylesheet"/>
-	<script type="text/javascript" src="../tinymce/js/tinymce/tinymce.min.js"></script>
-	<script src="../lib/js/board/board_reg.js"></script>
-	
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../lib/js/common.js"></script>
+<link href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="../lib/css/animate.css" rel="stylesheet" />
+<link href="../lib/css/style.css" rel="stylesheet" />
+<link href="../lib/css/board/board_reg.css" rel="stylesheet" />
+<script type="text/javascript"
+	src="../tinymce/js/tinymce/tinymce.min.js"></script>
+<script src="../lib/js/board/board_reg.js"></script>
+<script src="../lib/js/jquery.chained.min.js"></script>
+
 </head>
 
 <body class="gray-bg">
 
-  <nav id="nav_bar"></nav>
-  
-    <div class="middle-box text-center loginscreen animated fadeInDown" style="padding-top: 0; padding-bottom: 0px; min-width: 1280px;"> 
-      <div>       
-        <h1 class="logo-name" style="font-size: 150px;">AV+</h1>
-      </div>
-    <h3>팀 내부 공지사항+</h3>
-    </div>
-    <br><br><br>
-    <div style="width: 100%;">
-    
-      <table id="teamNoticeBoard">
-      
-        <!-- 게시판 상세페이지 -->
-        <tr style="background-color: #A0C0D7; color: white; font-weight: bold;">
-          <td style="width: 15%;">제목</td>
-          <td colspan="3" style="width: 65%; ">
-            <input type="text" id="title" name="title" style="width:90%;color:black;height: 75%;">
-          </td>
-          <td style="width: 20%;"><a href="noticeBoard.html">팀 내부 공지사항</a></td>
-        </tr>
-        <tr>
-          <td>작성자</td>
-          <td style="width: 25%;">양희영(yan***)</td>
-          <td style="width: 20%;">작성일</td>
-          <td>2016-06-18</td>
-          <td>
-            <select style="width:85%; height: 70%;">
-              <option>--카테고리 선택--</option>
-              <option>공지사항</option>
-              <option>시장이슈</option>
-              <option>제품별 시장 이슈</option>
-              <option>업무프로세스</option>
-              <option>PC 도움방</option>
-            </select>
-          </td>
-        </tr>
-<!--         <tr style="background-color: #F0F0F0;"><td colspan="5"></td></tr> -->
-        <tr>
-          <td colspan="5" style="text-align: left; padding: 30px 15px 30px 15px; background: floralwhite;">
-          <textarea class="write_desc_area"></textarea>
-          </td>
-        </tr>
-        <tr class="btn_area">
-          <td colspan="3">
-	        <input type="submit" class="btn btn-danger delete_btn" onclick="" value="삭제">
-	        <input type="submit" class="btn btn-info modify_btn" onclick="" value="수정">
-			<input type="submit" class="btn btn-success write_btn" onclick="" value="작성">	          
-          </td>
-        </tr>
-      </table>
-    </div>
-    
+	<nav id="nav_bar"></nav>
+
+	<div class="middle-box text-center loginscreen animated fadeInDown"
+		style="padding-top: 0; padding-bottom: 0px; min-width: 1280px;">
+		<div>
+			<h1 class="logo-name" style="font-size: 150px;">AV+</h1>
+		</div>
+		<h3>팀 내부 공지사항+</h3>
+	</div>
+	<br>
+	<br>
+	<br>
+	<div style="width: 100%;">
+
+		<table id="teamNoticeBoard">
+
+			<!-- 게시판 상세페이지 -->
+			<tr
+				style="background-color: #A0C0D7; color: white; font-weight: bold;">
+				<td style="width: 15%;">제목</td>
+				<td colspan="3" style="width: 65%;">
+					<input type="text" id="title" name="title" style="width: 90%; color: black; height: 75%;">
+				</td>
+				<td style="width: 20%;">
+					<select	id="board_type" style="width: 85%; height: 70%; color:black;">
+						<option value="">--카테고리 선택--</option>
+						<option value="notice">공지사항</option>
+						<option value="common_issue">시장이슈</option>
+						<option value="product_issue">제품별 시장 이슈</option>
+						<option value="process">업무프로세스</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td style="width: 25%;">양희영(yan***)</td>
+				<td style="width: 20%;">작성일</td>
+				<td>2016-06-18</td>
+				<td>
+					<select id="category_list" style="width: 85%; height: 70%; color: black;">
+						<option>--카테고리 선택--</option>
+						<option class="notice" value="team_notice">팀 내부 공지사항</option>
+						<option class="notice" value="work_notice">업무 관련 공지사항</option>
+						<option class="product_issue" value="sat">SAT</option>
+						<option class="product_issue" value="room_speaker">ROOM SPEAKER</option>
+						<option class="product_issue" value="multiroom">MULTIROOM APP</option>
+						<option class="product_issue" value="band">BAND APP</option>
+						<option class="product_issue" value="bd_hes">BD/HES</option>
+						<option class="product_issue" value="pvr">PVR</option>
+						<option class="product_issue" value="ss_connect">SAMSUNG CONNECT</option>
+						<option class="product_issue" value="convergence">CONVERGENCE</option>
+					</select>
+				</td>
+			</tr>
+			<!--         <tr style="background-color: #F0F0F0;"><td colspan="5"></td></tr> -->
+			<tr>
+				<td colspan="5"
+					style="text-align: left; padding: 30px 15px 30px 15px; background: floralwhite;">
+					<textarea class="write_desc_area"></textarea>
+				</td>
+			</tr>
+			<tr class="btn_area">
+				<td colspan="3">
+				<input type="submit" class="btn btn-danger delete_btn" onclick="" value="삭제"> 
+				<input type="submit" class="btn btn-info modify_btn" onclick="" value="수정">
+				<input type="submit" class="btn btn-success write_btn" onclick="write_add()" value="작성"></td>
+			</tr>
+		</table>
+	</div>
+
 </body>
 </html>
