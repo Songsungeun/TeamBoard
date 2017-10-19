@@ -3,11 +3,6 @@ package com.teamboard.vo;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.teamboard.vo.common.Category;
-
-import lombok.Getter;
-import lombok.Setter;
-
 
 /**
  * @author : Songsungeun

@@ -16,6 +16,9 @@ public interface UserService {
 
 	public void signUpUser(User user) throws Exception;
 	public void unregister(int userNo) throws Exception;
+	public void updateUser(User user) throws Exception;
+	public void changeAdmin(User user) throws Exception;
+	
 	public User findOne(int userNo) throws UserNotFoundException;
 	public User findOnebyID(String userId) throws UserNotFoundException;
 	public List<User> findAll();

@@ -15,6 +15,9 @@ public interface UserDao {
 
 	int signUpUser(User user) throws Exception;
 	int unRegistUser(int no) throws Exception;
+	int updateUser(User user) throws Exception;
+	int changeAdmin(User user) throws Exception;
+	
 	User findOnebyUserNo(int userNo); 
 	User findOnebyID(String userId); 
 	List<User> findAll();

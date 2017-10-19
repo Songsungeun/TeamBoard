@@ -5,41 +5,51 @@
 <mapper namespace="com.teamboard.dao.UserDao">
 
   <resultMap type="User" id="userMap">
-    <id column="board_no" property="memberNo"/>
-    <result column="title" property="userID"/>
-    <result column="descripition" property="password"/>
-    <result column="user_no" property="department"/>
-    <result column="board_type" property="position"/>
-    <result column="category" property="name"/>
-    <result column="date" property="admin"/>
-    <result column="date" property="permission"/>
+    <id column="user_no" property="memberNo"/>
+    <result column="user_id" property="userID"/>
+    <result column="user_pw" property="password"/>
+    <result column="department" property="department"/>
+    <result column="position" property="position"/>
+    <result column="name" property="name"/>
+    <result column="admin" property="admin"/>
+    <result column="permission" property="permission"/>
   </resultMap>
   
   <insert id="signUpUser" parameterType="Board">
-		insert into board(title, descripition, userNo, boardType, category, date)
-		values(#{title}, #{descripition}, #{user_no}, #{board_type}, #{category}, now())
+		insert into user(user_id, user_pw, department, position, name, admin, permission)
+		values(#{userID}, password(#{password}), #{department}, #{position}, #{name}, #{admin}, #{permission})
   </insert>
 
+  <update id="updateUser" parameterType="Board">
+    update user set
+    user_pw=password(#{password}),
+    department=#{department},
+    position=#{position},
+    where user_no=#{memberNo}
+  </update>
+  
+  <update id="changeAdmin" parameterType="Board">
+    update user set
+    permission = #{permission}
+    where user_no=#{memberNo}
+  </update>
+  
   <delete id="unRegistUser" parameterType="int">
-		delete from Board
-		where board_no=#{value}
+		delete from user
+		where user_no=#{value}
   </delete>
   
   <select id="findOnebyUserNo" resultMap="boardMap" parameterType="int">
-    select board_no,title,descripition,user_no,board_type,category, date
-		from board
-		where board_no = #{value}
+    select * from user
+		where user_no = #{value}
   </select>
   
   <select id="findOnebyID" resultMap="boardMap" parameterType="String">
-    select board_no,title,descripition,user_no,board_type,category, date
-		from board
+    select * from user where user_id = #{value}
   </select>
 	
   <select id="findAll" resultMap="boardMap">
-    select board_no,title,descripition,user_no,board_type,category, date
-		from board
-		where board_type = #{value}
+    select * from user
   </select>
   
 </mapper>

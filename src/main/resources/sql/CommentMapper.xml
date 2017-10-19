@@ -5,7 +5,7 @@
 <mapper namespace="com.teamboard.dao.CommentDao">
 
   <resultMap type="Comment" id="commentMap">
-    <id column="board_no" property="commentNo"/>
+    <id column="comment_no" property="commentNo"/>
     <result column="title" property="commentDescription"/>
     <result column="descripition" property="userNo"/>
     <result column="user_no" property="boardNo"/>

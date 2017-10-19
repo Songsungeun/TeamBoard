@@ -22,7 +22,7 @@ public class User implements Serializable{
 	protected String department;
 	protected String position;
 	protected String name;
-	protected String admin;
+	protected boolean admin;
 	protected boolean permission;
 	public int getMemberNo() {
 		return memberNo;
@@ -60,10 +60,10 @@ public class User implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAdmin() {
+	public boolean getAdmin() {
 		return admin;
 	}
-	public void setAdmin(String admin) {
+	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
 	public boolean isPermission() {

@@ -71,5 +71,15 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public void updateUser(User user) throws Exception {
+		userDao.updateUser(user);
+	}
+
+	@Override
+	public void changeAdmin(User user) throws Exception {
+		userDao.changeAdmin(user);
+	}
+
 	
 }
