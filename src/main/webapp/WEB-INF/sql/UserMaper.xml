@@ -48,6 +48,10 @@
     select * from user where user_id = #{value}
   </select>
 	
+  <select id="findOnebyIDandPW" resultMap="userMap" parameterType="map">
+    select * from user where user_id = #{userID} and user_pw = password(#{password})
+  </select>
+  
   <select id="findAll" resultMap="userMap">
     select * from user
   </select>

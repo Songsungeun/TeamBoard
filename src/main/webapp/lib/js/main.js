@@ -3,6 +3,12 @@
  */
 
 $(document).ready(function() {
+	
+	tabsFunc();
+    
+})
+
+function tabsFunc() {
 	$(".tab_content").hide();
     $(".tab_content:first").show();
 
@@ -14,4 +20,4 @@ $(document).ready(function() {
         var activeTab = $(this).attr("rel");
         $("#" + activeTab).fadeIn()
     });
-})
+}

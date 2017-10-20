@@ -1,6 +1,7 @@
 package com.teamboard.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.teamboard.vo.User;
 
@@ -19,6 +20,7 @@ public interface UserDao {
 	int unRegistUser(int no) throws Exception;
 	
 	User findOnebyUserNo(int userNo); 
+	User findOnebyIDandPW(Map<String, Object> paramMap);
 	User findOnebyID(String userId); 
 	List<User> findAll();
 }

@@ -1,5 +1,7 @@
 package com.teamboard.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -7,8 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamboard.Exception.UserNotFoundException;
 import com.teamboard.service.UserService;
@@ -42,22 +42,16 @@ public class UserController {
 	}
 	
 	
-//	@RequestMapping(value = "/login", method = RequestMethod.GET)
-//	public Object login(
-//		@RequestParam(value = "error", required = false) String error,
-//		@RequestParam(value = "logout", required = false) String logout) {
-//
-//		if (error != null) {
-//			return JsonResult.error("Invalid username and password!");
-//		}
-//
-//		if (logout != null) {
-//			return JsonResult.success("You've been logged out successfully.");
-//		}
-//
-//		return JsonResult.success();
-//
-//	}
+	@RequestMapping(value = "/loginCheck")
+	public Object loginCheck(HttpSession session) {
+		User user = (User)session.getAttribute("user");
+		
+		if (user == null) {
+			return JsonResult.fail("로그인이 필요합니다.");
+		}
+		
+		return JsonResult.success(user);
+	}
 	
 	@RequestMapping(value = "/login")
 	public Object login (
@@ -66,14 +60,13 @@ public class UserController {
 
 		try {
 			
-			User user = userService.findOnebyID(userData.getUserID());
+			HashMap<String, Object> paramMap = new HashMap<>();
+			paramMap.put("userID", userData.getUserID());
+			paramMap.put("password", userData.getPassword());
+			
+			User user = userService.findOnebyIDandPW(paramMap);
 			if (user != null) {
-				if (user.getPassword() != userData.getPassword()) {
-					return JsonResult.fail("Password를 확인하세요.");
-				}
-				
 				session.setAttribute("user", user);
-				
 			} else {
 				return JsonResult.fail("존재하지 않는 회원입니다.");
 			}
@@ -83,7 +76,7 @@ public class UserController {
 		}
 		
 
-		return JsonResult.success();
+		return JsonResult.success("로그인");
 
 	}	
 	

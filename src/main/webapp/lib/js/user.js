@@ -23,17 +23,15 @@ function fnSignUp() {
 
 function fnLogin() {
 	
-	console.log("aaaa");
-	
 	var formData = new FormData();
 	var url = "login.json";
 	
 	formData.append("userID", $("#txtLoginId").val());
 	formData.append("password", $("#txtPassword").val())
 	
-	DEBUG && console.log("userID : " + formData.get("userID"));
-	DEBUG && console.log("password : " + formData.get("password"));
-	ajaxRequest(formData, url);
+	console.log("userID : " + formData.get("userID"));
+	console.log("password : " + formData.get("password"));
+	ajaxLoginRequest(formData, url);
 	
 }
 

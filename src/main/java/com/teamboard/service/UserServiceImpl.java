@@ -1,6 +1,7 @@
 package com.teamboard.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,6 +80,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void changeAdmin(User user) throws Exception {
 		userDao.changeAdmin(user);
+	}
+
+	@Override
+	public User findOnebyIDandPW(Map<String, Object> paramMap) {
+		User user = userDao.findOnebyIDandPW(paramMap);
+		
+		if (user != null) {
+			return user;
+		} else {
+			throw new UserNotFoundException("회원정보가 없습니다.");
+		}
 	}
 
 	
