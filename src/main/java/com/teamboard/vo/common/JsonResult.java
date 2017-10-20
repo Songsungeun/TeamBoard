@@ -63,4 +63,30 @@ public class JsonResult{
 		this.data = data;
 		this.data2 = data2;
 	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public Object getData() {
+		return data;
+	}
+
+	public void setData(Object data) {
+		this.data = data;
+	}
+
+	public Object getData2() {
+		return data2;
+	}
+
+	public void setData2(Object data2) {
+		this.data2 = data2;
+	}
+	
+	
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teamboard.dao.BoardDao">
+
+  <resultMap type="Board" id="boardMap">
+    <id column="board_no" property="boardNo"/>
+    <result column="title" property="title"/>
+    <result column="descripition" property="descripition"/>
+    <result column="user_no" property="userNo"/>
+    <result column="board_type" property="boardType"/>
+    <result column="category" property="category"/>
+    <result column="cre_dt" property="date"/>
+  </resultMap>
+  
+  <insert id="insertBoard" parameterType="Board">
+		insert into board(title, descripition, userNo, boardType, category, date)
+		values(#{title}, #{descripition}, #{user_no}, #{board_type}, #{category}, now())
+  </insert>
+
+  <update id="updateBoard" parameterType="Board">
+    update board set
+    title=#{title},
+    descripition=#{descripition},
+    boardType=#{board_type},
+    category=#{category},
+    date=now()
+    where board_no=#{boardNo}
+  </update>
+  
+  <delete id="deleteBoard" parameterType="int">
+		delete from Board
+		where board_no=#{value}
+  </delete>
+  
+  <select id="findOne" resultMap="boardMap" parameterType="int">
+    select board_no,title,descripition,user_no,board_type,category, cre_dt
+		from board
+		where board_no = #{value}
+  </select>
+  
+  <select id="findAll" resultMap="boardMap" parameterType="int">
+    select board_no,title,descripition,user_no,board_type,category, cre_dt
+		from board
+  </select>
+	
+  <select id="findAllbyType" resultMap="boardMap" parameterType="Type">
+    select board_no,title,descripition,user_no,board_type,category, cre_dt
+		from board
+		where board_type = #{value}
+  </select>
+  
+  <select id="findAllbyCategory" resultMap="boardMap" parameterType="Category">
+    select board_no,title,descripition,user_no,board_type,category, cre_dt
+		from board
+		where category = #{value}
+  </select>
+</mapper>

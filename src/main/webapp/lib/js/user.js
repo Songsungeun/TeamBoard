@@ -13,9 +13,10 @@ function fnSignUp() {
 	formData.append("department", $("#user_department").val());
 	formData.append("position", $("#user_position").val());
 	formData.append("name", $("#user_name").val());
-	formData.append("admin", "user");
+	formData.append("admin", false);
 	formData.append("permission", false);
 	
+	DEBUG && console.log(formData.get("userID"));
 	ajaxRequest(formData, url);
 	
 }

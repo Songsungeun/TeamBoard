@@ -41,6 +41,7 @@ public class UserController {
 		return JsonResult.success();
 	}
 	
+	
 //	@RequestMapping(value = "/login", method = RequestMethod.GET)
 //	public Object login(
 //		@RequestParam(value = "error", required = false) String error,

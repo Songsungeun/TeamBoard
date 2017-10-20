@@ -14,9 +14,9 @@ import com.teamboard.vo.User;
 public interface UserDao {
 
 	int signUpUser(User user) throws Exception;
-	int unRegistUser(int no) throws Exception;
 	int updateUser(User user) throws Exception;
 	int changeAdmin(User user) throws Exception;
+	int unRegistUser(int no) throws Exception;
 	
 	User findOnebyUserNo(int userNo); 
 	User findOnebyID(String userId); 

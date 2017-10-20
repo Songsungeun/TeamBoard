@@ -32,7 +32,7 @@
    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="dataSource" ref="dataSource" />
     <property name="mapperLocations" 
-              value="classpath*:sql/*Mapper.xml" />
+              value="/WEB-INF/sql/*.xml" />
     <property name="typeAliasesPackage" value="com.teamboard.vo" />
   </bean>
           
