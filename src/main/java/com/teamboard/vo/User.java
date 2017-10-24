@@ -2,9 +2,6 @@ package com.teamboard.vo;
 
 import java.io.Serializable;
 
-import lombok.Getter;
-import lombok.Setter;
-
 
 /**
  * @author : Songsungeun

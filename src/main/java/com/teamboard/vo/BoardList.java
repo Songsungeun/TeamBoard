@@ -10,7 +10,7 @@ import java.sql.Date;
  * @description : TODO
  */
 
-public class Board implements Serializable{
+public class BoardList implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -21,6 +21,9 @@ public class Board implements Serializable{
 	protected String boardType;
 	protected String category;
 	protected Date date;
+	protected String userName;
+	protected String userPosition;
+	
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -32,12 +35,6 @@ public class Board implements Serializable{
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String descripition) {
-		this.description = descripition;
 	}
 	public int getUserNo() {
 		return userNo;
@@ -62,6 +59,24 @@ public class Board implements Serializable{
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserPosition() {
+		return userPosition;
+	}
+	public void setUserPosition(String userPosition) {
+		this.userPosition = userPosition;
 	}
 	
 	

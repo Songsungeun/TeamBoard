@@ -9,10 +9,13 @@
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../lib/js/common.js"></script>
+    <script src="../node_modules/handlebars/handlebars-v4.0.11.js"></script>
+    <script src="../lib/js/board/board_detail.js"></script>
     <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../lib/css/animate.css" rel="stylesheet"/>
     <link href="../lib/css/style.css" rel="stylesheet"/>
     <link href="../lib/css/board/board_detail.css" rel="stylesheet"/>
+    
 </head>
 <body class="gray-bg">
 
@@ -22,59 +25,52 @@
       <div>       
         <h1 class="logo-name" style="font-size: 150px;">AV+</h1>
       </div>
-    <h3>팀 내부 공지사항+</h3>
+    <h3 class="page_title"></h3>
     </div>
     <br><br><br>
     
     <div style="width: 100%;">
     
+    <div class="board_no" style="display:hidden;"></div>
       <table id="teamNoticeBoard">
-      
         <!-- 게시판 상세페이지 -->
         <tr style="background-color: #A0C0D7; color: white; font-weight: bold;">
           <td style="width: 15%;">제목</td>
-          <td colspan="3" style="width: 65%; ">팀내 공지사항 입니다!</td>
-          <td style="width: 20%;"><a href="noticeBoard.html">팀 내부 공지사항</a></td>
+          <td colspan="3" style="width: 60%;" class="board_title"></td>
+          <td style="width: 25%;"><a href="" class="board_type"></a></td>
         </tr>
         <tr>
           <td>작성자</td>
-          <td style="width: 25%;">양희영(yan***)</td>
-          <td style="width: 20%;">작성일</td>
-          <td>2016-06-18</td>
-          <td>0</td>
+          <td colspan="3" class="author_name"></td>
+          <td style="width: 10%;" class="cre_dt"></td>
         </tr>
-        <tr style="background-color: #F0F0F0;"><td colspan="5"></td></tr>
+        <tr style="background-color: #F0F0F0;"><td colspan="5" style="height: 2px;"></td></tr>
         <tr>
-          <td colspan="5" style="text-align: left; padding: 30px 15px 30px 15px;">
-          하하하하하하하ㅏ하하하ㅏ하하하ㅏ하하하하하하하ㅏ하하하하하하하하하하하하하하ㅏ하하하하하
-          하하하하하하하ㅏ하하하ㅏ하하하ㅏ하하하하하하하ㅏ하하하하하하하하하하하하하하ㅏ하하하하하
-          하하하하하하하ㅏ하하하ㅏ하하하ㅏ하하하하하하하ㅏ하하하하하하하하하하하하하하ㅏ하하하하하
-          하하하하하하하ㅏ하하하ㅏ하하하ㅏ하하하하하하하ㅏ하하하하하하하하하하하하하하ㅏ하하하하하
-          하하하하하하하ㅏ하하하ㅏ하하하ㅏ하하하하하하하ㅏ하하하하하하하하하하하하하하ㅏ하하하하하
-          하하하하하하하ㅏ하하하ㅏ하하하ㅏ하하하하하하하ㅏ하하하하하하하하하하하하하하ㅏ하하하하하
+          <td colspan="5" style="text-align: left; padding: 30px 15px 30px 15px; background: floralwhite;" class="board_content">
           </td>
         </tr>
         
         <!-- 댓글 부분 -->
-        <tr style="background-color: #F0F0F0;">
-          <td>양찬(vmf***)</td>
-          <td colspan="3" style="text-align: left; padding-left: 30px;">형 안냐세염</td>
-          <td>2017-07-04</td>
+        <tbody class="tmp">
+        <script id="board_comment_template" type="text/x-handlebars-template">
+		
+		{{#data}}   
+		<tr style="background-color: #F0F0F0;">
+          <td><b>{{userName}}</b></td>
+          <td colspan="3" style="text-align: left; padding-left: 30px;">{{commentDescription}}</td>
+          <td>{{cre_dt}}</td>
         </tr>
-        <tr>
-          <td>송성은(son***)</td>
-          <td colspan="3" style="text-align: left; padding-left: 30px;">테스트테스트</td>
-          <td>2017-07-04</td>
-        </tr>
-        
+		{{/data}}
+		</script>
+		</tbody>
         <!-- 댓글 입력 부분 -->
         <tr>
-          <td>양찬</td>
+          <td><b>댓글</b></td>
           <td colspan="3" style="padding-top: 5px; padding-bottom: 2px;">
-            <textarea rows="3" cols="70" ></textarea>
+            <textarea rows="3" cols="70" class="comment_content"></textarea>
           </td>
           <td>
-            <input type="button" value="등록" style="width:90%; height: 90%;" />
+            <input type="button" value="등록" style="width:90%; height: 90%;" class="add_comment"/>
           </td>
         </tr>
         

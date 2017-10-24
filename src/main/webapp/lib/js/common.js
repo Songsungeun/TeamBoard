@@ -5,9 +5,7 @@
 const DEBUG = true;
 
 $(document).ready( function() {
-
-	$("#nav_bar").load("../common_html/nav_bar.html");
-	
+	loadNav();
 });
 
 function ajaxRequest(formData, url) {
@@ -51,3 +49,29 @@ function ajaxLoginRequest(formData, url) {
 	})
 }
 
+
+
+function ajaxwriteRequest(formData, url) {
+	$.ajax({
+		url: url,
+		data: formData,
+		processData: false,
+		contentType: false,
+		type: "POST",
+		success : function(obj) {
+			var result = obj.jsonResult
+			if (result.state != "success") {
+				alert("작성되었습니다.");
+				location.reload();
+			} else {DEBUG && console.log("else로 빠짐")}
+		},
+		error : function(err) {
+			alert("오류 발생");
+			console.log("err message : " + err.data);
+		}
+	})
+}
+
+function loadNav() {
+	$("#nav_bar").load("../common_html/nav_bar.html");
+}

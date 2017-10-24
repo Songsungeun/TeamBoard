@@ -1,11 +1,11 @@
 /**
  * 
  */
-
 $(document).ready(function() {
 	initTinyMCE();
 	chained();
-	
+	insertUserInfo();
+	ajaxLoginCheck();
 })
 
 function chained() {
@@ -83,5 +83,37 @@ function write_add() {
 	DEBUG && console.log("boardType : " + formData.get("boardType"));
 	DEBUG && console.log("category : " + formData.get("category"));
 	
-	ajaxRequest(formData, url);
+	ajaxwriteRequest(formData, url);
 }
+
+function insertUserInfo() {
+	var dt = new Date();
+	var year = dt.getFullYear();
+	var month = dt.getMonth() + 1;
+	var day = dt.getDate();
+	$(".current_date").text(year + '-' + month + '-' + day);
+	$('user_name').text($("#user_name").val());
+}
+
+function ajaxLoginCheck() {
+	var url = "/" + location.pathname.split('/')[1] + "/user/loginCheck.json";
+	$.ajax({
+		url: url,
+		type: "GET",
+		success : function(obj) {
+			var result = obj.jsonResult;
+			if (result.state != "success") {
+				alert("로그인 하세요.");
+				location.href = "../user/login.html";
+			} else {
+				$('.user_name').text(result.data.name);
+			}
+		},
+		error : function(err) {
+			console.log("err message: " + err.data);
+			alert("오류발생");
+			location.href = "../user/login.html";
+		}
+	})
+}
+

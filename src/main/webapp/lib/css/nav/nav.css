@@ -62,3 +62,10 @@
 #myDropdown2 a:hover {
   color: #FF8000;
 }
+
+.logout_btn {
+	margin: 5px 0;
+}
+.logout_btn a {
+	font-size: 15px;
+}

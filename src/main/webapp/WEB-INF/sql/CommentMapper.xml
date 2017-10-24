@@ -6,36 +6,36 @@
 
   <resultMap type="Comment" id="commentMap">
     <id column="comment_no" property="commentNo"/>
-    <result column="title" property="commentDescription"/>
-    <result column="descripition" property="userNo"/>
-    <result column="user_no" property="boardNo"/>
+    <result column="description" property="commentDescription"/>
+    <result column="board_no" property="boardNo"/>
+    <result column="user_no" property="userNo"/>
+    <result column="name" property="userName"/>
   </resultMap>
   
   <insert id="insertComment" parameterType="Comment">
-		insert into board(title, descripition, userNo, boardType, category, date)
-		values(#{title}, #{descripition}, #{user_no}, #{board_type}, #{category}, now())
+		insert into comment(description, cre_dt, board_no, user_no)
+		values(#{commentDescription}, now(), #{boardNo}, #{userNo})
   </insert>
 
   <update id="updateComment" parameterType="Comment">
-    update board set
-    title=#{title},
-    descripition=#{descripition},
-    boardType=#{board_type},
-    category=#{category},
+    update comment set
+    description=#{commentDescription},
     date=now()
-    where board_no=#{boardNo}
+    where comment_no=#{commentNo}
   </update>
   
   <delete id="deleteComment" parameterType="int">
-		delete from Board
-		where board_no=#{value}
+		delete from comment
+		where comment_no=#{value}
   </delete>
   
   <select id="getCommentListbyBoardNo" resultMap="commentMap" parameterType="map">
-    select board_no,title,descripition,user_no,board_type,category, date
-		from board
-		where board_no = #{value}
-		ORDER  BY limit #{startIndex}, #{length}
+    select cm.description, cm.cre_dt, cm.board_no, cm.user_no, mem.name
+		from comment cm
+		left join user mem on cm.user_no = mem.user_no
+		where board_no = #{boardNo}
+		order by cm.comment_no desc
+<!-- 		limit #{startIndex}, #{length} -->
   </select>
   
 </mapper>

@@ -1,10 +1,10 @@
 package com.teamboard.service;
 
-import com.teamboard.vo.Board;
-import com.teamboard.vo.common.Category;
-import com.teamboard.vo.common.Type;
-
 import java.util.List;
+
+import com.teamboard.vo.Board;
+import com.teamboard.vo.BoardList;
+import com.teamboard.vo.common.Category;
 
 /**
  * @author : Songsungeun
@@ -18,8 +18,8 @@ public interface BoardService {
 	public void removeBoard(int boardNo) throws Exception;
 	public void updateBoard(Board board) throws Exception;
 	
-	public Board findOne(int boardNo);
-	public List<Board> findBoardListbyType(Type type);
-	public List<Board> findBoardListbyCategory(Category category);
+	public BoardList findOne(int boardNo);
+	public List<BoardList> findBoardListbyType(String type);
+	public List<BoardList> findBoardListbyCategory(String category);
 	
 }

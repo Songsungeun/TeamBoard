@@ -7,25 +7,37 @@
   <resultMap type="Board" id="boardMap">
     <id column="board_no" property="boardNo"/>
     <result column="title" property="title"/>
-    <result column="descripition" property="descripition"/>
+    <result column="descripition" property="description"/>
     <result column="user_no" property="userNo"/>
     <result column="board_type" property="boardType"/>
     <result column="category" property="category"/>
     <result column="cre_dt" property="date"/>
   </resultMap>
   
+  <resultMap type="BoardList" id="boardListMap">
+  	 <id column="board_no" property="boardNo"/>
+    <result column="title" property="title"/>
+    <result column="descripition" property="description"/>
+    <result column="user_no" property="userNo"/>
+    <result column="board_type" property="boardType"/>
+    <result column="category" property="category"/>
+    <result column="cre_dt" property="date"/>
+    <result column="name" property="userName"/>
+    <result column="position" property="userPosition"/>
+  </resultMap>
+  
   <insert id="insertBoard" parameterType="Board">
-		insert into board(title, descripition, userNo, boardType, category, date)
-		values(#{title}, #{descripition}, #{user_no}, #{board_type}, #{category}, now())
+		insert into board(title, description, user_no, board_type, category, cre_dt)
+		values(#{title}, #{description}, #{userNo}, #{boardType}, #{category}, now())
   </insert>
 
   <update id="updateBoard" parameterType="Board">
     update board set
     title=#{title},
-    descripition=#{descripition},
-    boardType=#{board_type},
+    description=#{description},
+    board_type=#{boardType},
     category=#{category},
-    date=now()
+    cre_dt=now()
     where board_no=#{boardNo}
   </update>
   
@@ -34,26 +46,31 @@
 		where board_no=#{value}
   </delete>
   
-  <select id="findOne" resultMap="boardMap" parameterType="int">
-    select board_no,title,descripition,user_no,board_type,category, cre_dt
-		from board
+  <select id="findOne" resultMap="boardListMap" parameterType="int">
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, mem.name, mem.position
+		from board bo
+		left join user mem on bo.user_no = mem.user_no
 		where board_no = #{value}
   </select>
   
   <select id="findAll" resultMap="boardMap" parameterType="int">
-    select board_no,title,descripition,user_no,board_type,category, cre_dt
+    select board_no,title,description,user_no,board_type,category, cre_dt
 		from board
   </select>
 	
-  <select id="findAllbyType" resultMap="boardMap" parameterType="Type">
-    select board_no,title,descripition,user_no,board_type,category, cre_dt
-		from board
+  <select id="findAllbyType" resultMap="boardListMap" parameterType="String">
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, mem.name, mem.position
+		from board bo
+		left join user mem on bo.user_no = mem.user_no
 		where board_type = #{value}
+		order by bo.board_no desc
   </select>
   
-  <select id="findAllbyCategory" resultMap="boardMap" parameterType="Category">
-    select board_no,title,descripition,user_no,board_type,category, cre_dt
-		from board
+  <select id="findAllbyCategory" resultMap="boardListMap" parameterType="String">
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, mem.name, mem.position
+		from board bo
+		left join user mem on bo.user_no = mem.user_no
 		where category = #{value}
+		order by bo.board_no desc
   </select>
 </mapper>

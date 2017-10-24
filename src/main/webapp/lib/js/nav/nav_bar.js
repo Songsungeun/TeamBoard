@@ -52,7 +52,7 @@ function ajaxLoginCheck() {
 			var result = obj.jsonResult;
 			if (result.state != "success") {
 				alert("로그인 하세요.");
-//				location.href = "../user/login.html";
+				location.href = "../user/login.html";
 			} else {
 				$("#user_department").text(result.data.department + "팀");
 				$("#user_name").text(result.data.name);

@@ -3,10 +3,11 @@ package com.teamboard.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.teamboard.service.BoardService;
 import com.teamboard.service.CommentService;
 import com.teamboard.vo.Board;
+import com.teamboard.vo.BoardList;
 import com.teamboard.vo.Comment;
+import com.teamboard.vo.User;
 import com.teamboard.vo.common.Category;
 import com.teamboard.vo.common.JsonResult;
-import com.teamboard.vo.common.Type;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,11 +41,14 @@ public class BoardController {
 	Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@RequestMapping(path = "add")
-	public Object insertBoard(Board board) {
+	public Object insertBoard(Board board, HttpSession session) {
 
 		System.out.println("please");
 		try {
 			System.out.println("hello");
+			User user = (User)session.getAttribute("user");
+			System.out.println("no: " + user.getMemberNo());
+			board.setUserNo(user.getMemberNo());
 			boardService.saveBoard(board);
 		} catch (Exception e) {
 			logger.error("{}", e);
@@ -87,9 +92,8 @@ public class BoardController {
 
 	@RequestMapping(path = "detail")
 	public Object detailBoard(int boardNo) {
-
 		try {
-			Board board = boardService.findOne(boardNo);
+			BoardList board = boardService.findOne(boardNo);
 
 			if (board == null) {
 				throw new RuntimeException("해당 게시물이 존재하지 않습니다.");
@@ -102,10 +106,26 @@ public class BoardController {
 		}
 	}
 
-	@RequestMapping(path = "categoryList")
-	public Object categoryList(Category category) {
+	@RequestMapping(path = "typeList")
+	public Object typeList(String type) {
+		
+		List<BoardList> boardListByType = new ArrayList<BoardList>();
+		
+		try {
+			boardListByType = boardService.findBoardListbyType(type);
+			
+		} catch (RuntimeException e) {
+			logger.error("{}", e);
+			return JsonResult.error(e.getMessage());
+		}
+		
+		return JsonResult.success(boardListByType);
+	}
 
-		List<Board> boardListByCategory = new ArrayList<Board>();
+	@RequestMapping(path = "categoryList")
+	public Object categoryList(String category) {
+
+		List<BoardList> boardListByCategory = new ArrayList<BoardList>();
 
 		try {
 			boardListByCategory = boardService.findBoardListbyCategory(category);
@@ -118,21 +138,6 @@ public class BoardController {
 		return JsonResult.success(boardListByCategory);
 	}
 
-	@RequestMapping(path = "typeList")
-	public Object typeList(Type type) {
-
-		List<Board> boardListByType = new ArrayList<Board>();
-
-		try {
-			boardListByType = boardService.findBoardListbyType(type);
-
-		} catch (RuntimeException e) {
-			logger.error("{}", e);
-			return JsonResult.error(e.getMessage());
-		}
-
-		return JsonResult.success(boardListByType);
-	}
 
 
 	// 댓글 영역
@@ -147,9 +152,9 @@ public class BoardController {
 	}
 
 	@RequestMapping(path = "inserComment")
-	public Object insertComment(Comment comment) {
-		// Front 에서 넘겨줄 때 boardNo, memberNo 꽂힌채로 넘어와야 함
-
+	public Object insertComment(Comment comment, HttpSession session) {
+		User user = (User)session.getAttribute("user");
+		comment.setUserNo(user.getMemberNo());
 		try {
 			commentService.insertComment(comment);
 		} catch (Exception e) {

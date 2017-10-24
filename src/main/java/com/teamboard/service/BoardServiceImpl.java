@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.teamboard.dao.BoardDao;
 import com.teamboard.vo.Board;
+import com.teamboard.vo.BoardList;
 import com.teamboard.vo.common.Category;
-import com.teamboard.vo.common.Type;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -32,20 +32,20 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public Board findOne(int boardNo) {
-		Board board = boardDao.findOne(boardNo);
+	public BoardList findOne(int boardNo) {
+		BoardList board = boardDao.findOne(boardNo);
 		return board;
 	}
 
 	@Override
-	public List<Board> findBoardListbyType(Type type) {
-		List<Board> boardList = boardDao.findAllbyType(type);
+	public List<BoardList> findBoardListbyType(String type) {
+		List<BoardList> boardList = boardDao.findAllbyType(type);
 		return boardList;
 	}
 
 	@Override
-	public List<Board> findBoardListbyCategory(Category category) {
-		List<Board> boardList = boardDao.findAllbyCategory(category);
+	public List<BoardList> findBoardListbyCategory(String category) {
+		List<BoardList> boardList = boardDao.findAllbyCategory(category);
 		return boardList;
 	}
 
