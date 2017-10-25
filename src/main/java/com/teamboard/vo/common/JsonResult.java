@@ -8,6 +8,7 @@ public class JsonResult{
 	String state;
 	Object data;
 	Object data2;
+	Object data3;
 
 	// Method - success
 
@@ -21,6 +22,10 @@ public class JsonResult{
 
 	public static JsonResult success(Object data1, Object data2) {
 		return new JsonResult(Constants.SUCCESS, data1, data2);
+	}
+	
+	public static JsonResult success(Object data1, Object data2, Object data3) {
+		return new JsonResult(Constants.SUCCESS, data1, data2, data3);
 	}
 
 	// Method - fail
@@ -62,6 +67,13 @@ public class JsonResult{
 		this.state = state;
 		this.data = data;
 		this.data2 = data2;
+	}
+	
+	public JsonResult(String state, Object data, Object data2, Object data3) {
+		this.state = state;
+		this.data = data;
+		this.data2 = data2;
+		this.data3 = data3;
 	}
 
 	public String getState() {

@@ -74,7 +74,7 @@ function write_add() {
 	var url = "add.json";
 	
 	formData.append("title", $("#title").val());
-	formData.append("descripition", tinyMCE.activeEditor.getContent())
+	formData.append("description", tinyMCE.activeEditor.getContent())
 	formData.append("boardType", $("#board_type option:selected").val());
 	formData.append("category", $("#category_list option:selected").val());
 	

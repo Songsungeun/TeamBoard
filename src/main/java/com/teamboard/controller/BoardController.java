@@ -1,7 +1,9 @@
 package com.teamboard.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +20,6 @@ import com.teamboard.vo.Board;
 import com.teamboard.vo.BoardList;
 import com.teamboard.vo.Comment;
 import com.teamboard.vo.User;
-import com.teamboard.vo.common.Category;
 import com.teamboard.vo.common.JsonResult;
 
 import lombok.extern.slf4j.Slf4j;
@@ -52,6 +53,7 @@ public class BoardController {
 			boardService.saveBoard(board);
 		} catch (Exception e) {
 			logger.error("{}", e);
+			e.printStackTrace();
 			return JsonResult.error(e.getMessage());
 		}
 
@@ -110,12 +112,12 @@ public class BoardController {
 	public Object typeList(String type) {
 		
 		List<BoardList> boardListByType = new ArrayList<BoardList>();
-		
 		try {
 			boardListByType = boardService.findBoardListbyType(type);
 			
 		} catch (RuntimeException e) {
 			logger.error("{}", e);
+			e.printStackTrace();
 			return JsonResult.error(e.getMessage());
 		}
 		
@@ -136,6 +138,33 @@ public class BoardController {
 		}
 
 		return JsonResult.success(boardListByCategory);
+	}
+	
+	@RequestMapping(path = "mainList")
+	public Object mainList(String type) {
+		
+		List<BoardList> mainNotice = new ArrayList<BoardList>();
+		List<BoardList> mainIssue = new ArrayList<BoardList>();
+		List<BoardList> productIssue = new ArrayList<BoardList>();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try {
+			mainNotice = boardService.findBoardListbyTypeForMain(type);
+			mainIssue = boardService.findBoardListbyTypeForMain("common_issue");
+			productIssue = boardService.findBoardListbyCategoryForMain("sat");
+			
+			map.put("notice", mainNotice);
+			map.put("issue", mainIssue);
+			map.put("product", productIssue);
+			
+		} catch (RuntimeException e) {
+			logger.error("{}", e);
+			e.printStackTrace();
+			return JsonResult.error(e.getMessage());
+		}
+		
+		return JsonResult.success(map);
 	}
 
 

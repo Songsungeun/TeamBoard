@@ -21,5 +21,6 @@ public interface BoardService {
 	public BoardList findOne(int boardNo);
 	public List<BoardList> findBoardListbyType(String type);
 	public List<BoardList> findBoardListbyCategory(String category);
-	
+	public List<BoardList> findBoardListbyTypeForMain(String type);
+	public List<BoardList> findBoardListbyCategoryForMain(String category);
 }

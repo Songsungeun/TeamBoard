@@ -1,145 +1,94 @@
 -- user
-CREATE TABLE `MY_SCHEMA`.`user` (
-	`user_no`    INTEGER            NOT NULL COMMENT 'user_no', -- user_no
-	`user_id`    VARCHAR(30)        NULL     COMMENT 'user_id', -- user_id
-	`user_pw`    VARCHAR(20)        NULL     COMMENT 'user_pw', -- user_pw
-	`department` VARCHAR(20)        NULL     COMMENT 'Department', -- Department
-	`position`   VARCHAR(20)        NULL     COMMENT 'position', -- position
-	`admin`      <데이터 타입 없음> NULL     COMMENT 'admin', -- admin
-	`name`       VARCHAR(50)        NULL     COMMENT 'name', -- name
-	`COL`        <데이터 타입 없음> NULL     COMMENT 'permission' -- permission
+CREATE TABLE `user` (
+   `user_no`    INT          NOT NULL COMMENT 'user_no', -- user_no
+   `user_id`    VARCHAR(20)  NULL     COMMENT 'user_id', -- user_id
+   `user_pw`    VARCHAR(255) NULL     COMMENT 'user_pw', -- user_pw
+   `department` varchar(50)  NULL     COMMENT 'department', -- department
+   `position`   varchar(20)  NULL     COMMENT 'position', -- position
+   `name`       varchar(10)  NULL     COMMENT 'name', -- name
+   `admin`      BOOLEAN      NULL     COMMENT 'admin', -- admin
+   `permission` BOOLEAN      NULL     COMMENT 'permission' -- permission
 )
 COMMENT 'user';
 
 -- user
-ALTER TABLE `MY_SCHEMA`.`user`
-	ADD CONSTRAINT `PK_user` -- user 기본키
-		PRIMARY KEY (
-			`user_no` -- user_no
-		);
+ALTER TABLE `user`
+   ADD CONSTRAINT `PK_user` -- user 기본키
+      PRIMARY KEY (
+         `user_no` -- user_no
+      );
 
-ALTER TABLE `MY_SCHEMA`.`user`
-	MODIFY COLUMN `user_no` INTEGER NOT NULL AUTO_INCREMENT COMMENT 'user_no';
+ALTER TABLE `user`
+   MODIFY COLUMN `user_no` INT NOT NULL AUTO_INCREMENT COMMENT 'user_no';
 
-ALTER TABLE `MY_SCHEMA`.`user`
-	AUTO_INCREMENT = 1;
-
--- Board
-CREATE TABLE `MY_SCHEMA`.`board` (
-	`board_no`    INTEGER      NOT NULL COMMENT 'board_no', -- board_no
-	`title`       VARCHAR(255) NULL     COMMENT 'title', -- title
-	`description` VARCHAR(255) NULL     COMMENT 'description', -- description
-	`user_no`     INTEGER      NULL     COMMENT 'user_no', -- user_no
-	`board_type`  VARCHAR(50)  NULL     COMMENT 'board_type', -- board_type
-	`category`    VARCHAR(50)  NULL     COMMENT 'board_category', -- board_category
-	`COL`         DATE         NULL     COMMENT 'Date' -- Date
+-- board
+CREATE TABLE `board` (
+   `board_no`    INT          NOT NULL COMMENT 'board_no', -- board_no
+   `title`       VARCHAR(255) NULL     COMMENT 'title', -- title
+   `description` MEDIUMTEXT   NULL     COMMENT 'description', -- description
+   `board_type`  VARCHAR(30)  NULL     COMMENT 'board_type', -- board_type
+   `category`    VARCHAR(50)  NULL     COMMENT 'category', -- category
+   `cre_dt`      DATETIME     NULL     COMMENT 'cre_dt', -- cre_dt
+   `user_no`     INT          NULL     COMMENT 'user_no' -- user_no
 )
-COMMENT 'Board';
+COMMENT 'board';
 
--- Board
-ALTER TABLE `MY_SCHEMA`.`board`
-	ADD CONSTRAINT `PK_board` -- Board 기본키
-		PRIMARY KEY (
-			`board_no` -- board_no
-		);
+-- board
+ALTER TABLE `board`
+   ADD CONSTRAINT `PK_board` -- board 기본키
+      PRIMARY KEY (
+         `board_no` -- board_no
+      );
 
-ALTER TABLE `MY_SCHEMA`.`board`
-	MODIFY COLUMN `board_no` INTEGER NOT NULL AUTO_INCREMENT COMMENT 'board_no';
-
-ALTER TABLE `MY_SCHEMA`.`board`
-	AUTO_INCREMENT = 1;
+ALTER TABLE `board`
+   MODIFY COLUMN `board_no` INT NOT NULL AUTO_INCREMENT COMMENT 'board_no';
 
 -- comment
-CREATE TABLE `MY_SCHEMA`.`comment` (
-	`comment_no`          INTEGER      NOT NULL COMMENT 'comment_no', -- comment_no
-	`comment_description` VARCHAR(255) NULL     COMMENT 'description', -- description
-	`board_no`            INTEGER      NULL     COMMENT 'board_no', -- board_no
-	`user_no`             INTEGER      NULL     COMMENT 'user_no' -- user_no
+CREATE TABLE `comment` (
+   `comment_no`  INT         NOT NULL COMMENT 'comment_no', -- comment_no
+   `description` VARCHAR(70) NULL     COMMENT 'description', -- description
+   `cre_dt`      DATETIME    NULL     COMMENT 'cre_dt', -- cre_dt
+   `board_no`    INT         NULL     COMMENT 'board_no', -- board_no
+   `user_no`     INT         NULL     COMMENT 'user_no' -- user_no
 )
 COMMENT 'comment';
 
 -- comment
-ALTER TABLE `MY_SCHEMA`.`comment`
-	ADD CONSTRAINT `PK_comment` -- comment 기본키
-		PRIMARY KEY (
-			`comment_no` -- comment_no
-		);
+ALTER TABLE `comment`
+   ADD CONSTRAINT `PK_comment` -- comment 기본키
+      PRIMARY KEY (
+         `comment_no` -- comment_no
+      );
 
-ALTER TABLE `MY_SCHEMA`.`comment`
-	MODIFY COLUMN `comment_no` INTEGER NOT NULL AUTO_INCREMENT COMMENT 'comment_no';
+ALTER TABLE `comment`
+   MODIFY COLUMN `comment_no` INT NOT NULL AUTO_INCREMENT COMMENT 'comment_no';
 
-ALTER TABLE `MY_SCHEMA`.`comment`
-	AUTO_INCREMENT = 1;
-
--- attach_file
-CREATE TABLE `MY_SCHEMA`.`attach_file` (
-	`file_no`     INTEGER      NOT NULL COMMENT 'file_no', -- file_no
-	`origin_name` VARCHAR(255) NULL     COMMENT 'origin_name', -- origin_name
-	`file_name`   VARCHAR(255) NULL     COMMENT 'file_name', -- file_name
-	`board_no`    INTEGER      NULL     COMMENT 'board_no', -- board_no
-	`user_no`     INTEGER      NULL     COMMENT 'user_no' -- user_no
-)
-COMMENT 'attach_file';
-
--- attach_file
-ALTER TABLE `MY_SCHEMA`.`attach_file`
-	ADD CONSTRAINT `PK_attach_file` -- attach_file 기본키
-		PRIMARY KEY (
-			`file_no` -- file_no
-		);
-
-ALTER TABLE `MY_SCHEMA`.`attach_file`
-	MODIFY COLUMN `file_no` INTEGER NOT NULL AUTO_INCREMENT COMMENT 'file_no';
-
-ALTER TABLE `MY_SCHEMA`.`attach_file`
-	AUTO_INCREMENT = 1;
-
--- Board
-ALTER TABLE `MY_SCHEMA`.`board`
-	ADD CONSTRAINT `FK_user_TO_board` -- user -> Board
-		FOREIGN KEY (
-			`user_no` -- user_no
-		)
-		REFERENCES `MY_SCHEMA`.`user` ( -- user
-			`user_no` -- user_no
-		);
+-- board
+ALTER TABLE `board`
+   ADD CONSTRAINT `FK_user_TO_board` -- user -> board
+      FOREIGN KEY (
+         `user_no` -- user_no
+      )
+      REFERENCES `user` ( -- user
+         `user_no` -- user_no
+      );
 
 -- comment
-ALTER TABLE `MY_SCHEMA`.`comment`
-	ADD CONSTRAINT `FK_board_TO_comment` -- Board -> comment
-		FOREIGN KEY (
-			`board_no` -- board_no
-		)
-		REFERENCES `MY_SCHEMA`.`board` ( -- Board
-			`board_no` -- board_no
-		);
+ALTER TABLE `comment`
+   ADD CONSTRAINT `FK_board_TO_comment` -- board -> comment
+      FOREIGN KEY (
+         `board_no` -- board_no
+      )
+      REFERENCES `board` ( -- board
+         `board_no` -- board_no
+      );
 
 -- comment
-ALTER TABLE `MY_SCHEMA`.`comment`
-	ADD CONSTRAINT `FK_user_TO_comment` -- user -> comment
-		FOREIGN KEY (
-			`user_no` -- user_no
-		)
-		REFERENCES `MY_SCHEMA`.`user` ( -- user
-			`user_no` -- user_no
-		);
-
--- attach_file
-ALTER TABLE `MY_SCHEMA`.`attach_file`
-	ADD CONSTRAINT `FK_board_TO_attach_file` -- Board -> attach_file
-		FOREIGN KEY (
-			`board_no` -- board_no
-		)
-		REFERENCES `MY_SCHEMA`.`board` ( -- Board
-			`board_no` -- board_no
-		);
-
--- attach_file
-ALTER TABLE `MY_SCHEMA`.`attach_file`
-	ADD CONSTRAINT `FK_user_TO_attach_file` -- user -> attach_file
-		FOREIGN KEY (
-			`user_no` -- user_no
-		)
-		REFERENCES `MY_SCHEMA`.`user` ( -- user
-			`user_no` -- user_no
-		);
+ALTER TABLE `comment`
+   ADD CONSTRAINT `FK_user_TO_comment` -- user -> comment
+      FOREIGN KEY (
+         `user_no` -- user_no
+      )
+      REFERENCES `user` ( -- user
+         `user_no` -- user_no
+      );boardboard

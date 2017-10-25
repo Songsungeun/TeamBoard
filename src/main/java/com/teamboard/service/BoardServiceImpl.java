@@ -49,4 +49,17 @@ public class BoardServiceImpl implements BoardService{
 		return boardList;
 	}
 
+	@Override
+	public List<BoardList> findBoardListbyTypeForMain(String type) {
+		List<BoardList> boardList = boardDao.findAllbyTypeForMain(type);
+		return boardList;
+	}
+
+	@Override
+	public List<BoardList> findBoardListbyCategoryForMain(String category) {
+		List<BoardList> boardList = boardDao.findAllbyCategoryForMain(category);
+		return boardList;
+	}
+
+	
 }

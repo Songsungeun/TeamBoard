@@ -23,4 +23,6 @@ public interface BoardDao {
 	List<Board> findAll();
 	List<BoardList> findAllbyType(String type);
 	List<BoardList> findAllbyCategory(String category);
+	List<BoardList> findAllbyTypeForMain(String type);
+	List<BoardList> findAllbyCategoryForMain(String category);
 } 

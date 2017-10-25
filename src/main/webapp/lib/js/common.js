@@ -60,7 +60,7 @@ function ajaxwriteRequest(formData, url) {
 		type: "POST",
 		success : function(obj) {
 			var result = obj.jsonResult
-			if (result.state != "success") {
+			if (result.state == "success") {
 				alert("작성되었습니다.");
 				location.reload();
 			} else {DEBUG && console.log("else로 빠짐")}
@@ -73,5 +73,6 @@ function ajaxwriteRequest(formData, url) {
 }
 
 function loadNav() {
-	$("#nav_bar").load("../common_html/nav_bar.html");
+//	$("#nav_bar").load("../common_html/nav_bar.html");
+//	$("#nav_bar").load("../main/Mainpage2.html");
 }
