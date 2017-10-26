@@ -18,9 +18,12 @@ public interface BoardService {
 	public void removeBoard(int boardNo) throws Exception;
 	public void updateBoard(Board board) throws Exception;
 	
+	public int getCountBoardByType(String type);
+	public int getCountBoardByCategory(String category);
+	
 	public BoardList findOne(int boardNo);
-	public List<BoardList> findBoardListbyType(String type);
-	public List<BoardList> findBoardListbyCategory(String category);
+	public List<BoardList> findBoardListbyType(String type, int pageNo, int length);
+	public List<BoardList> findBoardListbyCategory(String category, int pageNo, int length);
 	public List<BoardList> findBoardListbyTypeForMain(String type);
 	public List<BoardList> findBoardListbyCategoryForMain(String category);
 }

@@ -41,6 +41,8 @@ public class BoardController {
 
 	Logger logger = LoggerFactory.getLogger(UserController.class);
 	
+	int length = 10;
+	
 	@RequestMapping(path = "add")
 	public Object insertBoard(Board board, HttpSession session) {
 
@@ -109,11 +111,15 @@ public class BoardController {
 	}
 
 	@RequestMapping(path = "typeList")
-	public Object typeList(String type) {
+	public Object typeList(String type, int pageNo) {
 		
 		List<BoardList> boardListByType = new ArrayList<BoardList>();
+		
+		int count;
+		
 		try {
-			boardListByType = boardService.findBoardListbyType(type);
+			boardListByType = boardService.findBoardListbyType(type, pageNo, length);
+			count = boardService.getCountBoardByType(type);
 			
 		} catch (RuntimeException e) {
 			logger.error("{}", e);
@@ -121,23 +127,24 @@ public class BoardController {
 			return JsonResult.error(e.getMessage());
 		}
 		
-		return JsonResult.success(boardListByType);
+		return JsonResult.success(boardListByType, count);
 	}
 
 	@RequestMapping(path = "categoryList")
-	public Object categoryList(String category) {
+	public Object categoryList(String category, int pageNo) {
 
 		List<BoardList> boardListByCategory = new ArrayList<BoardList>();
-
+		int count;
+		
 		try {
-			boardListByCategory = boardService.findBoardListbyCategory(category);
-
+			boardListByCategory = boardService.findBoardListbyCategory(category, pageNo, length);
+			count = boardService.getCountBoardByCategory(category);
 		} catch (RuntimeException e) {
 			logger.error("{}", e);
 			return JsonResult.error(e.getMessage());
 		}
 
-		return JsonResult.success(boardListByCategory);
+		return JsonResult.success(boardListByCategory, count);
 	}
 	
 	@RequestMapping(path = "mainList")

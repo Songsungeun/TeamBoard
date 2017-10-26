@@ -29,8 +29,8 @@ function fnLogin() {
 	formData.append("userID", $("#txtLoginId").val());
 	formData.append("password", $("#txtPassword").val())
 	
-	console.log("userID : " + formData.get("userID"));
-	console.log("password : " + formData.get("password"));
+//	console.log("userID : " + formData.get("userID"));
+//	console.log("password : " + formData.get("password"));
 	ajaxLoginRequest(formData, url);
 	
 }

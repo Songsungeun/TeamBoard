@@ -78,11 +78,6 @@ function write_add() {
 	formData.append("boardType", $("#board_type option:selected").val());
 	formData.append("category", $("#category_list option:selected").val());
 	
-	DEBUG && console.log("title : " + formData.get("title"));
-	DEBUG && console.log("descripition : " + formData.get("descripition"));
-	DEBUG && console.log("boardType : " + formData.get("boardType"));
-	DEBUG && console.log("category : " + formData.get("category"));
-	
 	ajaxwriteRequest(formData, url);
 }
 
@@ -97,8 +92,8 @@ function ajaxwriteRequest(formData, url) {
 			var result = obj.jsonResult
 			if (result.state == "success") {
 				alert("작성되었습니다.");
-				location.reload();
-			} else {DEBUG && console.log("else로 빠짐")}
+				history.go(-1);
+			} else {console.log("else로 빠짐")}
 		},
 		error : function(err) {
 			alert("오류 발생");

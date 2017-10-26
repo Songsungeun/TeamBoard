@@ -1,10 +1,10 @@
 package com.teamboard.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.teamboard.vo.Board;
 import com.teamboard.vo.BoardList;
-import com.teamboard.vo.common.Category;
 
 
 /**
@@ -18,11 +18,14 @@ public interface BoardDao {
 	int insertBoard(Board board) throws Exception;
 	int updateBoard(Board board) throws Exception;
 	int deleteBoard(int boardNo);
+	int countType(String type);
+	int countCategory(String category);
+	
 	BoardList findOne(int boardNo);
 	
 	List<Board> findAll();
-	List<BoardList> findAllbyType(String type);
-	List<BoardList> findAllbyCategory(String category);
+	List<BoardList> findAllbyType(Map<String, Object> paramMap);
+	List<BoardList> findAllbyCategory(Map<String, Object> paramMap);
 	List<BoardList> findAllbyTypeForMain(String type);
 	List<BoardList> findAllbyCategoryForMain(String category);
 } 

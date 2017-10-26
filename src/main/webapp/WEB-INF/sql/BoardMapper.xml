@@ -58,12 +58,17 @@
 		from board
   </select>
 	
-  <select id="findAllbyType" resultMap="boardListMap" parameterType="String">
+  <select id="findAllbyType" resultMap="boardListMap" parameterType="map">
     select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, mem.name, mem.position
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
-		where board_type = #{value}
+		where board_type = #{type}
 		order by bo.board_no desc
+		limit #{startIndex}, #{length}
+  </select>
+  
+  <select id="countType" resultType="int" parameterType="String">
+  	select count(*) from board where board_type = #{value}
   </select>
   
   <select id="findAllbyTypeForMain" resultMap="boardListMap" parameterType="String">
@@ -75,12 +80,17 @@
 		limit 5
   </select>
   
-  <select id="findAllbyCategory" resultMap="boardListMap" parameterType="String">
+  <select id="countCategory" resultType="int" parameterType="String">
+  	select count(*) from board where category = #{value}
+  </select>
+  
+  <select id="findAllbyCategory" resultMap="boardListMap" parameterType="map">
     select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, mem.name, mem.position
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
-		where category = #{value}
+		where category = #{category}
 		order by bo.board_no desc
+		limit #{startIndex}, #{length}
   </select>
   
   <select id="findAllbyCategoryForMain" resultMap="boardListMap" parameterType="String">

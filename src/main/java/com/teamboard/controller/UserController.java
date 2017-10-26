@@ -31,10 +31,16 @@ public class UserController {
 	public Object signUpMember(User user) throws Exception {
 		System.out.println("hello");
 		try {
-			userService.signUpUser(user);
+			User originUser = userService.checkID(user.getUserID());
+			if (originUser != null) {
+				return JsonResult.fail("이미 존재하는 ID입니다.");
+			} else {
+				userService.signUpUser(user);
+			}
 			
 		} catch (Exception e) {
 			logger.error("{}", e);
+			e.printStackTrace();
 			return JsonResult.error(e.getMessage());
 		}
 
@@ -72,6 +78,7 @@ public class UserController {
 			}
 			
 		} catch (UserNotFoundException e) {
+			e.printStackTrace();
 			return JsonResult.fail(e.getMessage());
 		}
 		
