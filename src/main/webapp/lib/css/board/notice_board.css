@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
 
 #teamNoticeBoard {
-  margin-left: 30%;
-  width: 800px;
+  margin: 0 auto;
+  width: 70%;
   background-color: #E6E6E6;
   border: 1px solid white;
   border-collapse: collapse;
@@ -31,4 +31,9 @@
   height: 30px;
   border: 1px solid white;
   padding-left: 10px;
+}
+
+.btn_wrap {
+	width: 70%;
+	margin: 0 auto;
 }

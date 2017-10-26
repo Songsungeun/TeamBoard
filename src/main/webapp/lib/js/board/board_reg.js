@@ -23,7 +23,7 @@ function initTinyMCE() {
 	    forced_root_block : false,
 	    language: "ko_KR", // 사용할 언어는 한국어로 지정
 	    height : "350",
-	    width : "830",
+//	    width : "830",
 	    textcolor_map: [
 	                    "000000", "Black",
 	                    "993300", "Burnt orange",
@@ -84,6 +84,27 @@ function write_add() {
 	DEBUG && console.log("category : " + formData.get("category"));
 	
 	ajaxwriteRequest(formData, url);
+}
+
+function ajaxwriteRequest(formData, url) {
+	$.ajax({
+		url: url,
+		data: formData,
+		processData: false,
+		contentType: false,
+		type: "POST",
+		success : function(obj) {
+			var result = obj.jsonResult
+			if (result.state == "success") {
+				alert("작성되었습니다.");
+				location.reload();
+			} else {DEBUG && console.log("else로 빠짐")}
+		},
+		error : function(err) {
+			alert("오류 발생");
+			console.log("err message : " + err.data);
+		}
+	})
 }
 
 function insertUserInfo() {

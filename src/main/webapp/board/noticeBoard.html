@@ -1,66 +1,141 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>    
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>MainPage</title>
+<title>MainPage</title>
 
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../lib/js/common.js"></script>
-    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../lib/css/animate.css" rel="stylesheet"/>
-    <link href="../lib/css/style.css" rel="stylesheet"/>
-    <link href="../lib/css/board/notice_board.css" rel="stylesheet"/>
-    <script src="../node_modules/handlebars/handlebars-v4.0.11.js"></script>
-    <script src="../lib/js/board/board_list.js"></script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../node_modules/handlebars/handlebars-v4.0.11.js"></script>
+<script src="../lib/js/common.js"></script>
+<link href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="../lib/css/animate.css" rel="stylesheet" />
+<link href="../lib/css/main.css" rel="stylesheet" />
+<link href="../lib/css/board/notice_board.css" rel="stylesheet"/>
+<script src="../node_modules/handlebars/handlebars-v4.0.11.js"></script>
+<script src="../lib/js/board/board_list.js"></script>
+
+<script type="text/javascript">
+$(function(){
+  $('.notice_dropdown').mouseenter(function(){
+    $('.notice_content').css('display', 'block');
+  });
+  $('.notice_dropdown').mouseleave(function(){
+	  $('.notice_content').css('display', 'none');
+  });
+});
+
+$(function(){
+	  $('.issue_dropdown').mouseenter(function(){
+	    $('.issue_content').css('display', 'block');
+	  });
+	  $('.issue_dropdown').mouseleave(function(){
+		  $('.issue_content').css('display', 'none');
+	  });
+	});
+$(document).ready(function() {
+	
+$(".nav li").click(function(){
+   var index = $(".nav li").index(this);
+   if ($('.nav li a').hasClass('active')) {
+	   $('.nav li a').removeClass('active');
+   	   $(".nav li:eq(" + index + ") a").addClass('active');
+   } else {
+	   $(".nav li:eq(" + index + ") a").addClass('active');
+   }
+});
+})
+</script>
+
 </head>
-<body class="gray-bg">
+<body>
 
-	<nav id="nav_bar"></nav>
-  
-    <div class="middle-box text-center loginscreen animated fadeInDown" style="padding-top: 0; padding-bottom: 0px; min-width: 1280px;"> 
-      <div>       
-        <h1 class="logo-name" style="font-size: 150px;">AV+</h1>
-      </div>
-    <h3>팀 내부 공지사항+</h3>
-    </div>
-    <br><br><br>
-    
-    <div style="width: 100%;">
-      <div style="width:800px; margin-left: 30%;">
-        <input type="button" style="width:70px; height:30px;" value="글쓰기" onclick="location.href='noticeBoardReg.html'" />
-        <input type="submit" value="검색" style="float: right; height: 30px; width: 50px;" />
-        <input type="text" style="float: right; width: 250px;height: 30px;"/>
-      </div>
-      <div style="height: 10px;"></div>
-      <table id="teamNoticeBoard">
-        <thead>
-	        <tr style="background-color: #F0F0F0;">
-	          <th style="width: 10%;">번호</th>
-	          <th style="width: 50%;">제목</th>
-	          <th style="width: 15%;">이름</th>
-	          <th style="width: 15%;">날짜</th>
-<!-- 	          <th style="width: 10%;">조회수</th> -->
-	        </tr>
-        </thead>
+	<div class='wrapper'>
+		<div class='sidebar'>
+			<div class='title'><a href="../main/Mainpage2.html">HQTECH</a></div>
+			<ul class='nav'>
+				<li class="notice_dropdown"><a href="../board/noticeBoard.html?type=notice">공지사항</a>
+					<ul class="notice_content">
+						<li><a href="../board/noticeBoard.html?cat=team_notice">팀 내 공지사항</a></li>
+						<li><a href="../board/noticeBoard.html?cat=work_notice">업무 관련 공지사항</a></li>
+					</ul>
+				</li>
+				<li><a href="../board/noticeBoard.html?type=common_issue">시장이슈</a></li>
+				<li class="issue_dropdown"><a href="">제품별 사양 및 이슈</a>
+					<ul class="issue_content">
+						<li><a href="../board/noticeBoard.html?cat=sat">SAT</a></li>
+						<li><a href="../board/noticeBoard.html?cat=room_speaker">ROOM SPEAKER</a></li>
+						<li><a href="../board/noticeBoard.html?cat=multiroom">MULTIROOM APP</a></li>
+						<li><a href="../board/noticeBoard.html?cat=band">BAND APP</a></li>
+						<li><a href="../board/noticeBoard.html?cat=bd_hes">BD/HES</a></li>
+						<li><a href="../board/noticeBoard.html?cat=pvr">PVR</a></li>
+						<li><a href="../board/noticeBoard.html?cat=ss_connect">SAMSUNG CONNECT</a></li>
+						<li><a href="../board/noticeBoard.html?cat=convergence">CONVERGENCE</a></li>
+						
+					</ul>
+				</li>
+				<li><a href="../board/noticeBoard.html?type=process">업무 프로세스</a></li>
+				<li><a href="../board/noticeBoard.html?type=product_term">제품 관련 용어 정리</a></li>
+				<li><a href="../board/noticeBoard.html?type=no_name">익명 게시판</a></li>
+				<li><a href="../board/noticeBoard.html?type=pc_helper">PC 도움방</a></li>
+				<li><a href="../board/noticeBoard.html?type=about_work_site">업무 관련 사이트</a></li>
+				<li><a href="../board/noticeBoard.html?type=my_place">내공간</a></li>
+			</ul>
+		</div>
+		<div class='content isOpen'>
+			<div class="middle-box text-center loginscreen animated fadeInDown" style="padding-top: 0; padding-bottom: 0px; width: 100%;">        
+      			<h1 class="logo-name" style="font-size: 150px;">AV+</h1>
+    		</div>
+    		
+    		<div class="content_area">
+		      <div class="btn_wrap">
+		        <input type="button" style="width:70px; height:30px;" value="글쓰기" onclick="location.href='noticeBoardReg.html'" />
+		        <input type="submit" value="검색" style="float: right; height: 30px; width: 50px;" />
+		        <input type="text" style="float: right; width: 250px;height: 30px;"/>
+		      </div>
+		      <div style="height: 10px;"></div>
+		      <table id="teamNoticeBoard">
+		        <thead>
+			        <tr style="background-color: #F0F0F0;">
+			          <th style="width: 10%;">번호</th>
+			          <th style="width: 50%;">제목</th>
+			          <th style="width: 15%;">이름</th>
+			          <th style="width: 15%;">날짜</th>
+		<!-- 	          <th style="width: 10%;">조회수</th> -->
+			        </tr>
+		        </thead>
+		
+		        <tbody class="board_contents">
+		        <script id="board_list_template" type="text/x-handlebars-template">
 
-        <tbody class="board_contents">
-        <script id="board_list_template" type="text/x-handlebars-template">
+				{{#data}}
+					<tr style="background-color: #F0F0F0;">
+            		<td data-no="{{boardNo}}">{{boardNo}}</td>
+            		<td><a href="noticeBoardDetail.html?no={{boardNo}}">{{title}}</a><span style="color:#FF8000; ">[0]</span></td>
+            		<td>{{userName}}</td>
+            		<td>{{date}}</td>
+         			</tr>
+				{{/data}}
+				</script>
+		        </tbody>
+		      </table>
+		    </div>
+    		
+    		
+		
+		</div>
+		
+			
+					
 
-			{{#data}}
-				<tr style="background-color: #F0F0F0;">
-            	<td data-no="{{boardNo}}">{{boardNo}}</td>
-            	<td><a href="noticeBoardDetail.html?no={{boardNo}}">{{title}}</a><span style="color:#FF8000; ">[0]</span></td>
-            	<td>{{userName}}</td>
-            	<td>{{date}}</td>
-         		</tr>
-			{{/data}}
-		</script>
-        </tbody>
-      </table>
-    </div>
-  
+
+
+	</div>
+
+
+
 </body>
 </html>
