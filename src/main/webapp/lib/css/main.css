@@ -9,38 +9,41 @@
 }
 
 html, body {
-	height: 100vh;
+	height: 100%;
 }
 
 body {
 	font: 600 12px/1 'Open Sans', sans-serif;
 	color: #333;
-	background: #333;
+	background: #eee;
 	overflow-x: hidden;
 }
 
 .wrapper {
 	display: flex;
 	min-height: 100%;
-	height: 100%;
+	height: auto;
 }
 
 .sidebar {
-	position: absolute;
+	position: fixed;
 	width: 220px;
+	height: 100%;
+	background: #333;
 }
 
 .content {
 /* 	flex: 1; */
 	padding: 30px;
 	background: #eee;
-	box-shadow: 0 0 5px black;
+/* 	box-shadow: 0 0 5px black; */
 	transform: translate3d(0, 0, 0);
 	transition: transform .3s;
 	width: 89%;
 }
 
 .content.isOpen {
+    height: auto;
 	transform: translate3d(220px, 0, 0);
 }
 

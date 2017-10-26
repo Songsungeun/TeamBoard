@@ -31,18 +31,67 @@ function fnLogin() {
 	
 //	console.log("userID : " + formData.get("userID"));
 //	console.log("password : " + formData.get("password"));
-	ajaxLoginRequest(formData, url);
+	var check = fnCheck();
+	if(check) {
+		console.log("if")
+		ajaxLoginRequest(formData, url);
+	}
 	
 }
 
+function ajaxRequest(formData, url) {
+	$.ajax({
+		url: url,
+		data: formData,
+		processData: false,
+		contentType: false,
+		type: "POST",
+		success : function(obj) {
+			var result = obj.jsonResult
+			if (result.state != "success") {
+				alert(result.data)
+			} else {DEBUG && console.log(result.data)}
+		},
+		error : function(err) {
+			alert("오류 발생");
+			console.log("err message : " + err.data);
+		}
+	})
+}
+
+function ajaxLoginRequest(formData, url) {
+	$.ajax({
+		url: url,
+		data: formData,
+		processData: false,
+		contentType: false,
+		type: "POST",
+		success : function(obj) {
+			var result = obj.jsonResult
+			if (result.state == "success") {
+				console.log("페이지 이동");
+				location.href = "../main/Mainpage.html"
+			} else {
+				alert(result.data);
+			}
+		},
+		error : function(err) {
+			alert("오류 발생");
+			console.log("err message : " + err.data);
+		}
+	})
+}
+
 function fnCheck() {
-	console.log("check");
     if ($("#txtLoginId").val() == "") {
         alert("로그인 아이디를 입력하세요.");
-        return;
+        return false;
     }
     if ($("#txtPassword").val() == "") {
         alert("로그인 비밀번호를 입력하세요.");
-        return;
+        return false;
     }
+    
+    return true;
 }
+

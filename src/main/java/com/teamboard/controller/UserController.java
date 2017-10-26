@@ -74,7 +74,7 @@ public class UserController {
 			if (user != null) {
 				session.setAttribute("user", user);
 			} else {
-				return JsonResult.fail("존재하지 않는 회원입니다.");
+				return JsonResult.fail();
 			}
 			
 		} catch (UserNotFoundException e) {
@@ -87,6 +87,7 @@ public class UserController {
 
 	}	
 	
+	@RequestMapping(value = "/logout")
 	public Object logOut(HttpSession session) throws Exception {
 		try {
 			session.invalidate();

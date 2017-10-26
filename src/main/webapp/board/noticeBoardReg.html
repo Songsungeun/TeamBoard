@@ -58,7 +58,7 @@ $(".nav li").click(function(){
 		<div class='sidebar'>
 			<div class='title'><a href="../main/Mainpage.html">HQTECH</a></div>
 			<ul class='nav'>
-				<li class="notice_dropdown"><a href="../board/noticeBoard.html?type=notice">공지사항</a>
+				<li class="notice_dropdown"><a href="../board/noticeBoard.html?type=notice&pageNo=1">공지사항</a>
 					<ul class="notice_content">
 						<li><a href="../board/noticeBoard.html?cat=team_notice&pageNo=1">팀 내 공지사항</a></li>
 						<li><a href="../board/noticeBoard.html?cat=work_notice&pageNo=1">업무 관련 공지사항</a></li>
@@ -75,7 +75,7 @@ $(".nav li").click(function(){
 						<li><a href="../board/noticeBoard.html?cat=pvr&pageNo=1">PVR</a></li>
 						<li><a href="../board/noticeBoard.html?cat=ss_connect&pageNo=1">SAMSUNG CONNECT</a></li>
 						<li><a href="../board/noticeBoard.html?cat=convergence&pageNo=1">CONVERGENCE</a></li>
-						
+						<li><a href="../board/noticeBoard.html?cat=alexa&pageNo=1">ALEXA</a></li>
 					</ul>
 				</li>
 				<li><a href="../board/noticeBoard.html?type=process&pageNo=1">업무 프로세스</a></li>
@@ -92,6 +92,10 @@ $(".nav li").click(function(){
       			<h1 class="logo-name" style="font-size: 150px;">AV+</h1>
     		</div>
     		
+    		<div class="required_wrap">
+      		<input type="checkbox" class="required_box" value="required"> 필독
+			</div>
+			
     		<table id="teamNoticeBoard">
 
 			<!-- 게시판 상세페이지 -->
@@ -110,7 +114,7 @@ $(".nav li").click(function(){
 						<option value="process">업무프로세스</option>
 						<option value="product_term">제품 관련 용어 정리</option>
 						<option value="no_name">익명 게시판</option>
-						<option value="free">익명 게시판</option>
+						<option value="free">자유 게시판</option>
 						<option value="pc_helper">PC 도움방</option>
 						<option value="about_work_site">업무 관련 사이트</option>
 						<option value="my_place">내공간</option>
@@ -135,6 +139,8 @@ $(".nav li").click(function(){
 						<option class="product_issue" value="pvr">PVR</option>
 						<option class="product_issue" value="ss_connect">SAMSUNG CONNECT</option>
 						<option class="product_issue" value="convergence">CONVERGENCE</option>
+						<option class="product_issue" value="alexa">ALEXA</option>
+						
 					</select>
 				</td>
 			</tr>
@@ -149,23 +155,17 @@ $(".nav li").click(function(){
 				<td colspan="3">
 				<input type="submit" class="btn btn-danger delete_btn" onclick="" value="삭제"> 
 				<input type="submit" class="btn btn-info modify_btn" onclick="" value="수정">
-				<input type="submit" class="btn btn-success write_btn" onclick="write_add()" value="작성"></td>
+				<input type="submit" class="btn btn-success write_btn" onclick="write_add()" value="작성">
+			</td>
 			</tr>
 			</table>
-      
-      
+			
 	    </div>
     		
     		
 		
-		</div>
-		
-			
-					
-
-
-
 	</div>
+
 
 
 
