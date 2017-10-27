@@ -111,13 +111,21 @@
 		        
 			        <table id="tabTable" class="sat_tab">
 		    			<script id="sat_product" type="text/x-handlebars-template">
-						{{#sat}}
+						{{#satReq}}
 		    			<tr style="background-color: #F0F0F0;">
 					        <td style="width: 70%; padding-left: 10px;"><a href="../board/noticeBoardDetail.html?no={{boardNo}}">{{title}}</a></td>
 					        <td style="width: 15%; text-align: center;">{{userName}}</td>
 					        <td style="width: 15%; text-align: center;">{{date}}</td>
 					    </tr>
-					    {{/sat}}
+					    {{/satReq}}
+
+						{{#satNoReq}}
+		    			<tr style="background-color: #F0F0F0;">
+					        <td style="width: 70%; padding-left: 10px;"><a href="../board/noticeBoardDetail.html?no={{boardNo}}">{{title}}</a></td>
+					        <td style="width: 15%; text-align: center;">{{userName}}</td>
+					        <td style="width: 15%; text-align: center;">{{date}}</td>
+					    </tr>
+					    {{/satNoReq}}
 					      <tr>
 					        <td colspan="3" style="text-align: right; padding-right: 15px;"><a href="../board/noticeBoard.html?cat=sat&pageNo=1">More</a></td>
 					      </tr>

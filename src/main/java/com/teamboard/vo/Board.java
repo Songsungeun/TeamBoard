@@ -21,6 +21,8 @@ public class Board implements Serializable{
 	protected String boardType;
 	protected String category;
 	protected Date date;
+	protected boolean required;
+	
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -62,6 +64,12 @@ public class Board implements Serializable{
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public boolean isRequired() {
+		return required;
+	}
+	public void setRequired(boolean required) {
+		this.required = required;
 	}
 	
 	
