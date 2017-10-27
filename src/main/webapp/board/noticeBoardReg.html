@@ -19,73 +19,11 @@
 <link href="../lib/css/main.css" rel="stylesheet" />
 <link href="../lib/css/board/board_reg.css" rel="stylesheet" />
 
-<script type="text/javascript">
-$(function(){
-  $('.notice_dropdown').mouseenter(function(){
-    $('.notice_content').css('display', 'block');
-  });
-  $('.notice_dropdown').mouseleave(function(){
-	  $('.notice_content').css('display', 'none');
-  });
-});
-
-$(function(){
-	  $('.issue_dropdown').mouseenter(function(){
-	    $('.issue_content').css('display', 'block');
-	  });
-	  $('.issue_dropdown').mouseleave(function(){
-		  $('.issue_content').css('display', 'none');
-	  });
-	});
-$(document).ready(function() {
-	
-$(".nav li").click(function(){
-   var index = $(".nav li").index(this);
-   if ($('.nav li a').hasClass('active')) {
-	   $('.nav li a').removeClass('active');
-   	   $(".nav li:eq(" + index + ") a").addClass('active');
-   } else {
-	   $(".nav li:eq(" + index + ") a").addClass('active');
-   }
-});
-})
-</script>
-
 </head>
 <body>
 
 	<div class='wrapper'>
 		<div class='sidebar'>
-			<div class='title'><a href="../main/Mainpage.html">HQTECH</a></div>
-			<ul class='nav'>
-				<li class="notice_dropdown"><a href="../board/noticeBoard.html?type=notice&pageNo=1">공지사항</a>
-					<ul class="notice_content">
-						<li><a href="../board/noticeBoard.html?cat=team_notice&pageNo=1">팀 내 공지사항</a></li>
-						<li><a href="../board/noticeBoard.html?cat=work_notice&pageNo=1">업무 관련 공지사항</a></li>
-					</ul>
-				</li>
-				<li><a href="../board/noticeBoard.html?type=common_issue&pageNo=1">시장이슈</a></li>
-				<li class="issue_dropdown"><a href="">제품별 사양 및 이슈</a>
-					<ul class="issue_content">
-						<li><a href="../board/noticeBoard.html?cat=sat&pageNo=1">SAT</a></li>
-						<li><a href="../board/noticeBoard.html?cat=room_speaker&pageNo=1">ROOM SPEAKER</a></li>
-						<li><a href="../board/noticeBoard.html?cat=multiroom&pageNo=1">MULTIROOM APP</a></li>
-						<li><a href="../board/noticeBoard.html?cat=band&pageNo=1">BAND APP</a></li>
-						<li><a href="../board/noticeBoard.html?cat=bd_hes&pageNo=1">BD/HES</a></li>
-						<li><a href="../board/noticeBoard.html?cat=pvr&pageNo=1">PVR</a></li>
-						<li><a href="../board/noticeBoard.html?cat=ss_connect&pageNo=1">SAMSUNG CONNECT</a></li>
-						<li><a href="../board/noticeBoard.html?cat=convergence&pageNo=1">CONVERGENCE</a></li>
-						<li><a href="../board/noticeBoard.html?cat=alexa&pageNo=1">ALEXA</a></li>
-					</ul>
-				</li>
-				<li><a href="../board/noticeBoard.html?type=process&pageNo=1">업무 프로세스</a></li>
-				<li><a href="../board/noticeBoard.html?type=product_term&pageNo=1">제품 관련 용어 정리</a></li>
-				<li><a href="../board/noticeBoard.html?type=no_name&pageNo=1">익명 게시판</a></li>
-				<li><a href="../board/noticeBoard.html?type=free&pageNo=1">자유 게시판</a></li>
-				<li><a href="../board/noticeBoard.html?type=pc_helper&pageNo=1">PC 도움방</a></li>
-				<li><a href="../board/noticeBoard.html?type=about_work_site&pageNo=1">업무 관련 사이트</a></li>
-				<li><a href="../board/noticeBoard.html?type=my_place&pageNo=1">내공간</a></li>
-			</ul>
 		</div>
 		<div class='content isOpen'>
 			<div class="middle-box text-center loginscreen animated fadeInDown" style="padding-top: 0; padding-bottom: 0px; width: 100%;">        
@@ -153,9 +91,9 @@ $(".nav li").click(function(){
 			</tr>
 			<tr class="btn_area">
 				<td colspan="3">
-				<input type="submit" class="btn btn-danger delete_btn" onclick="" value="삭제"> 
+				<input type="submit" class="btn btn-danger delete_btn" onclick="javascript: clear_area(); return false;" value="삭제"> 
 				<input type="submit" class="btn btn-info modify_btn" onclick="" value="수정">
-				<input type="submit" class="btn btn-success write_btn" onclick="write_add()" value="작성">
+				<input type="submit" class="btn btn-success write_btn" onclick="javascript: write_add(); return false;" value="작성">
 			</td>
 			</tr>
 			</table>

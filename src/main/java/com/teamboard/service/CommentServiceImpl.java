@@ -37,11 +37,9 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public List<Comment> getCommentListbyBoardNo(int boardNo, int pageNo, int length) {
+	public List<Comment> getCommentListbyBoardNo(int boardNo) {
 		HashMap<String, Object> commentMap = new HashMap<>();
 
-		commentMap.put("startIndex", (pageNo - 1) * length);
-		commentMap.put("length", length);
 		commentMap.put("boardNo", boardNo);
 		return commentDao.getCommentListbyBoardNo(commentMap);
 	}

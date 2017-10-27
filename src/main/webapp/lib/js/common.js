@@ -5,7 +5,8 @@
 const DEBUG = true;
 
 $(document).ready( function() {
-//	loadNav();
+	loadNav();
+	ajaxLoginCheck();
 });
 
 function ajaxRequest(formData, url) {
@@ -28,31 +29,31 @@ function ajaxRequest(formData, url) {
 	})
 }
 
-function ajaxLoginRequest(formData, url) {
+function ajaxLoginCheck() {
+	var url = "/" + location.pathname.split('/')[1] + "/user/loginCheck.json";
 	$.ajax({
 		url: url,
-		data: formData,
-		processData: false,
-		contentType: false,
-		type: "POST",
+		type: "GET",
 		success : function(obj) {
-			var result = obj.jsonResult
-			if (result.state == "success") {
-				console.log("페이지 이동");
-				location.href = "../main/Mainpage.html"
+			var result = obj.jsonResult;
+			if (result.state != "success") {
+				alert("로그인 하세요.");
+				location.href = "../user/login.html";
 			} else {
-				alert("이미 존재하는 회원 ID입니다.");
+				console.log("로그인 상태");
+				$('.user_name').text(result.data.name);
 			}
 		},
 		error : function(err) {
-			alert("오류 발생");
-			console.log("err message : " + err.data);
+			console.log("err message: " + err.data);
+			alert("오류발생");
+			location.href = "../user/login.html";
 		}
 	})
 }
 
 function loadNav() {
-//	$("#nav_bar").load("../common_html/nav_bar.html");
+	$(".sidebar").load("../common_html/nav_bar.html");
 //	$("#nav_bar").load("../main/Mainpage2.html");
 }
 

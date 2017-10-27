@@ -1,90 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-<link href="../lib/css/nav/nav.css" rel="stylesheet"/>
-<script src="../lib/js/nav/nav_bar.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>MainPage</title>
+
+<script type="text/javascript">
+$(function(){
+  $('.notice_dropdown').mouseenter(function(){
+	  console.log("ìœ¼ì‰")
+    $('.notice_content').css('display', 'block');
+  });
+  $('.notice_dropdown').mouseleave(function(){
+	  $('.notice_content').css('display', 'none');
+  });
+});
+
+$(function(){
+	  $('.issue_dropdown').mouseenter(function(){
+	    $('.issue_content').css('display', 'block');
+	  });
+	  $('.issue_dropdown').mouseleave(function(){
+		  $('.issue_content').css('display', 'none');
+	  });
+	});
+$(document).ready(function() {
+	
+$(".nav li").click(function(){
+   var index = $(".nav li").index(this);
+   if ($('.nav li a').hasClass('active')) {
+	   $('.nav li a').removeClass('active');
+   	   $(".nav li:eq(" + index + ") a").addClass('active');
+   } else {
+	   $(".nav li:eq(" + index + ") a").addClass('active');
+   }
+});
+})
+</script>
+
 </head>
 <body>
-  <table class="sideTable">
-    <tr class="sidetr" style="border-bottom: 1px solid #E6E6E6">
-      <div class="user_info">
-        <td class="sidetd"> <span id="user_department" class="nav_user"></span> <span id="user_name" class="nav_user"></span> <span id="user_position" class="nav_user"></span>´Ô È¯¿µÇÕ´Ï´Ù!
-      </div>
-      <div class="logout_btn"><a onclick="fnLogout()">Logout</a></div>
-      </td>
-    </tr>
-<!--     <tr class="sidetr"> -->
-<!--       <td class="sidetd"></td> -->
-<!--     </tr> -->
-    <tr class="sidetr">
-      <td class="sidetd" style="background-color: #F0F0F0; font-size: large;">
-      <img src="../home.png" width="25xp;" style="padding-bottom: 5px;">
-      <a href="../main/Mainpage.html">Home</a>
-      </td>
-    </tr>
-    
-    <tr class="sidetr">
-      <td id="noticemenu" class="sidetd" style="cursor: pointer;" onClick="myFunction()">
-      °øÁö»çÇ× ¡å
-      </td>
-    </tr>
-    <tr id="myDropdown" class="dropdown-content" style="width: 200px;">
-      <td style="width: 200px;">
-      <a href="../board/noticeBoard.html?cat=team_notice" style="padding-left: 50px;">> ÆÀ ³»ºÎ °øÁö»çÇ×</a>
-      <a href="../board/noticeBoard.html?cat=work_notice" style="padding-left: 50px;">> ¾÷¹« °ü·Ã °øÁö»çÇ×</a>
-      </td>
-    </tr>
-    
-    <tr class="sidetr">
-      <td class="sidetd" style="background-color: #F0F0F0;">½ÃÀåÀÌ½´</td>
-    </tr>
-    
-    <tr class="sidetr">
-      <td id="noticemenu2" class="sidetd" style="cursor: pointer;" onClick="myFunction2()">Á¦Ç°º° »ç¾ç ¹× ÀÌ½´ ¡å</td>
-    </tr>
-    <tr id="myDropdown2" class="dropdown-content2" style="width: 20%;">
-      <td style="width: 100%;">
-      <a href="../board/noticeBoard.html?cat=sat" style="padding-left: 50px;">> SAT</a>
-      <a href="../board/noticeBoard.html?cat=room_speaker" style="padding-left: 50px;">> ROOM SPEAKER</a>
-      <a href="../board/noticeBoard.html?cat=multiroom" style="padding-left: 50px;">> MULTIROOM APP</a>
-      <a href="../board/noticeBoard.html?cat=band" style="padding-left: 50px;">> BAND APP</a>
-      <a href="../board/noticeBoard.html?cat=bd_hes" style="padding-left: 50px;">> BD/HES</a>
-      <a href="../board/noticeBoard.html?cat=pvr" style="padding-left: 50px;">> PVR</a>
-      <a href="../board/noticeBoard.html?cat=ss_connect" style="padding-left: 50px;">> SAMSUNG CONNECT</a>
-      <a href="../board/noticeBoard.html?cat=convergence" style="padding-left: 50px;">> CONVERGENCE</a>
-      </td>
-    </tr>
-    
-    <tr class="sidetr">
-      <td class="sidetd" style="background-color: #F0F0F0;">¾÷¹« ÇÁ·Î¼¼½º</td>
-    </tr>
-    
-    <tr class="sidetr">
-      <td class="sidetd">Á¦Ç° °ü·Ã ¿ë¾î Á¤¸®</td>
-    </tr>
-    
-    <tr class="sidetr">
-      <td class="sidetd" style="background-color: #F0F0F0;">ÀÍ¸í °Ô½ÃÆÇ</td>
-    </tr>
-    
-    <tr class="sidetr">
-      <td class="sidetd">PC µµ¿ò¹æ</td>
-    </tr>
-    
-    <tr class="sidetr">
-      <td class="sidetd" style="background-color: #F0F0F0;">¾÷¹« °ü·Ã »çÀÌÆ®</td>
-    </tr>
-    
-    <tr class="sidetr">
-      <td class="sidetd">³»°ø°£</td>
-    </tr>
-    
-    <tr class="sidetr" style="height: 300px;">
-      <td class="sidetd" style="background-color: #F0F0F0;"></td>
-    </tr>
-    
-  </table>
+
+<div class='title'><a href="../main/Mainpage.html">HQTECH</a></div>
+<ul class='nav'>
+	<li class="notice_dropdown"><a href="../board/noticeBoard.html?type=notice&pageNo=1">ê³µì§€ì‚¬í•­</a>
+		<ul class="notice_content">
+			<li><a href="../board/noticeBoard.html?cat=team_notice&pageNo=1">íŒ€ ë‚´ ê³µì§€ì‚¬í•­</a></li>
+			<li><a href="../board/noticeBoard.html?cat=work_notice&pageNo=1">ì—…ë¬´ ê´€ë ¨ ê³µì§€ì‚¬í•­</a></li>
+		</ul>
+	</li>
+	<li><a href="../board/noticeBoard.html?type=common_issue&pageNo=1">ì‹œì¥ì´ìŠˆ</a></li>
+	<li class="issue_dropdown"><a href="">ì œí’ˆë³„ ì‚¬ì–‘ ë° ì´ìŠˆ</a>
+		<ul class="issue_content">
+			<li><a href="../board/noticeBoard.html?cat=sat&pageNo=1">SAT</a></li>
+			<li><a href="../board/noticeBoard.html?cat=room_speaker&pageNo=1">ROOM SPEAKER</a></li>
+			<li><a href="../board/noticeBoard.html?cat=multiroom&pageNo=1">MULTIROOM APP</a></li>
+			<li><a href="../board/noticeBoard.html?cat=band&pageNo=1">BAND APP</a></li>
+			<li><a href="../board/noticeBoard.html?cat=bd_hes&pageNo=1">BD/HES</a></li>
+			<li><a href="../board/noticeBoard.html?cat=pvr&pageNo=1">PVR</a></li>
+			<li><a href="../board/noticeBoard.html?cat=ss_connect&pageNo=1">SAMSUNG CONNECT</a></li>
+			<li><a href="../board/noticeBoard.html?cat=convergence&pageNo=1">CONVERGENCE</a></li>
+			<li><a href="../board/noticeBoard.html?cat=alexa&pageNo=1">ALEXA</a></li>
+			
+		</ul>
+	</li>
+	<li><a href="../board/noticeBoard.html?type=process&pageNo=1">ì—…ë¬´ í”„ë¡œì„¸ìŠ¤</a></li>
+	<li><a href="../board/noticeBoard.html?type=product_term&pageNo=1">ì œí’ˆ ê´€ë ¨ ìš©ì–´ ì •ë¦¬</a></li>
+	<li><a href="../board/noticeBoard.html?type=no_name&pageNo=1">ìµëª… ê²Œì‹œíŒ</a></li>
+	<li><a href="../board/noticeBoard.html?type=free&pageNo=1">ììœ  ê²Œì‹œíŒ</a></li>
+	<li><a href="../board/noticeBoard.html?type=pc_helper&pageNo=1">PC ë„ì›€ë°©</a></li>
+	<li><a href="../board/noticeBoard.html?type=about_work_site&pageNo=1">ì—…ë¬´ ê´€ë ¨ ì‚¬ì´íŠ¸</a></li>
+	<li><a href="../board/noticeBoard.html?type=my_place&pageNo=1">ë‚´ê³µê°„</a></li>
+</ul>
+
+
 </body>
 </html>
