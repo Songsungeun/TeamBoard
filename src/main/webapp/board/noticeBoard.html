@@ -22,9 +22,12 @@
 <body>
 
 	<div class='wrapper'>
+	
+	<!-- navigation 영역 -->
 		<div class='sidebar'>
 		</div>
-		
+	<!-- navigation 영역 끝 -->
+	
 		<div class='content isOpen'>
 			<div class="middle-box text-center loginscreen animated fadeInDown" style="padding-top: 0; padding-bottom: 0px; width: 100%;">        
       			<h1 class="logo-name" style="font-size: 150px;">AV+</h1>
@@ -53,7 +56,7 @@
 
 				{{#data}}
 					<tr style="background-color: #F0F0F0;">
-            		<td data-no="{{boardNo}}">{{boardNo}}</td>
+            		<td data-no="{{boardNo}}">{{showNo}}</td>
             		<td><a href="noticeBoardDetail.html?no={{boardNo}}">{{title}}</a><span style="color:#FF8000; ">[0]</span></td>
             		<td>{{userName}}</td>
             		<td>{{date}}</td>
@@ -64,19 +67,8 @@
 		      </table>
 		    </div>
 		    
-		    <div class="paging">
-<!-- 				<a href="#" class="btn_arr first"><span class="hide">처음페이지</span></a>             -->
-<!-- 				<a href="#" class="btn_arr prev"><span class="hide">이전페이지</span></a>      -->
-<!-- 				<a href="#" class="on">1</a>D : 활성화페이지일 경우 : on 처리 -->
-<!-- 				<a href="#">2</a> -->
-<!-- 				<a href="#">3</a> -->
-<!-- 				<a href="#">4</a> -->
-<!-- 				<a href="#">5</a> -->
-<!-- 				<a href="#" class="btn_arr next"><span class="hide">다음페이지</span></a>              -->
-<!-- 				<a href="#" class="btn_arr last"><span class="hide">마지막페이지</span></a>             -->
-			</div>
-
-    		
+<!-- 		    paging 영역 -->
+		    <div class="paging"></div>
 		
 		</div>
 		

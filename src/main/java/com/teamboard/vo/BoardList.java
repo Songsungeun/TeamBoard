@@ -23,6 +23,7 @@ public class BoardList implements Serializable{
 	protected Date date;
 	protected String userName;
 	protected String userPosition;
+	protected int showNo;
 	
 	public int getBoardNo() {
 		return boardNo;
@@ -77,6 +78,12 @@ public class BoardList implements Serializable{
 	}
 	public void setUserPosition(String userPosition) {
 		this.userPosition = userPosition;
+	}
+	public int getShowNo() {
+		return showNo;
+	}
+	public void setShowNo(int showNo) {
+		this.showNo = showNo;
 	}
 	
 	

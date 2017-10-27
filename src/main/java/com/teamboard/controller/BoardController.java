@@ -119,8 +119,13 @@ public class BoardController {
 		
 		try {
 			boardListByType = boardService.findBoardListbyType(type, pageNo, length);
+			
 			count = boardService.getCountBoardByType(type);
 			
+			int startDisplayNo = count - ((pageNo - 1) * length);
+			for (int i = 0; i < boardListByType.size(); i++) {
+				boardListByType.get(i).setShowNo(startDisplayNo--);
+			}
 		} catch (RuntimeException e) {
 			logger.error("{}", e);
 			e.printStackTrace();
