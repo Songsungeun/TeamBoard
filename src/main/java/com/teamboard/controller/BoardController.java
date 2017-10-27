@@ -178,11 +178,9 @@ public class BoardController {
 
 	// 댓글 영역
 	@RequestMapping(path = "getComment")
-	public Object commentList(int boardNo,
-							  @RequestParam(defaultValue = "1") int pageNo,
-							  @RequestParam(defaultValue = "20") int length) {
+	public Object commentList(int boardNo) {
 
-		List<Comment> commentList = commentService.getCommentListbyBoardNo(boardNo, pageNo, length);
+		List<Comment> commentList = commentService.getCommentListbyBoardNo(boardNo);
 
 		return JsonResult.success(commentList);
 	}

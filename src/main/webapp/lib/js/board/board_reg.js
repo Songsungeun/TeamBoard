@@ -6,18 +6,22 @@ $(document).ready(function() {
 	chained();
 	insertUserInfo();
 	ajaxLoginCheck();
+	$('#board_type').on("change", changeType);
+	$(".sidebar").load("../common_html/nav_bar.html");
 })
 
 function chained() {
 	$("#category_list").chained("#board_type");
 }
+
+// onbeforeunload 팝업 없애려면 plugin(autosave) 언로드해야 한다.
 function initTinyMCE() {
 	//TinyMCE 사용을 위한 설정 정의
 	tinyMCE.init({
 	    // General options
 	    mode : "textareas", // 위지웍 에디터로 사용할 HTML 요소는 textarea로 지정한다.
 	    theme : "modern", // TinyMCE는 여러가지 테마를 지원해준다. 그중 advanced 테마를 사용
-	    plugins : "noneditable,autosave,fullpage,help,link,contextmenu,textcolor,textpattern,save,preview,charmap",
+	    plugins : "noneditable,fullpage,help,link,contextmenu,textcolor,textpattern,save,preview,charmap",
 	    toolbar: "newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyf,cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,imagepop,cleanup,|,insertdate,inserttime,preview,|,forecolor,backcolor,|,font",
 	    //skin : "lightgray",
 	    forced_root_block : false,
@@ -77,6 +81,7 @@ function write_add() {
 	formData.append("description", tinyMCE.activeEditor.getContent())
 	formData.append("boardType", $("#board_type option:selected").val());
 	formData.append("category", $("#category_list option:selected").val());
+	clear_area();
 	
 	ajaxwriteRequest(formData, url);
 }
@@ -100,6 +105,13 @@ function ajaxwriteRequest(formData, url) {
 			console.log("err message : " + err.data);
 		}
 	})
+}
+
+function clear_area() {
+	console.log("clear_area");
+	$('#title').val("");
+	tinyMCE.activeEditor.setContent("");
+	
 }
 
 function insertUserInfo() {
@@ -131,5 +143,15 @@ function ajaxLoginCheck() {
 			location.href = "../user/login.html";
 		}
 	})
+}
+
+function changeType() {
+	var chk_val = $("#board_type option:selected").val();
+	if (chk_val != "notice" && chk_val != "product_issue") {
+		$('#category_list').attr("disabled", true);
+		$('#category_list').css("background-color", "gainsboro");
+	} else {
+		$('#category_list').css("background-color", "white");
+	}
 }
 
