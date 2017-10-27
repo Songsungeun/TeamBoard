@@ -16,8 +16,10 @@ function fnSignUp() {
 	formData.append("admin", false);
 	formData.append("permission", false);
 	
-	DEBUG && console.log(formData.get("userID"));
-	ajaxRequest(formData, url);
+	var check = fnSignUpCheck();
+	if (check) {
+		ajaxSignUpRequest(formData, url);
+	}
 	
 }
 
@@ -29,17 +31,14 @@ function fnLogin() {
 	formData.append("userID", $("#txtLoginId").val());
 	formData.append("password", $("#txtPassword").val())
 	
-//	console.log("userID : " + formData.get("userID"));
-//	console.log("password : " + formData.get("password"));
 	var check = fnCheck();
 	if(check) {
-		console.log("if")
 		ajaxLoginRequest(formData, url);
 	}
 	
 }
 
-function ajaxRequest(formData, url) {
+function ajaxSignUpRequest(formData, url) {
 	$.ajax({
 		url: url,
 		data: formData,
@@ -50,7 +49,10 @@ function ajaxRequest(formData, url) {
 			var result = obj.jsonResult
 			if (result.state != "success") {
 				alert(result.data)
-			} else {DEBUG && console.log(result.data)}
+			} else {
+				alert("가입 되었습니다.");
+				location.href = "login.html";
+			}
 		},
 		error : function(err) {
 			alert("오류 발생");
@@ -93,5 +95,31 @@ function fnCheck() {
     }
     
     return true;
+}
+
+function fnSignUpCheck() {
+	if ($("#user_id").val() == "") {
+		alert("아이디를 입력하세요.");
+		return false;
+	}
+	if ($("#user_name").val() == "") {
+		alert("이름을 입력하세요.");
+		return false;
+	}
+	if ($("#user_password").val() == "") {
+		alert("비밀번호를 입력하세요.");
+		return false;
+	}
+	if ($("#user_department").val() == 0) {
+		alert("부서를 선택하세요.")
+		return false;
+	}
+	if ($("#user_position").val() == 0) {
+		alert("직급을 선택하세요.");
+		return false;
+	}
+	
+	return true;
+	
 }
 

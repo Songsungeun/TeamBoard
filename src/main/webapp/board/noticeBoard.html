@@ -54,14 +54,23 @@
 		        <tbody class="board_contents">
 		        <script id="board_list_template" type="text/x-handlebars-template">
 
-				{{#data}}
+				{{#data.require}}
+					<tr style="background-color: #F0F0F0;">
+            		<td data-no="{{boardNo}}">--</td>
+            		<td><a href="noticeBoardDetail.html?no={{boardNo}}"><span style="color:red;">[필독]</span>{{title}}</a><span style="color:#FF8000; ">[0]</span></td>
+            		<td>{{userName}}</td>
+            		<td>{{date}}</td>
+         			</tr>
+				{{/data.require}}
+
+				{{#data.noReq}}
 					<tr style="background-color: #F0F0F0;">
             		<td data-no="{{boardNo}}">{{showNo}}</td>
             		<td><a href="noticeBoardDetail.html?no={{boardNo}}">{{title}}</a><span style="color:#FF8000; ">[0]</span></td>
             		<td>{{userName}}</td>
             		<td>{{date}}</td>
          			</tr>
-				{{/data}}
+				{{/data.noReq}}
 				</script>
 		        </tbody>
 		      </table>

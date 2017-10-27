@@ -34,18 +34,26 @@
     			
     			<script id="main_notice" type="text/x-handlebars-template">
 			      <tr>
-			        <td colspan="3" style="padding-left: 10px; font-weight: bold; background-color: #A0C0D7; color: white;">* 공지사항</td>
+			        <td colspan="3" style="padding-left: 10px; font-weight: bold; background-color: #A0C0D7; color: white;">* 팀 공지 사항</td>
 			      </tr>
 			    
-				{{#notice}}
+				{{#teamReq}}
+			      <tr style="background-color: #F0F0F0;">
+			        <td style="width: 70%; padding-left: 10px;"><a href="../board/noticeBoardDetail.html?no={{boardNo}}"><span style="color: red">[필독]</span>{{title}}</a></td>
+			        <td style="width: 15%; text-align: center;">{{userName}}</td>
+			        <td style="width: 15%; text-align: center;">{{date}}</td>
+			      </tr>
+			    {{/teamReq}}
+
+				{{#teamNoReq}}
 			      <tr style="background-color: #F0F0F0;">
 			        <td style="width: 70%; padding-left: 10px;"><a href="../board/noticeBoardDetail.html?no={{boardNo}}">{{title}}</a></td>
 			        <td style="width: 15%; text-align: center;">{{userName}}</td>
 			        <td style="width: 15%; text-align: center;">{{date}}</td>
 			      </tr>
-			    {{/notice}}
+			    {{/teamNoReq}}
 			      <tr>
-			        <td colspan="3" style="text-align: right; padding-right: 15px;"><a href="../board/noticeBoard.html?type=notice">More</a></td>
+			        <td colspan="3" style="text-align: right; padding-right: 15px;"><a href="../board/noticeBoard.html?cat=team_notice&pageNo=1">More</a></td>
 			      </tr>
 				</script>
 			    
@@ -57,18 +65,26 @@
 			    
 			    <script id="issue_notice" type="text/x-handlebars-template">
 				<tr>
-			        <td colspan="3" style="padding-left: 10px; font-weight: bold; background-color: #A3D8C4; color: white;">* 시장이슈</td>
+			        <td colspan="3" style="padding-left: 10px; font-weight: bold; background-color: #A3D8C4; color: white;">* 업무 공지 사항</td>
 			      </tr>
 			    
-				{{#issue}}
+				{{#workReq}}
+			      <tr style="background-color: #F0F0F0;">
+			        <td style="width: 70%; padding-left: 10px;"><a href="../board/noticeBoardDetail.html?no={{boardNo}}"><span style="color: red">[필독]</span>{{title}}</a></td>
+			        <td style="width: 15%; text-align: center;">{{userName}}</td>
+			        <td style="width: 15%; text-align: center;">{{date}}</td>
+			      </tr>
+			    {{/workReq}}
+
+				{{#workNoReq}}
 			      <tr style="background-color: #F0F0F0;">
 			        <td style="width: 70%; padding-left: 10px;"><a href="../board/noticeBoardDetail.html?no={{boardNo}}">{{title}}</a></td>
 			        <td style="width: 15%; text-align: center;">{{userName}}</td>
 			        <td style="width: 15%; text-align: center;">{{date}}</td>
 			      </tr>
-			    {{/issue}}
+			    {{/workNoReq}}
 			      <tr>
-			        <td colspan="3" style="text-align: right; padding-right: 15px;"><a href="../board/noticeBoard.html?type=common_issue">More</a></td>
+			        <td colspan="3" style="text-align: right; padding-right: 15px;"><a href="../board/noticeBoard.html?cat=team_notice&pageNo=1">More</a></td>
 			      </tr>
 				</script>
 				
@@ -80,54 +96,34 @@
 		  <div id="container">
 		  <div style="font-weight: bold; margin-bottom: 10px;">*제품별 사양 및 이슈</div>
 		    <ul class="tabs">
-		        <li class="active" rel="tab1" data-value="sat">SAT</li>
-		        <li rel="tab2">ROOM SPEAKER</li>
-		        <li rel="tab3">MULTIROOM APP</li>
-		        <li rel="tab4">BAND APP</li>
-		        <li rel="tab5">BD/HES</li>
-		        <li rel="tab6">PVR</li>
-		        <li rel="tab7">SAMSUNG CONNECT</li>
-		        <li rel="tab8">CONVERGENCE</li>
+		        <li class="active" rel="tab1" value="sat">SAT</li>
+		        <li rel="tab2" value="room_speaker">ROOM SPEAKER</li>
+		        <li rel="tab3" value="multiroom">MULTIROOM APP</li>
+		        <li rel="tab4" value="band">BAND APP</li>
+		        <li rel="tab5" value="bd_hes">BD/HES</li>
+		        <li rel="tab6" value="pvr">PVR</li>
+		        <li rel="tab7" value="ss_connect">SAMSUNG CONNECT</li>
+		        <li rel="tab8" value="convergence">CONVERGENCE</li>
+		        <li rel="tab9" value="alexa">ALEXA</li>
 		    </ul>
 		    <div class="tab_container">
 		        <div id="tab1" class="tab_content">
 		        
-			        <table id="tabTable">
-			    
-					      <tr style="background-color: #F0F0F0;">
-					        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조1</a></td>
-					        <td style="width: 15%; text-align: center;">관리자</td>
-					        <td style="width: 15%; text-align: center;">2017-06-18</td>
-					      </tr>
-					    
+			        <table id="tabTable" class="sat_tab">
+		    			<script id="sat_product" type="text/x-handlebars-template">
+						{{#sat}}
+		    			<tr style="background-color: #F0F0F0;">
+					        <td style="width: 70%; padding-left: 10px;"><a href="../board/noticeBoardDetail.html?no={{boardNo}}">{{title}}</a></td>
+					        <td style="width: 15%; text-align: center;">{{userName}}</td>
+					        <td style="width: 15%; text-align: center;">{{date}}</td>
+					    </tr>
+					    {{/sat}}
 					      <tr>
-					        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조2</a></td>
-					        <td style="width: 15%; text-align: center;">관리자</td>
-					        <td style="width: 15%; text-align: center;">2017-06-18</td>
+					        <td colspan="3" style="text-align: right; padding-right: 15px;"><a href="../board/noticeBoard.html?cat=sat&pageNo=1">More</a></td>
 					      </tr>
-					    
-					      <tr style="background-color: #F0F0F0;">
-					        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조3</a></td>
-					        <td style="width: 15%; text-align: center;">관리자</td>
-					        <td style="width: 15%; text-align: center;">2017-06-18</td>
-					      </tr>
-					    
-					      <tr>
-					        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조4</a></td>
-					        <td style="width: 15%; text-align: center;">관리자</td>
-					        <td style="width: 15%; text-align: center;">2017-06-18</td>
-					      </tr>
-					    
-					      <tr style="background-color: #F0F0F0;">
-					        <td style="width: 70%; padding-left: 10px;"><a href="#">2017-06-18 기준 AV 모델별 이슈사항 참조5</a></td>
-					        <td style="width: 15%; text-align: center;">관리자</td>
-					        <td style="width: 15%; text-align: center;">2017-06-18</td>
-					      </tr>
+						</script>
 					      
-					      <tr>
-					        <td colspan="3" style="text-align: right; padding-right: 15px;"><a href="#">More</a></td>
-					      </tr>
-					    </table>
+				    </table>
 					    
 		        </div>
 		        <!-- #tab1 -->

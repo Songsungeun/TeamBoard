@@ -38,21 +38,23 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<BoardList> findBoardListbyType(String type, int pageNo, int length) {
+	public List<BoardList> findBoardListbyType(String type, int pageNo, int length, boolean required) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("type",	type);
 		map.put("startIndex", (pageNo - 1) * length);
 		map.put("length", length);
+		map.put("required", required);
 		List<BoardList> boardList = boardDao.findAllbyType(map);
 		return boardList;
 	}
 
 	@Override
-	public List<BoardList> findBoardListbyCategory(String category, int pageNo, int length) {
+	public List<BoardList> findBoardListbyCategory(String category, int pageNo, int length, boolean required) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("category",	category);
 		map.put("startIndex", (pageNo - 1) * length);
 		map.put("length", length);
+		map.put("required", required);
 		List<BoardList> boardList = boardDao.findAllbyCategory(map);
 		return boardList;
 	}
@@ -64,8 +66,13 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<BoardList> findBoardListbyCategoryForMain(String category) {
-		List<BoardList> boardList = boardDao.findAllbyCategoryForMain(category);
+	public List<BoardList> findBoardListbyCategoryForMain(String category, int length, boolean required) {
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("category",	category);
+		map.put("length", length);
+		map.put("required", required);
+		List<BoardList> boardList = boardDao.findAllbyCategoryForMain(map);
 		return boardList;
 	}
 

@@ -81,8 +81,8 @@ function write_add() {
 	formData.append("description", tinyMCE.activeEditor.getContent())
 	formData.append("boardType", $("#board_type option:selected").val());
 	formData.append("category", $("#category_list option:selected").val());
-	clear_area();
-	
+	formData.append("required", $('.required_box').prop("checked"));
+
 	ajaxwriteRequest(formData, url);
 }
 
@@ -107,12 +107,12 @@ function ajaxwriteRequest(formData, url) {
 	})
 }
 
-function clear_area() {
-	console.log("clear_area");
-	$('#title').val("");
-	tinyMCE.activeEditor.setContent("");
-	
-}
+//function clear_area() {
+//	console.log("clear_area");
+//	$('#title').val("");
+//	tinyMCE.activeEditor.setContent("");
+//	
+//}
 
 function insertUserInfo() {
 	var dt = new Date();

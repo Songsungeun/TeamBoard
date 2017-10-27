@@ -18,8 +18,12 @@ function addComment() {
 		
 		formData.append("boardNo", boardNo);
 		formData.append("commentDescription", $('.comment_content').val());
-		
-		ajaxAddComment(formData, url);
+		var limit = LimitString();
+		if (limit) {
+			ajaxAddComment(formData, url);
+		} else {
+			alert("글자수를 초과하였습니다. 최대 글자수는 1000자입니다.");
+		}
 	})
 }
 
@@ -164,4 +168,15 @@ function showBoardList(data) {
 	var template = Handlebars.compile(source);
 	var html = template(data);
 	$('.tmp').append(html);
+}
+
+function LimitString() {
+	var maxLength = 1000;
+	var length = $('.comment_content').val().length;
+	if (length <= maxLength) {
+		return true;
+	} else {
+		return false;
+	}
+	
 }

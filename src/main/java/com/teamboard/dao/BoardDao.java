@@ -27,5 +27,5 @@ public interface BoardDao {
 	List<BoardList> findAllbyType(Map<String, Object> paramMap);
 	List<BoardList> findAllbyCategory(Map<String, Object> paramMap);
 	List<BoardList> findAllbyTypeForMain(String type);
-	List<BoardList> findAllbyCategoryForMain(String category);
+	List<BoardList> findAllbyCategoryForMain(Map<String, Object> paramMap);
 } 

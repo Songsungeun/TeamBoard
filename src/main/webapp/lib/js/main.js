@@ -19,13 +19,15 @@ function tabsFunc() {
         $(".tab_content").hide()
         var activeTab = $(this).attr("rel");
         $("#" + activeTab).fadeIn()
+        console.log("aa4= " + $(this).attr("value"));
     });
 }
 
 function ajaxRequest() {
 	
 	var formData = new FormData();
-	formData.append("type", "notice");
+	formData.append("category1", "team_notice");
+	formData.append("category2", "work_notice");
 	formData.append("position", "main");
 	var url = "../board/mainList.json";
 	
@@ -41,8 +43,9 @@ function ajaxRequest() {
 				console.log("데이타 로드 실패");
 			} else {
 				console.log(result);
-				showNoticeList(result.data);
-				showIssueList(result.data);
+				showWorkList(result.data);
+				showTeamList(result.data);
+				showSatList(result.data);
 			}
 		},
 		error : function(err) {
@@ -52,7 +55,7 @@ function ajaxRequest() {
 	})
 }
 
-function showNoticeList(data) {
+function showWorkList(data) {
 	var source = $('#main_notice').html();
 	var template = Handlebars.compile(source);
 	
@@ -60,9 +63,16 @@ function showNoticeList(data) {
 	$('.notice_table').append(html);
 }
 
-function showIssueList(data) {
+function showTeamList(data) {
 	var source = $('#issue_notice').html();
 	var template = Handlebars.compile(source);
 	var html = template(data);
 	$('.issue_table').append(html);
+}
+
+function showSatList(data) {
+	var source = $('#sat_product').html();
+	var template = Handlebars.compile(source);
+	var html = template(data);
+	$('.sat_tab').append(html);
 }

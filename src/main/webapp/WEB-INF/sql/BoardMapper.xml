@@ -12,6 +12,7 @@
     <result column="board_type" property="boardType"/>
     <result column="category" property="category"/>
     <result column="cre_dt" property="date"/>
+    <result column="required" property="required"/>
   </resultMap>
   
   <resultMap type="BoardList" id="boardListMap">
@@ -27,8 +28,8 @@
   </resultMap>
   
   <insert id="insertBoard" parameterType="Board">
-		insert into board(title, description, user_no, board_type, category, cre_dt)
-		values(#{title}, #{description}, #{userNo}, #{boardType}, #{category}, now())
+		insert into board(title, description, user_no, board_type, category, cre_dt, required)
+		values(#{title}, #{description}, #{userNo}, #{boardType}, #{category}, now(), #{required})
   </insert>
 
   <update id="updateBoard" parameterType="Board">
@@ -37,7 +38,8 @@
     description=#{description},
     board_type=#{boardType},
     category=#{category},
-    cre_dt=now()
+    cre_dt=now(),
+    required=#{required}
     where board_no=#{boardNo}
   </update>
   
@@ -57,18 +59,18 @@
     select board_no,title,description,user_no,board_type,category, cre_dt
 		from board
   </select>
-	
+
   <select id="findAllbyType" resultMap="boardListMap" parameterType="map">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, mem.name, mem.position
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, mem.name, mem.position
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
-		where board_type = #{type}
+		where board_type = #{type} and required = #{required}
 		order by bo.board_no desc
 		limit #{startIndex}, #{length}
   </select>
   
   <select id="countType" resultType="int" parameterType="String">
-  	select count(*) from board where board_type = #{value}
+  	select count(*) from board where board_type = #{value} and required = false
   </select>
   
   <select id="findAllbyTypeForMain" resultMap="boardListMap" parameterType="String">
@@ -81,24 +83,24 @@
   </select>
   
   <select id="countCategory" resultType="int" parameterType="String">
-  	select count(*) from board where category = #{value}
+  	select count(*) from board where category = #{value} and required = false
   </select>
   
   <select id="findAllbyCategory" resultMap="boardListMap" parameterType="map">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, mem.name, mem.position
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, mem.name, mem.position
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
-		where category = #{category}
+		where category = #{category} and required = #{required}
 		order by bo.board_no desc
 		limit #{startIndex}, #{length}
   </select>
   
-  <select id="findAllbyCategoryForMain" resultMap="boardListMap" parameterType="String">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, mem.name, mem.position
+  <select id="findAllbyCategoryForMain" resultMap="boardListMap" parameterType="map">
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, mem.name, mem.position
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
-		where category = #{value}
+		where category = #{category} and required = #{required}
 		order by bo.board_no desc
-		limit 5
+		limit #{length}
   </select>
 </mapper>

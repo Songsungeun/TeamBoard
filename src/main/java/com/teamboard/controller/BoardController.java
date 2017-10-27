@@ -113,14 +113,19 @@ public class BoardController {
 	@RequestMapping(path = "typeList")
 	public Object typeList(String type, int pageNo) {
 		
+		List<BoardList> boardListByTypeAndRequired = new ArrayList<BoardList>();
 		List<BoardList> boardListByType = new ArrayList<BoardList>();
-		
 		int count;
+		Map<String, Object> maps = new HashMap<>();
 		
 		try {
-			boardListByType = boardService.findBoardListbyType(type, pageNo, length);
+			boardListByTypeAndRequired = boardService.findBoardListbyType(type, pageNo, 3, true);
+			boardListByType = boardService.findBoardListbyType(type, pageNo, length, false);
 			
 			count = boardService.getCountBoardByType(type);
+			
+			maps.put("require", boardListByTypeAndRequired);
+			maps.put("noReq", boardListByType);
 			
 			int startDisplayNo = count - ((pageNo - 1) * length);
 			for (int i = 0; i < boardListByType.size(); i++) {
@@ -132,43 +137,76 @@ public class BoardController {
 			return JsonResult.error(e.getMessage());
 		}
 		
-		return JsonResult.success(boardListByType, count);
+		return JsonResult.success(maps, count);
 	}
 
 	@RequestMapping(path = "categoryList")
 	public Object categoryList(String category, int pageNo) {
 
+		List<BoardList> boardListByCategoryAndRequired = new ArrayList<BoardList>();
 		List<BoardList> boardListByCategory = new ArrayList<BoardList>();
 		int count;
+		Map<String, Object> maps = new HashMap<>();
 		
 		try {
-			boardListByCategory = boardService.findBoardListbyCategory(category, pageNo, length);
+			boardListByCategoryAndRequired = boardService.findBoardListbyCategory(category, pageNo, 3, true);
+			boardListByCategory = boardService.findBoardListbyCategory(category, pageNo, length, false);
+			
 			count = boardService.getCountBoardByCategory(category);
+			
+			maps.put("require", boardListByCategoryAndRequired);
+			maps.put("noReq", boardListByCategory);
+			
 		} catch (RuntimeException e) {
 			logger.error("{}", e);
+			e.printStackTrace();
 			return JsonResult.error(e.getMessage());
 		}
 
-		return JsonResult.success(boardListByCategory, count);
+		return JsonResult.success(maps, count);
 	}
 	
 	@RequestMapping(path = "mainList")
-	public Object mainList(String type) {
+	public Object mainList(String category1, String category2) {
 		
-		List<BoardList> mainNotice = new ArrayList<BoardList>();
-		List<BoardList> mainIssue = new ArrayList<BoardList>();
-		List<BoardList> productIssue = new ArrayList<BoardList>();
+		List<BoardList> mainTeamReq = new ArrayList<BoardList>();
+		List<BoardList> mainWorkReq = new ArrayList<BoardList>();
+
+		List<BoardList> mainTeamNoReq = new ArrayList<BoardList>();
+		List<BoardList> mainWorkNoReq = new ArrayList<BoardList>();
+		List<BoardList> satIssue = new ArrayList<BoardList>();
+		List<BoardList> roomSPKIssue = new ArrayList<BoardList>();
+		List<BoardList> multiRoomIssue = new ArrayList<BoardList>();
+		List<BoardList> bandIssue = new ArrayList<BoardList>();
+		List<BoardList> bdHesIssue = new ArrayList<BoardList>();
+		List<BoardList> pvrIssue = new ArrayList<BoardList>();
+		List<BoardList> ssConnectIssue = new ArrayList<BoardList>();
+		List<BoardList> convergenceIssue = new ArrayList<BoardList>();
+		List<BoardList> alexaIssue = new ArrayList<BoardList>();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
-			mainNotice = boardService.findBoardListbyTypeForMain(type);
-			mainIssue = boardService.findBoardListbyTypeForMain("common_issue");
-			productIssue = boardService.findBoardListbyCategoryForMain("sat");
+			// 필독 영역
+			mainTeamReq = boardService.findBoardListbyCategoryForMain(category1, 3, true);
+			mainWorkReq = boardService.findBoardListbyCategoryForMain(category2, 3, true);
+			mainTeamNoReq = boardService.findBoardListbyCategoryForMain(category1, 5, false);
+			mainWorkNoReq = boardService.findBoardListbyCategoryForMain(category2, 5, false);
+//			satIssue = boardService.findBoardListbyCategoryForMain("sat", 5, false);
+//			satIssue = boardService.findBoardListbyCategoryForMain("sat", 5, false);
+//			satIssue = boardService.findBoardListbyCategoryForMain("sat", 5, false);
+//			satIssue = boardService.findBoardListbyCategoryForMain("sat", 5, false);
+//			satIssue = boardService.findBoardListbyCategoryForMain("sat", 5, false);
+//			satIssue = boardService.findBoardListbyCategoryForMain("sat", 5, false);
+//			satIssue = boardService.findBoardListbyCategoryForMain("sat", 5, false);
+//			satIssue = boardService.findBoardListbyCategoryForMain("sat", 5, false);
+//			satIssue = boardService.findBoardListbyCategoryForMain("sat", 5, false);
 			
-			map.put("notice", mainNotice);
-			map.put("issue", mainIssue);
-			map.put("product", productIssue);
+			map.put("teamReq", mainTeamReq);
+			map.put("workReq", mainWorkReq);
+			map.put("teamNoReq", mainTeamNoReq);
+			map.put("workNoReq", mainWorkNoReq);
+			map.put("sat", satIssue);
 			
 		} catch (RuntimeException e) {
 			logger.error("{}", e);
@@ -178,9 +216,7 @@ public class BoardController {
 		
 		return JsonResult.success(map);
 	}
-
-
-
+	
 	// 댓글 영역
 	@RequestMapping(path = "getComment")
 	public Object commentList(int boardNo) {
