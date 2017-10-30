@@ -221,6 +221,24 @@ h2 {
 	top: 0px;
 }
 
+.user_info {
+	background: gray;
+}
+
+.user_info .nav_user_name {
+/* 	font: 14px fontawesome; */
+	font-size:14px;
+	float: left;
+	margin-left:23px;
+	color: white
+}
+
+
+.user_info .logout_btn:after {
+	font: 20px fontawesome;
+	content: '\f08b';
+	color: white;
+}
 .content .table_area {
 	width: 100%;
     margin: 50px 150px;

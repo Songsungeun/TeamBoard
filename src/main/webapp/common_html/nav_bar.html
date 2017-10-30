@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>MainPage</title>
+<title></title>
 
+<script src="../lib/js/nav.js"></script>
 <script type="text/javascript">
 $(function(){
   $('.notice_dropdown').mouseenter(function(){
@@ -42,7 +45,10 @@ $(".nav li").click(function(){
 </head>
 <body>
 
-<div class='title'><a href="../main/Mainpage.html">HQTECH</a></div>
+<div class='title'>
+<a href="../main/Mainpage.html">HQTECH<br></a>
+<div class="user_info"><span><a class="nav_user_name" href=""></a></span><span class="logout_area"><a href="" class="logout_btn"></a></span></div>
+</div>
 <ul class='nav'>
 	<li class="notice_dropdown"><a href="../board/noticeBoard.html?type=notice&pageNo=1">공지사항</a>
 		<ul class="notice_content">
