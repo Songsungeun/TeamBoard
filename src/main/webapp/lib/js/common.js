@@ -7,6 +7,7 @@ const DEBUG = true;
 $(document).ready( function() {
 	loadNav();
 	ajaxLoginCheck();
+	authCheck();
 });
 
 function ajaxRequest(formData, url) {
@@ -41,7 +42,6 @@ function ajaxLoginCheck() {
 				location.href = "../user/login.html";
 			} else {
 				console.log("로그인 상태");
-				$('.user_name').text(result.data.name);
 			}
 		},
 		error : function(err) {
@@ -57,6 +57,16 @@ function loadNav() {
 //	$("#nav_bar").load("../main/Mainpage2.html");
 }
 
+function authCheck() {
+	var host = $(location).attr('pathname');
+	var path = host.split('/')[3];
+	console.log("path : " + path);
+	
+	if (path = 'noticeBoardDetail.html') {
+		console.log("디테일 페이지");
+	}
+	
+}
 Paging = function(totalCnt, dataSize, pageSize, pageNo, param) {
 	totalCnt = parseInt(totalCnt); // 전체 레코드 수
 	dataSize = parseInt(dataSize); // 페이지당 보여줄 데이터 수

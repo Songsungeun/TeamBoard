@@ -29,7 +29,6 @@ function addComment() {
 
 function getBoardDetail() {
 	var param = $(location).attr('search').split('?')[1];
-	console.log(param);
 	var params = param.split('=');
 	
 	var formData = new FormData();
@@ -66,6 +65,31 @@ function ajaxGetBoard(formData, url) {
 			console.log("err message : " + err.data);
 		}
 	})
+}
+
+function ajaxDeleteBoard() {
+	var param = $(location).attr('search').split('?')[1];
+	var boardNo = param.split('=')[1];
+	
+	$.ajax({
+		url : "delete.json",
+		data: "boardNo=" + boardNo,
+		processData: false,
+		contentType: false,
+		success : function(obj) {
+			var result = obj.jsonResult
+			if (result.state != "success") {
+				alert(obj.data);
+			} else {
+				alert("삭제 되었습니다.");
+				location.href = "../main/Mainpage.html";
+			}
+		},
+		error : function(err) {
+			alert("오류 발생");
+		}
+	})
+	
 }
 
 // Part 변경시 해당 영역 변경 변경
