@@ -190,10 +190,10 @@ public class BoardController {
 			
 			map.put("teamReq", mainTeamReq);
 			map.put("workReq", mainWorkReq);
-			map.put("satReq", satIssueReq);
+			map.put("productReq", satIssueReq);
 			map.put("teamNoReq", mainTeamNoReq);
 			map.put("workNoReq", mainWorkNoReq);
-			map.put("satNoReq", satIssueNoReq);
+			map.put("productNoReq", satIssueNoReq);
 			
 		} catch (RuntimeException e) {
 			logger.error("{}", e);
@@ -215,8 +215,12 @@ public class BoardController {
 			mainProductListReq = boardService.findBoardListbyCategoryForMain(category, 3, true);
 			mainProductListNoReq = boardService.findBoardListbyCategoryForMain(category, 5, false);
 			
-			map.put("prodcutReq", mainProductListReq);
+			map.put("productReq", mainProductListReq);
 			map.put("productNoReq", mainProductListNoReq);
+			
+			if (mainProductListNoReq == null && mainProductListReq == null) {
+				return JsonResult.fail("데이터가 없습니다.");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return JsonResult.error(e.getMessage());
