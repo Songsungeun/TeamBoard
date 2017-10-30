@@ -56,6 +56,8 @@ public class UserController {
 			return JsonResult.fail("로그인이 필요합니다.");
 		}
 		
+		user.setPassword("");
+		
 		return JsonResult.success(user);
 	}
 	
