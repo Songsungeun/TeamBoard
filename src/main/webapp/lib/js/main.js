@@ -95,6 +95,12 @@ function showTeamList(data) {
 }
 
 function showProductList(data, source, template) {
-	var html = template(data);
+	var html;
+	if (data.productNoReq <= 0 && data.productReq <= 0) {
+		html = "<tr style='background-color: #F0F0F0;'>" +
+		"<td colspan='3' style='text-align: center;'> 게시물이 없습니다. </td>";
+	} else {
+		html = template(data);
+	}
 	$('.product_tab').html(html);
 }
