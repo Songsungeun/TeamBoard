@@ -3,6 +3,7 @@
  */
 var boardCnt;
 var paramFlag;
+var paramsForWrite;
 var currPage;
 
 $(document).ready(function() {
@@ -10,11 +11,20 @@ $(document).ready(function() {
 	checkParam();
 })
 
+$(window).load(function() {
+	console.log("write: " + paramsForWrite);
+	$("#write_btn").click(function() {
+		location.href = "noticeBoardReg.html?" + paramsForWrite;
+	})
+})
+
 function checkParam() {
 	var origin_param = $(location).attr('search').split('?')[1];
 	var split_param = origin_param.split('&');
 	
 	var params = split_param[0].split('=');
+	paramsForWrite = split_param[0]; //writepage에 파라미터 전달할 변수
+	
 	paramFlag = split_param[0] + "&" + split_param[1].split('=')[0] + "=";
 	currPage = split_param[1].split('=')[1];
 	
@@ -31,7 +41,6 @@ function checkParam() {
 
 function insertBoardName(params) {
 	var showText;
-	console.log("param[0] : " + params[0])
 	if (params[0] == "type") {
 		switch (params[1]) {
 		case "notice" : showText = "[공지사항]"; break;
@@ -61,7 +70,6 @@ function insertBoardName(params) {
 		
 		}
 	}
-	console.log("text : " + showText);
 	$('.type_name').text(showText);
 }
 

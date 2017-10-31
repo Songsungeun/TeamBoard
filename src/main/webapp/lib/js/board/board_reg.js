@@ -125,11 +125,13 @@ function write_add() {
 	formData.append("title", $("#title").val());
 	formData.append("description", tinyMCE.activeEditor.getContent())
 	formData.append("boardType", $("#board_type option:selected").val());
+	
 	if ($("#board_type option:selected").val() == "notice") {
 		formData.append("category", $("#category_list_notice option:selected").val());
 	} else if ($("#board_type option:selected").val() == "product_issue") {
 		formData.append("category", $("#category_list_product option:selected").val());
 	}
+	
 	formData.append("required", $('.required_box').prop("checked"));
 
 	ajaxwriteRequest(formData, url);
@@ -228,16 +230,44 @@ function isEdit() {
 		
 	} else {
 		var params = param.split('=');
-		boardNo = params[1];
-		var formData = new FormData();
-		var url = "detail.json";
-
-		if (params[1]) {
-			formData.append("boardNo", params[1])
-			ajaxGetBoard(formData, url)
-		} else {
-			alert("오류 발생");
-			location.href = "noticeBoard.html"
+		console.log("0 = " + params[0]);
+		console.log("1 = " + params[1]);
+		
+		// 수정으로 들어온 경우
+		if (params[0] == "no") {
+			boardNo = params[1];
+			var formData = new FormData();
+			var url = "detail.json";
+			
+			if (params[1]) {
+				formData.append("boardNo", params[1])
+				ajaxGetBoard(formData, url)
+			} else {
+				alert("오류 발생");
+				location.href = "noticeBoard.html"
+			}
+		} else { // 수정이 아닌 경우
+			console.log("수정 아님");
+			if (params[0] == "type") {
+				$("#board_type").val(params[1]);
+				chained();
+			} else if (params[0] == "cat"){
+				console.log("cat 진입");
+				console.log("param[1] = " + params[1])
+				var type;
+				switch (params[1]) {
+				case "team_notice" : type = "notice"; break;
+				case "work_notice" : type = "notice"; break;
+				default : type = "product_issue"; break;
+				}
+				$("#board_type").val(type);
+				chained();
+				if (type == "notice") {
+					$("#category_list_notice").val(params[1]);
+				} else if (type == "product_issue") {
+					$("#category_list_product").val(params[1]);
+				}
+			}
 		}
 	}
 
@@ -272,14 +302,14 @@ function ajaxGetBoard(formData, url) {
 					tinymce.get('description').setContent(result.data.description);
 					
 					// 공지 or 상품 타입은 하위 카테고리 있으므로 해당 select 선택되어 있도록 설정
-					if (result.data.boardType == "notice" || result.data.boardType == "product_issue") {
-						$("#board_type").val(result.data.boardType);
-						chained();
-						$('#category_list').val(result.data.category);
-					} else {
-						$("#board_type").val(result.data.boardType);
-						chained();
-					}
+					$("#board_type").val(result.data.boardType);
+					chained();
+
+					if (result.data.boardType == "notice") {
+						$('#category_list_notice').val(result.data.category);
+					} else if (result.data.boardType == "product_issue") {
+						$('#category_list_product').val(result.data.category);
+					} 
 					
 					// 필독 글인경우 기본으로 필독 체크되도록 설정
 					if (result.data.required) {
