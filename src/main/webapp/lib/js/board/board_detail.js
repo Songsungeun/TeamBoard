@@ -9,6 +9,11 @@ $(document).ready(function() {
 function addComment() {
 	$('.add_comment').click(function(event) {
 
+		if ($('.comment_content').val() == "" || $('.comment_content').val() == null) {
+			alert("내용을 입력하세요");
+			return false;
+		}
+		
 		var formData = new FormData();
 		var url = "inserComment.json";
 		var boardNo = Number($('.board_no').val());

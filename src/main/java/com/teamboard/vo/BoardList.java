@@ -23,6 +23,8 @@ public class BoardList implements Serializable{
 	protected Date date;
 	protected String userName;
 	protected String userPosition;
+	protected boolean admin;
+	protected boolean required;
 	protected int showNo;
 	
 	public int getBoardNo() {
@@ -84,6 +86,18 @@ public class BoardList implements Serializable{
 	}
 	public void setShowNo(int showNo) {
 		this.showNo = showNo;
+	}
+	public boolean isAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+	public boolean isRequired() {
+		return required;
+	}
+	public void setRequired(boolean required) {
+		this.required = required;
 	}
 	
 	

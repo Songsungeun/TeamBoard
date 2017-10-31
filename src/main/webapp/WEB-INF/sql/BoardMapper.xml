@@ -25,6 +25,8 @@
     <result column="cre_dt" property="date"/>
     <result column="name" property="userName"/>
     <result column="position" property="userPosition"/>
+    <result column="admin" property="admin"/>
+    <result column="required" property="required"/>
   </resultMap>
   
   <insert id="insertBoard" parameterType="Board">
@@ -49,7 +51,7 @@
   </delete>
   
   <select id="findOne" resultMap="boardListMap" parameterType="int">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, mem.name, mem.position
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, mem.name, mem.position
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
 		where board_no = #{value}
@@ -61,7 +63,7 @@
   </select>
 
   <select id="findAllbyType" resultMap="boardListMap" parameterType="map">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, mem.name, mem.position
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, mem.name, mem.position, mem.admin
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
 		where board_type = #{type} and required = #{required}
@@ -74,7 +76,7 @@
   </select>
   
   <select id="findAllbyTypeForMain" resultMap="boardListMap" parameterType="String">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, mem.name, mem.position
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, mem.name, mem.position, mem.admin
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
 		where board_type = #{value}
@@ -87,7 +89,7 @@
   </select>
   
   <select id="findAllbyCategory" resultMap="boardListMap" parameterType="map">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, mem.name, mem.position
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, mem.name, mem.position, mem.admin
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
 		where category = #{category} and required = #{required}
@@ -96,7 +98,7 @@
   </select>
   
   <select id="findAllbyCategoryForMain" resultMap="boardListMap" parameterType="map">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, mem.name, mem.position
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, mem.name, mem.position, mem.admin
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
 		where category = #{category} and required = #{required}

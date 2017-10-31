@@ -24,7 +24,16 @@ function ajaxRequest() {
 				console.log("데이타 로드 실패");
 			} else {
 				console.log(result);
-				$('.nav_user_name').text(result.data.name);
+				var position;
+				switch (result.data.position) {
+				case "1" : position = "팀장"; break;
+				case "2" : position = "수석"; break;
+				case "3" : position = "책임"; break;
+				case "4" : position = "선임"; break;
+				case "5" : position = "주임"; break;
+				case "6" : position = "사원"; break;
+				}
+				$('.nav_user_name').text(result.data.name + " " + position);
 			}
 		},
 		error : function(err) {

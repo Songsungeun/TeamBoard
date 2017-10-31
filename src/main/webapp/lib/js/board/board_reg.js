@@ -238,15 +238,20 @@ function ajaxGetBoard(formData, url) {
 //					tinymce.editors[0].setContent("hello world");
 					console.log(result.data.description);
 					tinymce.get('description').setContent(result.data.description);
+					
+					// 공지 or 상품 타입은 하위 카테고리 있으므로 해당 select 선택되어 있도록 설정
 					if (result.data.boardType == "notice" || result.data.boardType == "product_issue") {
-						console.log("if 진입");
-//						$('select[name="board_type"] option:"notice"').attr("selected", "selected");
 						$("#board_type").val(result.data.boardType);
 						chained();
 						$('#category_list').val(result.data.category);
 					} else {
 						$("#board_type").val(result.data.boardType);
 						chained();
+					}
+					
+					// 필독 글인경우 기본으로 필독 체크되도록 설정
+					if (result.data.required) {
+						$("#required_box").prop('checked', true);
 					}
 				}
 			}

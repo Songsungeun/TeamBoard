@@ -88,6 +88,7 @@ public class BoardController {
 
 		} catch (Exception e ) {
 			logger.error("{}", e);
+			e.printStackTrace();
 			return JsonResult.error(e.getMessage());
 		}
 
