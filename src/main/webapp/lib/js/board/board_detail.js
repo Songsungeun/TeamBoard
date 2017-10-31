@@ -58,6 +58,10 @@ function ajaxGetBoard(formData, url) {
 			} else {
 				console.log(result);
 				insertData(result.data);
+				
+				if (result.data.userNo == result.data2.memberNo) {
+					$('.btn').show();
+				}
 			}
 		},
 		error : function(err) {
@@ -202,5 +206,8 @@ function LimitString() {
 	} else {
 		return false;
 	}
-	
+}
+
+function movoToUpdate() {
+	location.href = "../board/noticeBoardReg.html?no=" + $('.board_no').val();
 }

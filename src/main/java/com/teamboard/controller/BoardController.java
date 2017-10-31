@@ -95,14 +95,18 @@ public class BoardController {
 	}
 
 	@RequestMapping(path = "detail")
-	public Object detailBoard(int boardNo) {
+	public Object detailBoard(int boardNo, HttpSession session) {
 		try {
 			BoardList board = boardService.findOne(boardNo);
-
+			User user = (User)session.getAttribute("user");
+			
+			if (user == null) {
+				throw new RuntimeException("회원정보가 없습니다.");
+			}
 			if (board == null) {
 				throw new RuntimeException("해당 게시물이 존재하지 않습니다.");
 			}
-			return JsonResult.success(board);
+			return JsonResult.success(board, user);
 
 		} catch (RuntimeException e) {
 			logger.error("{}", e);

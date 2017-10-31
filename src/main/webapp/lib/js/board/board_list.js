@@ -25,6 +25,44 @@ function checkParam() {
 	} else {
 		alert("parameter 값이 잘못되었습니다.")
 	}
+	
+	insertBoardName(params);
+}
+
+function insertBoardName(params) {
+	var showText;
+	console.log("param[0] : " + params[0])
+	if (params[0] == "type") {
+		switch (params[1]) {
+		case "notice" : showText = "[공지사항]"; break;
+		case "common_issue" : showText = "[시장이슈]"; break;
+		case "product_issue" : showText = "[제품별 시장 이슈]"; break;
+		case "process" : showText = "[업무프로세스]"; break;
+		case "product_term" : showText = "[제품 관련 용어 정리]"; break;
+		case "no_name" : showText = "[익명 게시판]"; break;
+		case "free" : showText = "[자유 게시판]"; break;
+		case "pc_helper" : showText = "[PC 도움방]"; break;
+		case "about_work_site" : showText = "[업무 관련 사이트]"; break;
+		}
+	} else {
+		console.log("else")
+		switch (params[1]) {
+		case "team_notice" : showText = "[팀 내부 공지사항]"; break;
+		case "work_notice" : showText = "[업무 관련 공지사항]"; break;
+		case "sat" : showText = "[SAT]"; break;
+		case "room_speaker" : showText = "[ROOM SPEAKER]"; break; 
+		case "multiroom" : showText = "[MULTIROOM APP]"; break;
+		case "band" : showText = "[BAND APP]"; break;
+		case "bd_hes" : showText = "[BD/HES]"; break;
+		case "pvr": showText = "[PVR]"; break;
+		case "ss_connect" : showText = "[SAMSUNG CONNECT]"; break;
+		case "convergence" : showText = "[CONVERGENCE]"; break;
+		case "alexa" : showText = "[ALEXA]"; break;
+		
+		}
+	}
+	console.log("text : " + showText);
+	$('.type_name').text(showText);
 }
 
 function ajaxBoardListForType(type_name, pageNo) {

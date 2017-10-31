@@ -19,6 +19,9 @@
   background-color: #A0C0D7;
   color: white;
 }
+.type_name {
+	margin-bottom: 50px;
+}
 #searchTable {
   margin-left: 30%;
   width: 800px;

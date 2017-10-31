@@ -1,17 +1,43 @@
 /**
  * 
  */
+var boardNo;
 $(document).ready(function() {
 	initTinyMCE();
 	chained();
 	insertUserInfo();
 	ajaxLoginCheck();
-	$('#board_type').on("change", changeType);
+//	$('#board_type').on("change", chained());
 	$(".sidebar").load("../common_html/nav_bar.html");
+	$('#board_type').change(function(event){
+		chained();
+	})
+})
+
+$(window).load(function() {
+	isEdit();
 })
 
 function chained() {
-	$("#category_list").chained("#board_type");
+//	$("#category_list").chained("#board_type");
+	$('.product_issue').hide();
+	$('.notice').hide();
+	
+	var type = $("#board_type option:selected").val();
+	if (type == "notice") {
+		$('.notice').show();
+	}
+	if (type == "product_issue") {
+		$('.product_issue').show();
+	}
+	
+	if (type != "notice" && type != "product_issue") {
+		$('#category_list').attr("disabled", true);
+		$('#category_list').css("background-color", "gainsboro");
+	} else {
+		$('#category_list').attr("disabled", false);
+		$('#category_list').css("background-color", "white");
+	}
 }
 
 // onbeforeunload 팝업 없애려면 plugin(autosave) 언로드해야 한다.
@@ -86,6 +112,20 @@ function write_add() {
 	ajaxwriteRequest(formData, url);
 }
 
+function write_update() {
+	var formData = new FormData();
+	var url = "update.json";
+	
+	formData.append("boardNo", boardNo);
+	formData.append("title", $("#title").val());
+	formData.append("description", tinyMCE.activeEditor.getContent())
+	formData.append("boardType", $("#board_type option:selected").val());
+	formData.append("category", $("#category_list option:selected").val());
+	formData.append("required", $('.required_box').prop("checked"));
+
+	ajaxwriteRequest(formData, url);
+}
+
 function ajaxwriteRequest(formData, url) {
 	$.ajax({
 		url: url,
@@ -106,13 +146,6 @@ function ajaxwriteRequest(formData, url) {
 		}
 	})
 }
-
-//function clear_area() {
-//	console.log("clear_area");
-//	$('#title').val("");
-//	tinyMCE.activeEditor.setContent("");
-//	
-//}
 
 function insertUserInfo() {
 	var dt = new Date();
@@ -135,6 +168,7 @@ function ajaxLoginCheck() {
 				location.href = "../user/login.html";
 			} else {
 				$('.user_name').text(result.data.name);
+				console.log("로그인 상태");
 			}
 		},
 		error : function(err) {
@@ -145,13 +179,83 @@ function ajaxLoginCheck() {
 	})
 }
 
-function changeType() {
-	var chk_val = $("#board_type option:selected").val();
-	if (chk_val != "notice" && chk_val != "product_issue") {
-		$('#category_list').attr("disabled", true);
-		$('#category_list').css("background-color", "gainsboro");
+//function changeType() {
+//	var chk_val = $("#board_type option:selected").val();
+//	if (chk_val != "notice" && chk_val != "product_issue") {
+//		$('#category_list').attr("disabled", true);
+//		$('#category_list').css("background-color", "gainsboro");
+//	} else {
+//		$('#category_list').css("background-color", "white");
+//	}
+//}
+
+function isEdit() {
+	var param = $(location).attr('search').split('?')[1];
+	console.log("param = " + param);
+	if (param == undefined) {
+		
 	} else {
-		$('#category_list').css("background-color", "white");
+		var params = param.split('=');
+		boardNo = params[1];
+		var formData = new FormData();
+		var url = "detail.json";
+
+		if (params[1]) {
+			formData.append("boardNo", params[1])
+			ajaxGetBoard(formData, url)
+		} else {
+			alert("오류 발생");
+			location.href = "noticeBoard.html"
+		}
 	}
+
 }
+
+function ajaxGetBoard(formData, url) {
+	$.ajax({
+		url: url,
+		data: formData,
+		processData: false,
+		contentType: false,
+		type: "POST",
+		success : function(obj) {
+			var result = obj.jsonResult
+			if (result.state != "success") {
+				console.log("데이타 로드 실패");
+			} else {
+				console.log(result);
+//				insertData(result.data);
+				
+				if (result.data.userNo != result.data2.memberNo) {
+					alert("수정은 관리자나 작성자만 가능합니다.");
+					location.href = "../main/Mainpage.html";
+				} else {
+					$('.write_btn').hide();
+					$('.modify_btn').show();
+					$('#title').val(result.data.title);
+					$('.board_no').text(result.data.boardNo);
+//					tinyMCE.activeEditor.setContent(result.data.description);
+//					tinymce.editors[0].setContent("hello world");
+					console.log(result.data.description);
+					tinymce.get('description').setContent(result.data.description);
+					if (result.data.boardType == "notice" || result.data.boardType == "product_issue") {
+						console.log("if 진입");
+//						$('select[name="board_type"] option:"notice"').attr("selected", "selected");
+						$("#board_type").val(result.data.boardType);
+						chained();
+						$('#category_list').val(result.data.category);
+					} else {
+						$("#board_type").val(result.data.boardType);
+						chained();
+					}
+				}
+			}
+		},
+		error : function(err) {
+			alert("오류 발생");
+			console.log("err message : " + err.data);
+		}
+	})
+}
+
 

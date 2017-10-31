@@ -19,13 +19,14 @@
   background-color: #A0C0D7;
   color: white;
 }
-.btn_area .btn {
-  float: right;
-}
 
 .required_wrap {
 	margin-top: 20px;
 	margin-left: 15%;
 	font-size: 15px;
 	color: red;
+}
+
+.btn_area .modify_btn {
+	display: none;
 }

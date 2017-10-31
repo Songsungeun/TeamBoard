@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <title>MainPage</title>
-
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="../node_modules/handlebars/handlebars-v4.0.11.js"></script>
@@ -31,7 +30,7 @@
 			<div class="middle-box text-center loginscreen animated fadeInDown" style="padding-top: 0; padding-bottom: 0px; width: 100%;">        
       			<h1 class="logo-name" style="font-size: 150px;">AV+</h1>
     		</div>
-    		
+    		<div class="board_no" style="display: hidden;"></div> 
     		<div class="required_wrap">
       		<input type="checkbox" id = "required_box" class="required_box" value="required"> 필독
 			</div>
@@ -46,7 +45,7 @@
 					<input type="text" id="title" name="title" style="width: 90%; color: black; height: 75%;">
 				</td>
 				<td style="width: 20%;">
-					<select	id="board_type" style="width: 85%; height: 70%; color:black;">
+					<select	id="board_type" name="board_type" style="width: 85%; height: 70%; color:black;">
 						<option value="">--카테고리 선택--</option>
 						<option value="notice">공지사항</option>
 						<option value="common_issue">시장이슈</option>
@@ -88,13 +87,12 @@
 			<tr>
 				<td colspan="5"
 					style="text-align: left; padding: 30px 15px 30px 15px; background: floralwhite;">
-					<textarea class="write_desc_area"></textarea>
+					<textarea class="write_desc_area" id="description"></textarea>
 				</td>
 			</tr>
 			<tr class="btn_area">
-				<td colspan="3">
-				<input type="submit" class="btn btn-danger delete_btn" onclick="javascript: clear_area(); return false;" value="삭제"> 
-				<input type="submit" class="btn btn-info modify_btn" onclick="" value="수정">
+				<td colspan="5">
+				<input type="submit" class="btn btn-info modify_btn" onclick="javascript: write_update(); return false;" value="수정">
 				<input type="submit" class="btn btn-success write_btn" onclick="javascript: write_add(); return false;" value="작성">
 			</td>
 			</tr>
