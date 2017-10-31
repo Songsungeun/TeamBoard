@@ -59,7 +59,11 @@ public class BoardController {
 			return JsonResult.error(e.getMessage());
 		}
 
-		return JsonResult.success();
+		if (board.getCategory() != null) {
+			return JsonResult.success(board.getCategory(), "category");
+		} 
+		
+		return JsonResult.success(board.getBoardType(), "type");
 	}
 
 	@RequestMapping(path = "update")

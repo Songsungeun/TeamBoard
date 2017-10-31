@@ -2,6 +2,8 @@
  * 
  */
 var boardNo;
+var agent = navigator.userAgent.toLowerCase();
+
 $(document).ready(function() {
 	initTinyMCE();
 	chained();
@@ -20,15 +22,18 @@ $(window).load(function() {
 
 function chained() {
 //	$("#category_list").chained("#board_type");
-	$('.product_issue').hide();
-	$('.notice').hide();
+//	$('.product_issue').hide();
+//	$('.notice').hide();
+	
+	$("#category_list_notice").hide();
+	$("#category_list_product").hide();
 	
 	var type = $("#board_type option:selected").val();
 	if (type == "notice") {
-		$('.notice').show();
+		$('#category_list_notice').show();
 	}
 	if (type == "product_issue") {
-		$('.product_issue').show();
+		$('#category_list_product').show();
 	}
 	
 	if (type != "notice" && type != "product_issue") {
@@ -103,10 +108,28 @@ function write_add() {
 	var formData = new FormData();
 	var url = "add.json";
 	
+	// Validation
+	if ($("#title").val() == "" || $("#title").val() == null) {
+		alert("제목을 입력하세요.");
+		return false;
+	}
+	
+	// 내용은 미 입력 작성 가능하도록 설정
+	
+	if ($("#board_type option:selected").val() == "" || $("#board_type option:selected").val() == null) {
+		alert("카테고리를 선택하세요");
+		return false;
+	}
+	
+	// append
 	formData.append("title", $("#title").val());
 	formData.append("description", tinyMCE.activeEditor.getContent())
 	formData.append("boardType", $("#board_type option:selected").val());
-	formData.append("category", $("#category_list option:selected").val());
+	if ($("#board_type option:selected").val() == "notice") {
+		formData.append("category", $("#category_list_notice option:selected").val());
+	} else if ($("#board_type option:selected").val() == "product_issue") {
+		formData.append("category", $("#category_list_product option:selected").val());
+	}
 	formData.append("required", $('.required_box').prop("checked"));
 
 	ajaxwriteRequest(formData, url);
@@ -137,7 +160,16 @@ function ajaxwriteRequest(formData, url) {
 			var result = obj.jsonResult
 			if (result.state == "success") {
 				alert("작성되었습니다.");
-				history.go(-1);
+//				history.go(-1);
+				console.log(result);
+				if (result.data2 == "type") {
+					location.href = "../board/noticeBoard.html?type=" + result.data + "&pageNo=1";
+				} else if (result.data2 == "category") {
+					location.href = "../board/noticeBoard.html?cat=" + result.data + "&pageNo=1";
+				} else {
+					alert("문제가 있습니다. 관리자에게 문의하세요.");
+					location.href = "../main/Mainpage.html"; 
+				}
 			} else {console.log("else로 빠짐")}
 		},
 		error : function(err) {
