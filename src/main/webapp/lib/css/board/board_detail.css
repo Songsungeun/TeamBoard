@@ -19,3 +19,7 @@
   background-color: #A0C0D7;
   color: white;
 }
+
+.btn_area .btn {
+	display: none;
+}
