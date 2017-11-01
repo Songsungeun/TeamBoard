@@ -26,6 +26,7 @@ public class BoardList implements Serializable{
 	protected boolean admin;
 	protected boolean required;
 	protected int showNo;
+	protected int commentCount;
 	
 	public int getBoardNo() {
 		return boardNo;
@@ -99,6 +100,13 @@ public class BoardList implements Serializable{
 	public void setRequired(boolean required) {
 		this.required = required;
 	}
+	public int getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+	
 	
 	
 }

@@ -17,6 +17,7 @@ public interface BoardService {
 	public void saveBoard(Board board) throws Exception;
 	public void removeBoard(int boardNo) throws Exception;
 	public void updateBoard(Board board) throws Exception;
+	public void increaseCommentCount(int boardNo);
 	
 	public int getCountBoardByType(String type);
 	public int getCountBoardByCategory(String category);

@@ -22,6 +22,7 @@ public class Board implements Serializable{
 	protected String category;
 	protected Date date;
 	protected boolean required;
+	protected int commentCount;
 	
 	public int getBoardNo() {
 		return boardNo;
@@ -71,6 +72,13 @@ public class Board implements Serializable{
 	public void setRequired(boolean required) {
 		this.required = required;
 	}
+	public int getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+	
 	
 	
 }

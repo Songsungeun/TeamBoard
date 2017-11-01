@@ -13,6 +13,7 @@
     <result column="category" property="category"/>
     <result column="cre_dt" property="date"/>
     <result column="required" property="required"/>
+    <result column="comment_count" property="commentCount"/>
   </resultMap>
   
   <resultMap type="BoardList" id="boardListMap">
@@ -27,6 +28,7 @@
     <result column="position" property="userPosition"/>
     <result column="admin" property="admin"/>
     <result column="required" property="required"/>
+    <result column="comment_count" property="commentCount"/>
   </resultMap>
   
   <insert id="insertBoard" parameterType="Board">
@@ -43,6 +45,12 @@
     cre_dt=now(),
     required=#{required}
     where board_no=#{boardNo}
+  </update>
+  
+    <update id="increaseCommentCount" parameterType="int">
+    update board set
+    comment_count = comment_count + 1
+    where board_no=#{value}
   </update>
   
   <delete id="deleteBoard" parameterType="int">
@@ -63,7 +71,7 @@
   </select>
 
   <select id="findAllbyType" resultMap="boardListMap" parameterType="map">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, mem.name, mem.position, mem.admin
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, bo.comment_count, mem.name, mem.position, mem.admin
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
 		where board_type = #{type} and required = #{required}
@@ -89,7 +97,7 @@
   </select>
   
   <select id="findAllbyCategory" resultMap="boardListMap" parameterType="map">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, mem.name, mem.position, mem.admin
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, bo.comment_count, mem.name, mem.position, mem.admin
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
 		where category = #{category} and required = #{required}

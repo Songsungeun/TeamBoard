@@ -86,5 +86,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.countCategory(category);
 	}
 
+	@Override
+	public void increaseCommentCount(int boardNo) {
+		boardDao.increaseCommentCount(boardNo);
+	}
+
 	
 }

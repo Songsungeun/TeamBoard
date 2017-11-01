@@ -255,6 +255,7 @@ public class BoardController {
 		comment.setUserNo(user.getMemberNo());
 		try {
 			commentService.insertComment(comment);
+			boardService.increaseCommentCount(comment.getBoardNo());
 		} catch (Exception e) {
 			logger.error("{}", e);
 			return JsonResult.error(e.getMessage());

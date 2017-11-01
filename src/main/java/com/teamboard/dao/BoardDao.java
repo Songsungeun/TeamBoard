@@ -20,6 +20,7 @@ public interface BoardDao {
 	int deleteBoard(int boardNo);
 	int countType(String type);
 	int countCategory(String category);
+	int increaseCommentCount(int boardNo);
 	
 	BoardList findOne(int boardNo);
 	
