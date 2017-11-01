@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>MainPage</title>
+
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../node_modules/handlebars/handlebars-v4.0.11.js"></script>
+<script src="../lib/js/common.js"></script>
+<script src="../node_modules/handlebars/handlebars-v4.0.11.js"></script>
+<link href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="../lib/css/animate.css" rel="stylesheet" />
+<link href="../lib/css/main.css" rel="stylesheet" />
+<link href="../lib/css/user/mypage.css" rel="stylesheet"/>
+
+</head>
+<body>
+
+	<div class='wrapper'>
+	
+	<!-- navigation 영역 -->
+		<div class='sidebar'>
+		</div>
+	<!-- navigation 영역 끝 -->
+	
+		<div class='content isOpen'>
+			<div class="middle-box text-center loginscreen animated fadeInDown" style="padding-top: 0; padding-bottom: 0px; width: 100%;">        
+      			<h1 class="logo-name" style="font-size: 150px;">AV+</h1>
+      			<h3 class="type_name">[마이 페이지]</h3>
+    		</div>
+    		
+    		<div class="content_area">
+		      <table class="info_table">
+			      <tr class="hqttr">
+			        <td class="hqttd1">아이디</td>
+			        <td class="hqttd2"><input type="text" id="user_id" class="form-control" style="padding-left: 5px;" readonly></td>
+			      </tr>
+			   
+			      <tr class="hqttr" style="background-color: #F0F0F0;">
+			        <td class="hqttd1">이름</td>
+			        <td class="hqttd2"><input type="text" id="user_name" class="form-control" style="padding-left: 5px;" readonly></td>
+			      </tr>
+			      
+			      <tr class="hqttr">
+			        <td class="hqttd1">비밀번호</td>
+			        <td class="hqttd2"><input type="password" id="user_password" class="form-control" style="padding-left: 5px;"></td>
+			      </tr>
+			      
+			      <tr class="hqttr">
+			        <td class="hqttd1">신규 비밀번호</td>
+			        <td class="hqttd2"><input type="password" id="user_password" class="form-control" style="padding-left: 5px;"></td>
+			      </tr>
+			      
+			      <tr class="hqttr">
+			        <td class="hqttd1">신규 비밀번호 확인</td>
+			        <td class="hqttd2"><input type="password" id="user_password" class="form-control" style="padding-left: 5px;"></td>
+			      </tr>
+			      
+			      <tr class="hqttr">
+			        <td class="hqttd1">부서</td>
+			        <td class="hqttd2">
+			          <select id="user_department" >
+			            <option value=0>-</option>
+			            <option value=1>AV팀</option>
+			            <option value=2>TV팀</option>
+			            <option value=3>APP팀</option>
+			            <option value=4>LFD팀</option>
+			          </select>
+			        </td>
+			      </tr>
+			      
+			      <tr class="hqttr" style="background-color: #F0F0F0;">
+			        <td class="hqttd1">직급</td>
+			        <td class="hqttd2">
+			          <select id="user_position" >
+			            <option value=0>-</option>
+			            <option value=1>팀장</option>
+			            <option value=2>수석</option>
+			            <option value=3>책임</option>
+			            <option value=4>선임</option>
+			            <option value=5>주임</option>
+			            <option value=6>사원</option>
+			          </select>
+			        </td>
+			      </tr>
+			    </table>
+		    </div>
+		    
+		
+		</div>
+		
+			
+					
+
+
+
+	</div>
+
+
+
+</body>
+</html>

@@ -50,7 +50,7 @@ function ajaxSignUpRequest(formData, url) {
 			if (result.state != "success") {
 				alert(result.data)
 			} else {
-				alert("가입 되었습니다.");
+				alert("가입 되었습니다. 승인을 기다려 주세요.");
 				location.href = "login.html";
 			}
 		},
