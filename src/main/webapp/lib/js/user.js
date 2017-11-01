@@ -119,6 +119,11 @@ function fnSignUpCheck() {
 		return false;
 	}
 	
+	if ($("#user_password").val() != $("#user_password_confirm").val()) {
+		alert("비밀번호가 일치 하지 않습니다.");
+		return false;
+	}
+	
 	return true;
 	
 }
