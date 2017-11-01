@@ -46,11 +46,8 @@ public class BoardController {
 	@RequestMapping(path = "add")
 	public Object insertBoard(Board board, HttpSession session) {
 
-		System.out.println("please");
 		try {
-			System.out.println("hello");
 			User user = (User)session.getAttribute("user");
-			System.out.println("no: " + user.getMemberNo());
 			board.setUserNo(user.getMemberNo());
 			boardService.saveBoard(board);
 		} catch (Exception e) {
@@ -120,7 +117,9 @@ public class BoardController {
 	}
 
 	@RequestMapping(path = "typeList")
-	public Object typeList(String type, int pageNo) {
+	public Object typeList(String type, int pageNo, boolean no_name, HttpSession session) {
+		
+		User user = (User)session.getAttribute("user");
 		
 		List<BoardList> boardListByTypeAndRequired = new ArrayList<BoardList>();
 		List<BoardList> boardListByType = new ArrayList<BoardList>();
@@ -128,18 +127,40 @@ public class BoardController {
 		Map<String, Object> maps = new HashMap<>();
 		
 		try {
-			boardListByTypeAndRequired = boardService.findBoardListbyType(type, pageNo, 3, true);
-			boardListByType = boardService.findBoardListbyType(type, pageNo, length, false);
-			
-			count = boardService.getCountBoardByType(type);
-			
-			maps.put("require", boardListByTypeAndRequired);
-			maps.put("noReq", boardListByType);
-			
-			int startDisplayNo = count - ((pageNo - 1) * length);
-			for (int i = 0; i < boardListByType.size(); i++) {
-				boardListByType.get(i).setShowNo(startDisplayNo--);
+			if (no_name) {
+				// admin 인경우 익명게시판 모두 노출
+				if (user.getAdmin()) {
+					boardListByType = boardService.findBoardListbyType(type, pageNo, length, false);
+					count = boardService.getCountBoardByType(type);
+				} else {
+					// 일반 유저인 경우 본인 익명 게시물만 노출
+					boardListByType = boardService.findBoardListbyTypeForNoName(type, pageNo, length, user.getMemberNo());
+					count = boardService.getCountBoardByNoName(type, user.getMemberNo());
+				}
+				
+				// 이름 비공개 설정인 경우 이름 익명으로 변경
+				for (int i = 0; i < boardListByType.size(); i++) {
+					if(!boardListByType.get(i).isShowName()) {
+						boardListByType.get(i).setUserName("익명");
+					}
+				}
+
+				maps.put("noReq", boardListByType);
+			} else {
+				boardListByTypeAndRequired = boardService.findBoardListbyType(type, pageNo, 3, true);
+				boardListByType = boardService.findBoardListbyType(type, pageNo, length, false);
+				
+				count = boardService.getCountBoardByType(type);
+				
+				maps.put("require", boardListByTypeAndRequired);
+				maps.put("noReq", boardListByType);
+				
+				int startDisplayNo = count - ((pageNo - 1) * length);
+				for (int i = 0; i < boardListByType.size(); i++) {
+					boardListByType.get(i).setShowNo(startDisplayNo--);
+				}
 			}
+			
 		} catch (RuntimeException e) {
 			logger.error("{}", e);
 			e.printStackTrace();

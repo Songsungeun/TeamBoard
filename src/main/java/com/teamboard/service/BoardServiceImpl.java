@@ -91,5 +91,24 @@ public class BoardServiceImpl implements BoardService{
 		boardDao.increaseCommentCount(boardNo);
 	}
 
+	@Override
+	public List<BoardList> findBoardListbyTypeForNoName(String type, int pageNo, int length, int userNo) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("type",	type);
+		map.put("startIndex", (pageNo - 1) * length);
+		map.put("length", length);
+		map.put("userNo", userNo);
+		List<BoardList> boardList = boardDao.findAllbyTypeForNoName(map);
+		return boardList;
+	}
+
+	@Override
+	public int getCountBoardByNoName(String type, int userNo) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("type",	type);
+		map.put("userNo", userNo);
+		return boardDao.countNoName(map);
+	}
+
 	
 }

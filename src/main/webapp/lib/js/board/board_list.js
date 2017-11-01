@@ -77,6 +77,12 @@ function ajaxBoardListForType(type_name, pageNo) {
 	var formData = new FormData();
 	var url = "typeList.json";
 	
+	if (type_name == "no_name") {
+		formData.append("no_name", true);
+	} else {
+		formData.append("no_name", false);
+	}
+	
 	formData.append("type", type_name);
 	formData.append("pageNo", pageNo);
 	ajaxRequest(formData, url);

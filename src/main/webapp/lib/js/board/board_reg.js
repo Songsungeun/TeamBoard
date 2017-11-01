@@ -13,11 +13,13 @@ $(document).ready(function() {
 	$(".sidebar").load("../common_html/nav_bar.html");
 	$('#board_type').change(function(event){
 		chained();
+		isNoName();
 	})
 })
 
 $(window).load(function() {
 	isEdit();
+	isNoName();
 })
 
 function chained() {
@@ -121,26 +123,33 @@ function write_add() {
 		return false;
 	}
 	
-	// append
-	formData.append("title", $("#title").val());
-	formData.append("description", tinyMCE.activeEditor.getContent())
-	formData.append("boardType", $("#board_type option:selected").val());
-	
-	if ($("#board_type option:selected").val() == "notice") {
-		formData.append("category", $("#category_list_notice option:selected").val());
-	} else if ($("#board_type option:selected").val() == "product_issue") {
-		formData.append("category", $("#category_list_product option:selected").val());
+	if ($("#board_type option:selected").val() == "no_name") {
+		formData.append("showName", $('.show_box').prop("checked"));
 	}
 	
-	formData.append("required", $('.required_box').prop("checked"));
-
-	ajaxwriteRequest(formData, url);
+		// append
+		formData.append("title", $("#title").val());
+		formData.append("description", tinyMCE.activeEditor.getContent())
+		formData.append("boardType", $("#board_type option:selected").val());
+		
+		if ($("#board_type option:selected").val() == "notice") {
+			formData.append("category", $("#category_list_notice option:selected").val());
+		} else if ($("#board_type option:selected").val() == "product_issue") {
+			formData.append("category", $("#category_list_product option:selected").val());
+		}
+		
+		formData.append("required", $('.required_box').prop("checked"));
+		
+		ajaxwriteRequest(formData, url);
+		
 }
 
 function write_update() {
 	var formData = new FormData();
 	var url = "update.json";
-	
+	if ($("#board_type option:selected").val() == "no_name") {
+		console.log("noname");
+	}
 	formData.append("boardNo", boardNo);
 	formData.append("title", $("#title").val());
 	formData.append("description", tinyMCE.activeEditor.getContent())
@@ -325,4 +334,12 @@ function ajaxGetBoard(formData, url) {
 	})
 }
 
-
+function isNoName() {
+	if ($("#board_type option:selected").val() == "no_name") {
+		$(".required_wrap").hide();
+		$(".show_wrap").show();
+	} else {
+		$(".required_wrap").show();
+		$(".show_wrap").hide();
+	}
+}

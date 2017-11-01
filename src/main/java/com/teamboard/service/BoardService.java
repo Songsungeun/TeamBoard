@@ -21,9 +21,11 @@ public interface BoardService {
 	
 	public int getCountBoardByType(String type);
 	public int getCountBoardByCategory(String category);
+	public int getCountBoardByNoName(String type, int userNo);
 	
 	public BoardList findOne(int boardNo);
 	public List<BoardList> findBoardListbyType(String type, int pageNo, int length, boolean required);
+	public List<BoardList> findBoardListbyTypeForNoName(String type, int pageNo, int length, int userNo);
 	public List<BoardList> findBoardListbyCategory(String category, int pageNo, int length, boolean required);
 	public List<BoardList> findBoardListbyTypeForMain(String type);
 	public List<BoardList> findBoardListbyCategoryForMain(String category, int length, boolean required);

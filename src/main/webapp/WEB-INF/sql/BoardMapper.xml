@@ -14,6 +14,7 @@
     <result column="cre_dt" property="date"/>
     <result column="required" property="required"/>
     <result column="comment_count" property="commentCount"/>
+    <result column="show_name" property="showName"/>
   </resultMap>
   
   <resultMap type="BoardList" id="boardListMap">
@@ -29,11 +30,12 @@
     <result column="admin" property="admin"/>
     <result column="required" property="required"/>
     <result column="comment_count" property="commentCount"/>
+    <result column="show_name" property="showName"/>
   </resultMap>
   
   <insert id="insertBoard" parameterType="Board">
-		insert into board(title, description, user_no, board_type, category, cre_dt, required)
-		values(#{title}, #{description}, #{userNo}, #{boardType}, #{category}, now(), #{required})
+		insert into board(title, description, user_no, board_type, category, cre_dt, required, show_name)
+		values(#{title}, #{description}, #{userNo}, #{boardType}, #{category}, now(), #{required}, #{showName})
   </insert>
 
   <update id="updateBoard" parameterType="Board">
@@ -43,7 +45,8 @@
     board_type=#{boardType},
     category=#{category},
     cre_dt=now(),
-    required=#{required}
+    required=#{required},
+    show_name=#{showName}
     where board_no=#{boardNo}
   </update>
   
@@ -59,7 +62,7 @@
   </delete>
   
   <select id="findOne" resultMap="boardListMap" parameterType="int">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, mem.name, mem.position
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, bo.show_name, mem.name, mem.position
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
 		where board_no = #{value}
@@ -71,7 +74,7 @@
   </select>
 
   <select id="findAllbyType" resultMap="boardListMap" parameterType="map">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, bo.comment_count, mem.name, mem.position, mem.admin
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, bo.comment_count, bo.show_name, mem.name, mem.position, mem.admin
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
 		where board_type = #{type} and required = #{required}
@@ -79,8 +82,21 @@
 		limit #{startIndex}, #{length}
   </select>
   
+  <select id="findAllbyTypeForNoName" resultMap="boardListMap" parameterType="map">
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, bo.comment_count, bo.show_name, mem.name, mem.position, mem.admin
+		from board bo
+		left join user mem on bo.user_no = mem.user_no
+		where board_type = #{type} and bo.user_no = #{userNo}
+		order by bo.board_no desc
+		limit #{startIndex}, #{length}
+  </select>
+  
   <select id="countType" resultType="int" parameterType="String">
   	select count(*) from board where board_type = #{value} and required = false
+  </select>
+  
+  <select id="countNoName" resultType="int" parameterType="map">
+  	select count(*) from board where board_type = #{type} and user_no = #{userNo}
   </select>
   
   <select id="findAllbyTypeForMain" resultMap="boardListMap" parameterType="String">
@@ -97,7 +113,7 @@
   </select>
   
   <select id="findAllbyCategory" resultMap="boardListMap" parameterType="map">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, bo.comment_count, mem.name, mem.position, mem.admin
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, bo.comment_count, bo.show_name, mem.name, mem.position, mem.admin
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
 		where category = #{category} and required = #{required}

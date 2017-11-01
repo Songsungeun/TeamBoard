@@ -20,12 +20,14 @@ public interface BoardDao {
 	int deleteBoard(int boardNo);
 	int countType(String type);
 	int countCategory(String category);
+	int countNoName(Map<String, Object> paramMap);
 	int increaseCommentCount(int boardNo);
 	
 	BoardList findOne(int boardNo);
 	
 	List<Board> findAll();
 	List<BoardList> findAllbyType(Map<String, Object> paramMap);
+	List<BoardList> findAllbyTypeForNoName(Map<String, Object> paramMap);
 	List<BoardList> findAllbyCategory(Map<String, Object> paramMap);
 	List<BoardList> findAllbyTypeForMain(String type);
 	List<BoardList> findAllbyCategoryForMain(Map<String, Object> paramMap);
