@@ -147,14 +147,35 @@ function write_add() {
 function write_update() {
 	var formData = new FormData();
 	var url = "update.json";
-	if ($("#board_type option:selected").val() == "no_name") {
-		console.log("noname");
+	
+	// Validation
+	if ($("#title").val() == "" || $("#title").val() == null) {
+		alert("제목을 입력하세요.");
+		return false;
 	}
+	
+	// 내용은 미 입력 작성 가능하도록 설정
+	
+	if ($("#board_type option:selected").val() == "" || $("#board_type option:selected").val() == null) {
+		alert("카테고리를 선택하세요");
+		return false;
+	}
+	
+	if ($("#board_type option:selected").val() == "no_name") {
+		formData.append("showName", $('.show_box').prop("checked"));
+	}
+	
 	formData.append("boardNo", boardNo);
 	formData.append("title", $("#title").val());
 	formData.append("description", tinyMCE.activeEditor.getContent())
 	formData.append("boardType", $("#board_type option:selected").val());
-	formData.append("category", $("#category_list option:selected").val());
+	
+	if ($("#board_type option:selected").val() == "notice") {
+		formData.append("category", $("#category_list_notice option:selected").val());
+	} else if ($("#board_type option:selected").val() == "product_issue") {
+		formData.append("category", $("#category_list_product option:selected").val());
+	}
+	
 	formData.append("required", $('.required_box').prop("checked"));
 
 	ajaxwriteRequest(formData, url);
@@ -171,7 +192,6 @@ function ajaxwriteRequest(formData, url) {
 			var result = obj.jsonResult
 			if (result.state == "success") {
 				alert("작성되었습니다.");
-//				history.go(-1);
 				console.log(result);
 				if (result.data2 == "type") {
 					location.href = "../board/noticeBoard.html?type=" + result.data + "&pageNo=1";
