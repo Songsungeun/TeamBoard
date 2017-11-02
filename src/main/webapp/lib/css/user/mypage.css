@@ -32,12 +32,12 @@
   text-align: center;
 }
 .info_table tr td #user_password {
-	width: 79%;
-	display: inherit;
+	width: 83%;
+	display: inline-block;
 }
 
 .info_table tr td .modify_pw {
-	
+	margin-left: 10px;
 }
 .info_table .hqttd2 {
 	padding: 10px 20px;
