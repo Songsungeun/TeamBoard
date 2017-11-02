@@ -6,7 +6,10 @@ const DEBUG = true;
 var userNo;
 $(document).ready( function() {
 	loadNav();
-	ajaxLoginCheck();
+	if ($(location).attr('pathname').split('/')[3] != "mypage.html") {
+		console.log("마이 페이지 아님");
+		ajaxLoginCheck();
+	} 
 });
 
 function ajaxRequest(formData, url) {

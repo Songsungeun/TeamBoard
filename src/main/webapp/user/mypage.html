@@ -40,27 +40,30 @@
 		      <table class="info_table">
 			      <tr class="hqttr">
 			        <td class="hqttd1">아이디</td>
-			        <td class="hqttd2"><input type="text" id="user_id" class="form-control" style="padding-left: 5px;" readonly></td>
+			        <td class="hqttd2"><input type="text" id="user_id" class="form-control" style="padding-left: 5px;" id="user_id" readonly></td>
 			      </tr>
 			   
 			      <tr class="hqttr" style="background-color: #F0F0F0;">
 			        <td class="hqttd1">이름</td>
-			        <td class="hqttd2"><input type="text" id="user_name" class="form-control" style="padding-left: 5px;" readonly></td>
+			        <td class="hqttd2"><input type="text" id="user_name" class="form-control" style="padding-left: 5px;" id="user_name" readonly></td>
 			      </tr>
 			      
 			      <tr class="hqttr">
 			        <td class="hqttd1">비밀번호</td>
-			        <td class="hqttd2"><input type="password" id="user_password" class="form-control" style="padding-left: 5px;"></td>
+			        <td class="hqttd2">
+			        <input type="password" id="user_password" class="form-control" style="padding-left: 5px;">
+			        <input type="submit" class="btn btn-info modify_pw" onclick="javascript: showRePW();" value="변경">
+			        </td>
 			      </tr>
 			      
-			      <tr class="hqttr">
+			      <tr class="hqttr" id="re_pw" style="display: none;">
 			        <td class="hqttd1">신규 비밀번호</td>
-			        <td class="hqttd2"><input type="password" id="user_password" class="form-control" style="padding-left: 5px;"></td>
+			        <td class="hqttd2"><input type="password" id="new_user_password" class="form-control" style="padding-left: 5px;"></td>
 			      </tr>
 			      
-			      <tr class="hqttr">
+			      <tr class="hqttr" id="re_pw_confirm"style="display: none;">
 			        <td class="hqttd1">신규 비밀번호 확인</td>
-			        <td class="hqttd2"><input type="password" id="user_password" class="form-control" style="padding-left: 5px;"></td>
+			        <td class="hqttd2"><input type="password" id="new_user_password_confirm" class="form-control" style="padding-left: 5px;"></td>
 			      </tr>
 			      
 			      <tr class="hqttr">
@@ -92,7 +95,10 @@
 			      </tr>
 			    </table>
 		    </div>
-		    
+		    <div style="margin: 20px auto; width: 350px; text-align: center;">
+      			<input type="submit" class="btn btn-info" onclick="javascript: updateMyInfo();" value="수정">
+      			<input type="submit" class="btn btn-danger" onclick="javascript: fnCancelBtn();" value="취소">
+		    </div>
 		
 		</div>
 		

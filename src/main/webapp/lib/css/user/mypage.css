@@ -6,21 +6,12 @@
 
 .info_table {
   margin: 0 auto;
-  width: 30%;
+  width: 35%;
   background-color: #E6E6E6;
   border: 1px solid white;
   border-collapse: collapse;
 }
 
-.info_table tr {
-	height: 50px;
-}
-
-.info_table tr td {
-  height: 40px;
-  border: 1px solid white;
-  text-align: center;
-}
 .info_table th {
   height: 40px;
   border: 1px solid white;
@@ -28,7 +19,26 @@
   background-color: #A0C0D7;
   color: white;
 }
+.info_table tr {
+	height: 50px;
+}
 
+.info_table tr .hqttd1 {
+	width: 115px;
+}
+.info_table tr td {
+  height: 40px;
+  border: 1px solid white;
+  text-align: center;
+}
+.info_table tr td #user_password {
+	width: 79%;
+	display: inherit;
+}
+
+.info_table tr td .modify_pw {
+	
+}
 .info_table .hqttd2 {
 	padding: 10px 20px;
 }

@@ -99,5 +99,36 @@ public class UserController {
 		}
 	}
 
+	@RequestMapping(value = "/updateinfo")
+	public Object updateInfo(User user, String newPassword, HttpSession session) throws Exception {
+		try {
+			HashMap<String, Object> paramMap = new HashMap<>();
+			paramMap.put("userID", user.getUserID());
+			paramMap.put("password", user.getPassword());
+		
+			User originUser = userService.findOnebyIDandPW(paramMap); 
+			
+			if (originUser == null) {
+				return JsonResult.fail("비밀번호를 확인하세요");
+			}
+			
+			if (newPassword != null) {
+				originUser.setPassword(newPassword);
+			} else {
+				originUser.setPassword(user.getPassword());
+			}
+			
+			originUser.setDepartment(user.getDepartment());
+			originUser.setPosition(user.getPosition());
+			
+			userService.updateUser(originUser);
+			
+			session.setAttribute("user", originUser);
+			return JsonResult.success();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return JsonResult.error();
+		}
+	}
 
 }

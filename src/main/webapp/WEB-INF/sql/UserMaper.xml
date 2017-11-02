@@ -24,7 +24,7 @@
     update user set
     user_pw=password(#{password}),
     department=#{department},
-    position=#{position},
+    position=#{position}
     where user_no=#{memberNo}
   </update>
   
