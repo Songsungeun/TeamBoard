@@ -34,6 +34,10 @@ function ajaxRequest() {
 				case "6" : position = "사원"; break;
 				}
 				$('.nav_user_name').text(result.data.name + " " + position);
+				
+				if (result.data.admin) {
+					$('.admin_menu').show();
+				}
 			}
 		},
 		error : function(err) {
