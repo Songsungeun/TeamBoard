@@ -6,6 +6,8 @@ $(document).ready(function() {
 	addComment();
 })
 
+var returnType;
+
 function addComment() {
 	$('.add_comment').click(function(event) {
 
@@ -62,10 +64,10 @@ function ajaxGetBoard(formData, url) {
 				console.log("데이타 로드 실패");
 			} else {
 				console.log(result);
+				returnType = result.data.boardType;
 				insertData(result.data);
-				
 				if (result.data.userNo == result.data2.memberNo) {
-					$('.btn').show();
+					$('.login_user_btn').show();
 				}
 			}
 		},
@@ -110,6 +112,7 @@ function insertData(data) {
 	$('.board_no').val(data.boardNo);
 	var type;
 	var category;
+	
 	if (data.category) {
 		switch(data.category) {
 		case "team_notice" : category = "팀 내부 공지사항"; break;
@@ -213,6 +216,15 @@ function LimitString() {
 	}
 }
 
-function movoToUpdate() {
+function moveToUpdate() {
 	location.href = "../board/noticeBoardReg.html?no=" + $('.board_no').val();
+}
+
+function moveToList() {
+	
+	if (document.referrer.split('/')[5] == "Mainpage.html") {
+		location.href = "../board/noticeBoard.html?type=" + returnType + "&pageNo=1"; 
+	} else {
+		history.go(-1);
+	}
 }
