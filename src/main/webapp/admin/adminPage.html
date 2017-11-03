@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>MainPage</title>
+
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../node_modules/handlebars/handlebars-v4.0.11.js"></script>
+<script src="../lib/js/common.js"></script>
+<script src="../lib/js/admin/admin.js"></script>
+<link href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="../lib/css/animate.css" rel="stylesheet" />
+<link href="../lib/css/main.css" rel="stylesheet" />
+
+</head>
+<body>
+
+	<div class='wrapper'>
+		<div class='sidebar'>
+		</div>
+		
+		<div class='content isOpen'>
+			<div class="middle-box text-center loginscreen animated fadeInDown" style="padding-top: 0; padding-bottom: 0px; width: 100%;">        
+      			<h1 class="logo-name" style="font-size: 150px;">AV+</h1>
+    		</div>
+    		
+		  <div id="container">
+		  <div style="font-weight: bold; margin-bottom: 10px;">*관리자 리스트</div>
+		    <ul class="tabs">
+		        <li class="active" value="user_manager">사용자 관리</li>
+		        <li value="required_manager">필독 관리</li>
+		    </ul>
+		    <div class="tab_container">
+		        <div id="tab1" class="tab_content">
+		        
+		    			
+			        <table id="tabTable" class="user_tab">
+
+						<script id="user_list" type="text/x-handlebars-template">
+
+						<thead>
+							<tr style="background-color: bisque; text-align: center;">
+								<td>이름</td>
+								<td>아이디</td>
+								<td>부서</td>
+								<td>직급</td>
+								<td>관리자</td>
+								<td>승인여부</td>
+							</tr>
+						</thead>		
+						<tbody clss="user_list_body">
+						
+						{{#data}}
+						<tr style="text-align: center;">
+					      	<td style="width:20%;">{{name}}</td>
+					      	<td style="width:20%;">{{userID}}</td>
+					      	<td style="width:20%;">{{department}}</td>
+					      	<td style="width:10%;">{{position}}</td>
+					      	<td style="width:10%;">{{admin}}</td>
+					      	<td style="width:10%;">{{permission}}</td>
+					    </tr>
+						{{/data}}
+						</tbody>
+
+						</script>
+				    </table>
+					    
+		        </div>
+		    </div>
+		    <!-- .tab_container -->
+		</div>		
+		
+		
+		</div>
+		
+	</div>
+
+
+</body>
+</html>

@@ -1,6 +1,8 @@
 package com.teamboard.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -129,6 +131,19 @@ public class UserController {
 			e.printStackTrace();
 			return JsonResult.error();
 		}
+	}
+	
+	@RequestMapping(value = "/userList")
+	public Object getUserList() {
+		List<User> userList = new ArrayList<User>();
+		
+		try {
+			userList = userService.findAll();
+			return JsonResult.success(userList);
+		} catch (Exception e) {
+			return JsonResult.error();
+		}
+		
 	}
 
 }
