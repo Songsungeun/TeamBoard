@@ -45,13 +45,14 @@ function insertBoardName(params) {
 		switch (params[1]) {
 		case "notice" : showText = "[공지사항]"; break;
 		case "common_issue" : showText = "[시장이슈]"; break;
-		case "product_issue" : showText = "[제품별 시장 이슈]"; break;
+		case "product_issue" : showText = "[제품별 사양 및 이슈]"; break;
 		case "process" : showText = "[업무프로세스]"; break;
 		case "product_term" : showText = "[제품 관련 용어 정리]"; break;
 		case "no_name" : showText = "[익명 게시판]"; break;
 		case "free" : showText = "[자유 게시판]"; break;
 		case "pc_helper" : showText = "[PC 도움방]"; break;
 		case "about_work_site" : showText = "[업무 관련 사이트]"; break;
+		case "my_place" : showText = "[나의 업무 공간]"; break;
 		}
 	} else {
 		console.log("else")

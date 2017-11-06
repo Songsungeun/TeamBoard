@@ -134,7 +134,7 @@ function insertData(data) {
 		switch(data.boardType) {
 		case "notice" : type = "공지사항"; break;
 		case "common_issue" : type = "시장이슈"; break;
-		case "product_issue" : type = "제품별 시장 이슈"; break;
+		case "product_issue" : type = "제품별 사양 및 이슈"; break;
 		case "process" : type = "업무프로세스"; break;
 		}
 		
