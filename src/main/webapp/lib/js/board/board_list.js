@@ -56,7 +56,7 @@ function insertBoardName(params) {
 	} else {
 		console.log("else")
 		switch (params[1]) {
-		case "team_notice" : showText = "[팀 내부 공지사항]"; break;
+		case "team_notice" : showText = "[팀 내 공지사항]"; break;
 		case "work_notice" : showText = "[업무 관련 공지사항]"; break;
 		case "sat" : showText = "[SAT]"; break;
 		case "room_speaker" : showText = "[ROOM SPEAKER]"; break; 
