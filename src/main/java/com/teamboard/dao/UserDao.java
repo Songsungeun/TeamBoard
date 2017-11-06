@@ -23,4 +23,6 @@ public interface UserDao {
 	User findOnebyIDandPW(Map<String, Object> paramMap);
 	User findOnebyID(String userId); 
 	List<User> findAll();
+	
+	int approveUser(int userNo) throws Exception;
 }

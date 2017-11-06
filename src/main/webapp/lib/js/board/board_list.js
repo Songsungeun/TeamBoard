@@ -53,6 +53,7 @@ function insertBoardName(params) {
 		case "pc_helper" : showText = "[PC 도움방]"; break;
 		case "about_work_site" : showText = "[업무 관련 사이트]"; break;
 		case "my_place" : showText = "[나의 업무 공간]"; break;
+		case "etc_work" : showText = "[기타 업무 공유]"; break;
 		}
 	} else {
 		console.log("else")
@@ -68,7 +69,8 @@ function insertBoardName(params) {
 		case "ss_connect" : showText = "[SAMSUNG CONNECT]"; break;
 		case "convergence" : showText = "[CONVERGENCE]"; break;
 		case "alexa" : showText = "[ALEXA]"; break;
-		
+		case "etc_work" : showText = "[업무]"; break;
+		case "etc_nonwork" : showText = "[비업무]"; break;
 		}
 	}
 	$('.type_name').text(showText);

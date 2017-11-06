@@ -62,15 +62,6 @@ function initTinyMCE() {
 	    menubar: "insert",
 	    toolbar: "newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyf,cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,image,|,insertdate,inserttime,preview,|,forecolor,backcolor,|,font",
 	    //skin : "lightgray",
-	    setup: function(editor) {
-            editor.addButton('custom_image', {
-                    title: '이미지삽입',
-                    icon: 'image',
-                    onclick: function() {
-                        window.open("POPUP_URL","tinymcePop","width=400,height=350");
-                    }
-                });
-            },
 	    forced_root_block : false,
 	    language: "ko_KR", // 사용할 언어는 한국어로 지정
 	    height : "350",
@@ -152,6 +143,7 @@ function write_add() {
 			formData.append("category", $("#category_list_product option:selected").val());
 		} else if ($("#board_type option:selected").val() == "etc_work") {
 			formData.append("category", $("#category_list_etc option:selected").val());
+		}
 		
 		formData.append("required", $('.required_box').prop("checked"));
 		
@@ -191,7 +183,7 @@ function write_update() {
 		formData.append("category", $("#category_list_product option:selected").val());
 	} else if ($("#board_type option:selected").val() == "etc_work") {
 		formData.append("category", $("#category_list_etc option:selected").val());
-	
+	}
 	formData.append("required", $('.required_box').prop("checked"));
 
 	ajaxwriteRequest(formData, url);

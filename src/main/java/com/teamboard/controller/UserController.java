@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.teamboard.Exception.UserNotFoundException;
+import com.teamboard.dao.UserDao;
 import com.teamboard.service.UserService;
 import com.teamboard.vo.User;
 import com.teamboard.vo.common.JsonResult;
@@ -56,7 +57,7 @@ public class UserController {
 		
 		if (user == null) {
 			return JsonResult.fail("로그인이 필요합니다.");
-		}
+		} 
 		
 		user.setPassword("");
 		
@@ -76,9 +77,13 @@ public class UserController {
 			
 			User user = userService.findOnebyIDandPW(paramMap);
 			if (user != null) {
-				session.setAttribute("user", user);
+				if (user.isPermission()) {
+					session.setAttribute("user", user);
+				} else {
+					return JsonResult.fail("승인되지 않은 회원입니다.");
+				}
 			} else {
-				return JsonResult.fail();
+				return JsonResult.fail("회원 정보가 없습니다.");
 			}
 			
 		} catch (UserNotFoundException e) {
@@ -143,6 +148,20 @@ public class UserController {
 		} catch (Exception e) {
 			return JsonResult.error();
 		}
+		
+	}
+	
+	@RequestMapping(value = "/approveUser") 
+	public Object approveUser(int userNo) {
+		
+		try {
+			userService.approveUser(userNo);
+			return JsonResult.success();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return JsonResult.error("해당 유저 정보가 없습니다.");
+		}
+		
 		
 	}
 

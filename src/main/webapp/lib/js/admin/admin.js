@@ -42,3 +42,22 @@ function showUserList(result) {
 	$('.user_tab').append(html);
 }
 
+function approveUser(userNo) {
+	var url = "../user/approveUser.json";
+	var param = "userNo=" + userNo;
+	$.ajax({
+		url: url,
+		type: "GET",
+		data: param,
+		success : function(obj) {
+			var result = obj.jsonResult;
+			if (result.state != "success") {
+				alert("승인 실패");
+			} else {
+				console.log(result);
+				alert("승인 되었습니다.");
+				location.reload();
+			}
+		}
+	})
+}

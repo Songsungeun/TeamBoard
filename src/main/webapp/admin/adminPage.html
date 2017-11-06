@@ -50,6 +50,8 @@
 								<td>아이디</td>
 								<td>부서</td>
 								<td>직급</td>
+								<td>게시글 수</td>
+								<td>Level</td>
 								<td>관리자</td>
 								<td>승인여부</td>
 							</tr>
@@ -58,12 +60,22 @@
 						
 						{{#data}}
 						<tr style="text-align: center;">
-					      	<td style="width:20%;">{{name}}</td>
-					      	<td style="width:20%;">{{userID}}</td>
-					      	<td style="width:20%;">{{department}}</td>
+					      	<td style="width:10%;">{{name}}</td>
+					      	<td style="width:10%;">{{userID}}</td>
+					      	<td style="width:10%;">{{department}}</td>
 					      	<td style="width:10%;">{{position}}</td>
-					      	<td style="width:10%;">{{admin}}</td>
-					      	<td style="width:10%;">{{permission}}</td>
+							<td style="width:10%;">10</td>
+							<td style="width:10%;">50</td>
+					      	<td style="width:5%;">{{admin}}</td>
+							{{#if permission}}
+							<td style="width:5%; color:blue;">Y</td>
+							<td style="width:5%;" data-no={{memberNo}}></td>
+							{{else}}
+							<td style="width:5%; color:red;">N</td>
+					      	<td style="width:5%;" >
+								<input type="submit" class="btn btn-info write_btn" onclick="javascript: approveUser({{memberNo}}); return false;" value="승인">
+							</td>
+							{{/if}}
 					    </tr>
 						{{/data}}
 						</tbody>

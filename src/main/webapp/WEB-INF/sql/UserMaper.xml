@@ -56,4 +56,9 @@
     select * from user
   </select>
   
+  <update id="approveUser" parameterType="int">
+    update user set
+    permission=true
+    where user_no=#{value}
+  </update>
 </mapper>

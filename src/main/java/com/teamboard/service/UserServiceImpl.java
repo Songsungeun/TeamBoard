@@ -93,5 +93,10 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public void approveUser(int userNo) throws Exception {
+		userDao.approveUser(userNo);
+	}
+
 	
 }

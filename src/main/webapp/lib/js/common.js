@@ -40,7 +40,7 @@ function ajaxLoginCheck() {
 		success : function(obj) {
 			var result = obj.jsonResult;
 			if (result.state != "success") {
-				alert("로그인 하세요.");
+				alert(result.data);
 				location.href = "../user/login.html";
 			} else {
 				console.log("로그인 상태");

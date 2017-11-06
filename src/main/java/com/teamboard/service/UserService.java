@@ -26,5 +26,5 @@ public interface UserService {
 	public List<User> findAll();
 	public User checkID(String userId);
 	
-	
+	public void approveUser(int userNo) throws Exception;
 }
