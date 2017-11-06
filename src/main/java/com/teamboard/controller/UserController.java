@@ -129,7 +129,7 @@ public class UserController {
 			return JsonResult.success();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return JsonResult.error();
+			return JsonResult.fail("비밀번호를 확인하세요");
 		}
 	}
 	
