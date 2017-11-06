@@ -99,31 +99,35 @@ body {
 }
 
 .nav li:nth-child(4) a:before {
-	content: '\f16c';
+	content: '\f0c5';
 }
 
 .nav li:nth-child(5) a:before {
-	content: '\f02d';
+	content: '\f16c';
 }
 
 .nav li:nth-child(6) a:before {
-	content: '\f23e';
+	content: '\f02d';
 }
 
 .nav li:nth-child(7) a:before {
-	content: '\f1ae';
+	content: '\f23e';
 }
 
 .nav li:nth-child(8) a:before {
-	content: '\f108';
+	content: '\f1ae';
 }
 
 .nav li:nth-child(9) a:before {
+	content: '\f108';
+}
+
+.nav li:nth-child(10) a:before {
 	content: '\f26b';
 	left: 23px;
 }
 
-.nav li:nth-child(10) a:before {
+.nav li:nth-child(11) a:before {
 	content: '\f023';
 	left: 23px;
 }
@@ -199,18 +203,7 @@ h2 {
 	margin-bottom: 0px;
 }
 
-.notice_content {
-	display: none;
-	margin-left: 30px;
-	background: #444;
-	z-index: 1;
-	position: absolute;
-	left: 190px;
-	width: 200px;
-	top: 0px;
-}
-
-.issue_content {
+.notice_content, .issue_content, .etc_content {
 	display: none;
 	margin-left: 30px;
 	background: #444;

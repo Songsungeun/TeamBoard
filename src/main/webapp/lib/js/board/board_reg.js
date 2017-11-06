@@ -29,6 +29,7 @@ function chained() {
 	
 	$("#category_list_notice").hide();
 	$("#category_list_product").hide();
+	$("#category_list_etc").hide();
 	
 	var type = $("#board_type option:selected").val();
 	if (type == "notice") {
@@ -36,6 +37,9 @@ function chained() {
 	}
 	if (type == "product_issue") {
 		$('#category_list_product').show();
+	}
+	if (type == "etc_work") {
+		$('#category_list_etc').show();
 	}
 	
 	if (type != "notice" && type != "product_issue") {
@@ -54,9 +58,19 @@ function initTinyMCE() {
 	    // General options
 	    mode : "textareas", // 위지웍 에디터로 사용할 HTML 요소는 textarea로 지정한다.
 	    theme : "modern", // TinyMCE는 여러가지 테마를 지원해준다. 그중 advanced 테마를 사용
-	    plugins : "noneditable,fullpage,help,link,contextmenu,textcolor,textpattern,save,preview,charmap",
-	    toolbar: "newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyf,cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,imagepop,cleanup,|,insertdate,inserttime,preview,|,forecolor,backcolor,|,font",
+	    plugins : "noneditable,fullpage,help,link,contextmenu,textcolor,textpattern,save,preview,charmap,image",
+	    menubar: "insert",
+	    toolbar: "newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyf,cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,image,|,insertdate,inserttime,preview,|,forecolor,backcolor,|,font",
 	    //skin : "lightgray",
+	    setup: function(editor) {
+            editor.addButton('custom_image', {
+                    title: '이미지삽입',
+                    icon: 'image',
+                    onclick: function() {
+                        window.open("POPUP_URL","tinymcePop","width=400,height=350");
+                    }
+                });
+            },
 	    forced_root_block : false,
 	    language: "ko_KR", // 사용할 언어는 한국어로 지정
 	    height : "350",
@@ -136,7 +150,8 @@ function write_add() {
 			formData.append("category", $("#category_list_notice option:selected").val());
 		} else if ($("#board_type option:selected").val() == "product_issue") {
 			formData.append("category", $("#category_list_product option:selected").val());
-		}
+		} else if ($("#board_type option:selected").val() == "etc_work") {
+			formData.append("category", $("#category_list_etc option:selected").val());
 		
 		formData.append("required", $('.required_box').prop("checked"));
 		
@@ -174,7 +189,8 @@ function write_update() {
 		formData.append("category", $("#category_list_notice option:selected").val());
 	} else if ($("#board_type option:selected").val() == "product_issue") {
 		formData.append("category", $("#category_list_product option:selected").val());
-	}
+	} else if ($("#board_type option:selected").val() == "etc_work") {
+		formData.append("category", $("#category_list_etc option:selected").val());
 	
 	formData.append("required", $('.required_box').prop("checked"));
 

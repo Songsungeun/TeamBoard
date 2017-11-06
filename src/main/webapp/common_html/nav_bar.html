@@ -12,7 +12,6 @@
 <script type="text/javascript">
 $(function(){
   $('.notice_dropdown').mouseenter(function(){
-	  console.log("으잉")
     $('.notice_content').css('display', 'block');
   });
   $('.notice_dropdown').mouseleave(function(){
@@ -28,6 +27,16 @@ $(function(){
 		  $('.issue_content').css('display', 'none');
 	  });
 	});
+
+$(function(){
+	  $('.etc_dropdown').mouseenter(function(){
+	    $('.etc_content').css('display', 'block');
+	  });
+	  $('.etc_dropdown').mouseleave(function(){
+		  $('.etc_content').css('display', 'none');
+	  });
+	});
+	
 $(document).ready(function() {
 	
 $(".nav li").click(function(){
@@ -69,6 +78,12 @@ $(".nav li").click(function(){
 			<li><a href="../board/noticeBoard.html?cat=convergence&pageNo=1">CONVERGENCE</a></li>
 			<li><a href="../board/noticeBoard.html?cat=alexa&pageNo=1">ALEXA</a></li>
 			
+		</ul>
+	</li>
+	<li class="etc_dropdown"><a href="../board/noticeBoard.html?type=etc_work&pageNo=1">기타 업무 공유</a>
+		<ul class="etc_content">
+			<li><a href="../board/noticeBoard.html?cat=team_notice&pageNo=1">업무</a></li>
+			<li><a href="../board/noticeBoard.html?cat=work_notice&pageNo=1">비업무</a></li>
 		</ul>
 	</li>
 	<li><a href="../board/noticeBoard.html?type=process&pageNo=1">업무 프로세스</a></li>
