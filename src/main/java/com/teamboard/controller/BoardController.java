@@ -191,6 +191,11 @@ public class BoardController {
 			maps.put("require", boardListByCategoryAndRequired);
 			maps.put("noReq", boardListByCategory);
 			
+			int startDisplayNo = count - ((pageNo - 1) * length);
+			for (int i = 0; i < boardListByCategory.size(); i++) {
+				boardListByCategory.get(i).setShowNo(startDisplayNo--);
+			}
+			
 		} catch (RuntimeException e) {
 			logger.error("{}", e);
 			e.printStackTrace();
