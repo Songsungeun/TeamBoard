@@ -9,7 +9,6 @@ $(document).ready(function() {
 	chained();
 	insertUserInfo();
 	ajaxLoginCheck();
-//	$('#board_type').on("change", chained());
 	$(".sidebar").load("../common_html/nav_bar.html");
 	$('#board_type').change(function(event){
 		chained();
@@ -19,7 +18,6 @@ $(document).ready(function() {
 
 $(window).load(function() {
 	isEdit();
-	isNoName();
 })
 
 function chained() {
@@ -307,7 +305,7 @@ function isEdit() {
 			}
 		}
 	}
-
+	
 }
 
 function ajaxGetBoard(formData, url) {
@@ -352,6 +350,9 @@ function ajaxGetBoard(formData, url) {
 					if (result.data.required) {
 						$("#required_box").prop('checked', true);
 					}
+					
+					// 익명인지 체크후 체크박스 이름 변경
+					isNoName();
 				}
 			}
 		},
@@ -363,6 +364,8 @@ function ajaxGetBoard(formData, url) {
 }
 
 function isNoName() {
+	console.log("isnoname1");
+	console.log($("#board_type option:selected").val());
 	if ($("#board_type option:selected").val() == "no_name") {
 		$(".required_wrap").hide();
 		$(".show_wrap").show();

@@ -77,7 +77,7 @@ public class UserController {
 			
 			User user = userService.findOnebyIDandPW(paramMap);
 			if (user != null) {
-				if (user.isPermission()) {
+				if (user.isPermission() || user.getAdmin()) {
 					session.setAttribute("user", user);
 				} else {
 					return JsonResult.fail("승인되지 않은 회원입니다.");
