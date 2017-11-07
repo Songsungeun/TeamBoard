@@ -66,7 +66,7 @@ function ajaxGetBoard(formData, url) {
 				console.log(result);
 				returnType = result.data.boardType;
 				insertData(result.data);
-				if (result.data.userNo == result.data2.memberNo) {
+				if (result.data.userNo == result.data2.memberNo || result.data2.admin) {
 					$('.login_user_btn').show();
 				}
 			}
@@ -82,24 +82,30 @@ function ajaxDeleteBoard() {
 	var param = $(location).attr('search').split('?')[1];
 	var boardNo = param.split('=')[1];
 	
-	$.ajax({
-		url : "delete.json",
-		data: "boardNo=" + boardNo,
-		processData: false,
-		contentType: false,
-		success : function(obj) {
-			var result = obj.jsonResult
-			if (result.state != "success") {
-				alert(obj.data);
-			} else {
-				alert("삭제 되었습니다.");
-				location.href = "../main/Mainpage.html";
+	var confirm_del = confirm("삭제하시겠습니까?");
+	
+	if (confirm_del) {
+		$.ajax({
+			url : "delete.json",
+			data: "boardNo=" + boardNo,
+			processData: false,
+			contentType: false,
+			success : function(obj) {
+				var result = obj.jsonResult
+				if (result.state != "success") {
+					alert(obj.data);
+				} else {
+					alert("삭제 되었습니다.");
+					location.href = "../main/Mainpage.html";
+				}
+			},
+			error : function(err) {
+				alert("오류 발생");
 			}
-		},
-		error : function(err) {
-			alert("오류 발생");
-		}
-	})
+		})
+	} else {
+		return false;
+	}
 	
 }
 

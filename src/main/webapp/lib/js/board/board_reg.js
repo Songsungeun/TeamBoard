@@ -323,7 +323,7 @@ function ajaxGetBoard(formData, url) {
 				console.log(result);
 //				insertData(result.data);
 				
-				if (result.data.userNo != result.data2.memberNo) {
+				if (result.data.userNo != result.data2.memberNo && !(result.data2.admin)) {
 					alert("수정은 관리자나 작성자만 가능합니다.");
 					location.href = "../main/Mainpage.html";
 				} else {
