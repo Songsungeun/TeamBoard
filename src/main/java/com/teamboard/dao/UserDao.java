@@ -18,6 +18,7 @@ public interface UserDao {
 	int updateUser(User user) throws Exception;
 	int changeAdmin(User user) throws Exception;
 	int unRegistUser(int no) throws Exception;
+	int setAdminUser(Map<String, Object> paramMap);
 	
 	User findOnebyUserNo(int userNo); 
 	User findOnebyIDandPW(Map<String, Object> paramMap);

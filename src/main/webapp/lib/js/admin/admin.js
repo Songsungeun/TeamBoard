@@ -61,3 +61,23 @@ function approveUser(userNo) {
 		}
 	})
 }
+
+function setAdminUser(userNo, isAdmin) {
+	var url = "../user/setAdminUser.json";
+	var param = "userNo=" + userNo + "&admin=" + isAdmin;
+	$.ajax({
+		url: url,
+		type: "GET",
+		data: param,
+		success : function(obj) {
+			var result = obj.jsonResult;
+			if (result.state != "success") {
+				alert("승인 실패");
+			} else {
+				console.log(result);
+				alert("적용 되었습니다.");
+				location.reload();
+			}
+		}
+	})
+}

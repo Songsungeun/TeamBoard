@@ -1,5 +1,6 @@
 package com.teamboard.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -96,6 +97,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void approveUser(int userNo) throws Exception {
 		userDao.approveUser(userNo);
+	}
+
+	@Override
+	public void updateAmin(int userNo, boolean admin) throws Exception {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("userNo", userNo);
+		map.put("admin", admin);
+		
+		userDao.setAdminUser(map);
 	}
 
 	

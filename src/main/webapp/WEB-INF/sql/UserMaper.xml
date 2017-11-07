@@ -61,4 +61,10 @@
     permission=true
     where user_no=#{value}
   </update>
+  
+  <update id="setAdminUser" parameterType="map">
+    update user set
+    admin=#{admin}
+    where user_no=#{userNo}
+  </update>
 </mapper>

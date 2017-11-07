@@ -21,6 +21,8 @@ public class User implements Serializable{
 	protected String name;
 	protected boolean admin;
 	protected boolean permission;
+	int writeCount;
+	
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -68,6 +70,12 @@ public class User implements Serializable{
 	}
 	public void setPermission(boolean permission) {
 		this.permission = permission;
+	}
+	public int getWriteCount() {
+		return writeCount;
+	}
+	public void setWriteCount(int writeCount) {
+		this.writeCount = writeCount;
 	}
 	
 	

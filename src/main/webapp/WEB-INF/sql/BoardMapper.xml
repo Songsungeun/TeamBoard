@@ -129,4 +129,8 @@
 		order by bo.board_no desc
 		limit #{length}
   </select>
+  
+  <select id="getWriteCount" resultType="int" parameterType="int">
+  	select count(*) from board where user_no = #{value} and board_type not in ('no_name', 'free', 'my_place')
+  </select>
 </mapper>

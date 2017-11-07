@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.teamboard.Exception.UserNotFoundException;
-import com.teamboard.dao.UserDao;
+import com.teamboard.service.BoardService;
 import com.teamboard.service.UserService;
 import com.teamboard.vo.User;
 import com.teamboard.vo.common.JsonResult;
@@ -27,6 +27,9 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	BoardService boardService;
 
 	Logger logger = LoggerFactory.getLogger(UserController.class);
 	
@@ -144,6 +147,31 @@ public class UserController {
 		
 		try {
 			userList = userService.findAll();
+			for (int i = 0; i < userList.size(); i++) {
+				User user = userList.get(i);
+				user.setWriteCount(boardService.getWriteCount(user.getMemberNo()));
+				
+				// 부서 꽂기
+				switch (user.getDepartment()) {
+				case "1" : user.setDepartment("AV팀"); break;
+				case "2" : user.setDepartment("TV팀"); break;
+				case "3" : user.setDepartment("APP팀"); break;
+				case "4" : user.setDepartment("LFD팀"); break;
+				}
+				
+				// 직급 꽂기
+				switch (user.getPosition()) {
+				case "1" : user.setPosition("팀장"); break;
+				case "2" : user.setPosition("수석"); break;
+				case "3" : user.setPosition("책임"); break;
+				case "4" : user.setPosition("선임"); break;
+				case "5" : user.setPosition("주임"); break;
+				case "6" : user.setPosition("사원"); break;
+				}
+				
+				userList.set(i, user);
+			}
+			
 			return JsonResult.success(userList);
 		} catch (Exception e) {
 			return JsonResult.error();
@@ -161,8 +189,17 @@ public class UserController {
 			e.printStackTrace();
 			return JsonResult.error("해당 유저 정보가 없습니다.");
 		}
-		
-		
+	}
+	
+	@RequestMapping(value = "/setAdminUser")
+	public Object setAdminUser(int userNo, boolean admin) {
+		try {
+			userService.updateAmin(userNo, admin);
+			return JsonResult.success();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return JsonResult.error("해당 유저 정보가 없습니다.");
+		}
 	}
 
 }

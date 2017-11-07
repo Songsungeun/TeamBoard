@@ -110,5 +110,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.countNoName(map);
 	}
 
+	@Override
+	public int getWriteCount(int userNo) {
+		return boardDao.getWriteCount(userNo);
+	}
+
 	
 }

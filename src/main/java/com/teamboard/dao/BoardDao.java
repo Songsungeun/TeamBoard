@@ -22,6 +22,7 @@ public interface BoardDao {
 	int countCategory(String category);
 	int countNoName(Map<String, Object> paramMap);
 	int increaseCommentCount(int boardNo);
+	int getWriteCount(int userNo);
 	
 	BoardList findOne(int boardNo);
 	
