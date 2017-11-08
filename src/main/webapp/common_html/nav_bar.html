@@ -36,6 +36,15 @@ $(function(){
 		  $('.etc_content').css('display', 'none');
 	  });
 	});
+
+$(function(){
+	  $('.admin_menu').mouseenter(function(){
+	    $('.admin_content').css('display', 'block');
+	  });
+	  $('.admin_menu').mouseleave(function(){
+		  $('.admin_content').css('display', 'none');
+	  });
+	});
 	
 $(document).ready(function() {
 	
@@ -94,7 +103,12 @@ $(".nav li").click(function(){
 	<li><a href="../board/noticeBoard.html?type=about_work_site&pageNo=1">업무 관련 사이트</a></li>
 	<li><a href="../board/noticeBoard.html?type=my_place&pageNo=1">나의 업무 공간</a></li>
 	
-	<li><a href="../admin/adminPage.html" style="display: none;" class="admin_menu">관리자 페이지</a></li>
+	<li style="display: none;" class="admin_menu"><a href="../admin/adminUserList.html">관리자 페이지</a>
+		<ul class="admin_content" >
+			<li><a href="../admin/adminUserList.html">유저 관리</a></li>
+			<li><a href="../admin/adminRequiredBoard.html">필독 관리</a></li>
+		</ul>
+	</li>
 </ul>
 
 
