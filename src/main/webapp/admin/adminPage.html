@@ -32,12 +32,12 @@
     		
 		  <div id="container">
 		  <div style="font-weight: bold; margin-bottom: 10px;">*관리자 리스트</div>
-		    <ul class="tabs">
-		        <li class="active" value="user_manager">사용자 관리</li>
-		        <li value="required_manager">필독 관리</li>
+		    <ul class="tabs" style="margin-bottom: 5px;">
+		        <li class="active" value="user_manager" data-content="user_list" data-target="user_tab">사용자 관리</li>
+		        <li value="required_manager" data-content="required_list" data-target="required_tab">필독 관리</li>
 		    </ul>
 		    <div class="tab_container">
-		        <div id="tab1" class="tab_content">
+		        <div id="user_manager" class="tab_content">
 		        
 		    			
 			        <table id="tabTable" class="user_tab">
@@ -97,6 +97,36 @@
 						</script>
 				    </table>
 					    
+		        </div>
+		        
+		        <div id="required_manager" class="tab_content">
+		        
+		        	<table id="tabTable" class="required_tab">
+		        	
+		        	<script id="required_list" type="text/x-handlebars-template">
+						<thead>
+							<tr style="background-color: bisque; text-align: center;">
+								<td></td>
+								<td>제목</td>
+								<td>작성자</td>
+								<td>날짜</td>
+								<td>사용여부</td>
+							</tr>
+						</thead>		
+						
+						<tbody clss="user_list_body">
+							<tr style="text-align: center;">
+								<td style="width:3%;"><input type="checkbox" class="check_use"></td>
+								<td style="width:20%;">공지사항 게시판입니다.</td>
+								<td style="width:10%;">양희영</td>
+								<td style="width:5%;">2017-11-07</td>
+								<td style="width:3%;">Y</td>
+							</tr>
+						</tbody>
+					</script>
+		        	
+		        	</table>
+		        
 		        </div>
 		    </div>
 		    <!-- .tab_container -->
