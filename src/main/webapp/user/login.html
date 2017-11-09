@@ -7,27 +7,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <title>HQTech AV Team | Login</title>
-
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+	<script data-main="../lib/js/require/requireConfig" src="../lib/js/require/require.js"></script>
+	<script src="../lib/js/user.js"></script>    
+    <link href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../lib/css/animate.css" rel="stylesheet"/>
     <link href="../lib/css/style.css" rel="stylesheet"/>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="../lib/js/user.js"></script>    
     <script type="text/javascript">
 
-    $(document).ready(function () {
-        $("#txtPassword").keypress(function (e) {
+//     $(document).ready(function () {
+//         $("#txtPassword").keypress(function (e) {
 
-            if (e.keyCode == 13) {
-                fnLogin();
-            }
-        });
+//             if (e.keyCode == 13) {
+//                 fnLogin();
+//             }
+//         });
         
 //         $("#login_btn").click(function(e) {
 //         	fnCheck();
 //         })
-    });
+//     });
 
     </script>
 </head>
@@ -46,7 +44,7 @@
             <div class="form-group">
                 <input type="password" class="form-control" placeholder="비밀번호" required="" id="txtPassword" />
             </div>
-            <input type="button" class="btn btn-primary block full-width m-b login_btn" onclick="javascript:fnLogin();" value="로그인">
+            <input type="button" class="btn btn-primary block full-width m-b login_btn" onclick="" value="로그인">
             <button type="button" class="btn btn-primary block full-width m-b" onclick="location.href='signup.html';" style="background-color: #A0C0D7; border : 1px solid #A0C0D7 ">회원가입</button>
             </form>
             <p class="m-t"> <small>sse & yc &copy; 2017</small> </p>

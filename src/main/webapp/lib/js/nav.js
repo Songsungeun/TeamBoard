@@ -7,6 +7,7 @@ $(document).ready(function() {
 	$('.logout_area').click(function(event) {
 		logout();
 	})
+	console.log("nav.js");
 })
 
 function ajaxRequest() {

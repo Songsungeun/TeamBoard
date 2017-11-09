@@ -2,6 +2,47 @@
  * sign up/in 관련 js
  */
 
+require(['domReady'], function (domReady) {
+	require(['jquery'], function ($) {
+		
+		domReady(function() {
+			$('.login_btn').on("click", fnLogin)
+		})
+	})
+})
+
+fnLogin = function () {
+	let formData = new FormData();
+	let url = "login.json";
+	
+	formData.append("userID", $("#txtLoginId").val());
+	formData.append("password", $("#txtPassword").val())
+	
+	let success = function(obj) {
+		let result = obj.jsonResult
+		if (result.state == "success") {
+			console.log("페이지 이동");
+			location.href = "../main/Mainpage.html"
+		} else {
+			alert(result.data);
+		}
+	};
+	
+	let fail = function(err) {
+		alert("오류 발생");
+		console.log("err message : " + err.data);
+	};
+	
+	var check = fnLoginCheck;
+	console.log(check)
+	if(check) {
+		console.log("check 진입");
+		require(['common'], function(common) {
+			common.ajax(url, formData, success, fail, common.POST);
+		})
+	}
+	
+}
 
 function fnSignUp() {
 	
@@ -23,20 +64,6 @@ function fnSignUp() {
 	
 }
 
-function fnLogin() {
-	
-	var formData = new FormData();
-	var url = "login.json";
-	
-	formData.append("userID", $("#txtLoginId").val());
-	formData.append("password", $("#txtPassword").val())
-	
-	var check = fnCheck();
-	if(check) {
-		ajaxLoginRequest(formData, url);
-	}
-	
-}
 
 function ajaxSignUpRequest(formData, url) {
 	$.ajax({
@@ -84,7 +111,7 @@ function ajaxLoginRequest(formData, url) {
 	})
 }
 
-function fnCheck() {
+var fnLoginCheck = function () {
     if ($("#txtLoginId").val() == "") {
         alert("로그인 아이디를 입력하세요.");
         return false;
@@ -131,6 +158,19 @@ function fnSignUpCheck() {
     }
 
 	return true;
-	
 }
 
+var enterLogin = function() {
+	
+	$("#txtPassword").keypress(function (e) {
+		
+		if (e.keyCode == 13) {
+			fnLogin();
+		}
+	});
+	
+//	$("#login_btn").click(function(e) {
+//		fnCheck();
+//	})
+	
+}    

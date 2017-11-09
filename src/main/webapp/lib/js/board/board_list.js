@@ -9,6 +9,13 @@ var currPage;
 $(document).ready(function() {
 	
 	checkParam();
+	var user = new User('Alice');
+	console.log(user.say()); // My name is Alice
+
+	var admin = new Admin('Bob');
+	console.log(admin.say()); // [Administrator] My name is Bob
+	
+	console.log("boardList.js");
 })
 
 $(window).load(function() {
