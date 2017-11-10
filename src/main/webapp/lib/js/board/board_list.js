@@ -6,24 +6,31 @@ var paramFlag;
 var paramsForWrite;
 var currPage;
 
-$(document).ready(function() {
-	
-	checkParam();
-	var user = new User('Alice');
-	console.log(user.say()); // My name is Alice
-
-	var admin = new Admin('Bob');
-	console.log(admin.say()); // [Administrator] My name is Bob
-	
-	console.log("boardList.js");
-})
-
-$(window).load(function() {
-	console.log("write: " + paramsForWrite);
-	$("#write_btn").click(function() {
-		location.href = "noticeBoardReg.html?" + paramsForWrite;
+require(['domReady', 'jquery', 'common'], function (domReady, $, common) {
+		
+		domReady(function() {
+			DEBUG && console.log("board_list.js domReady");
+			common.loadNav();
 	})
 })
+//$(document).ready(function() {
+//	
+//	checkParam();
+//	var user = new User('Alice');
+//	console.log(user.say()); // My name is Alice
+//
+//	var admin = new Admin('Bob');
+//	console.log(admin.say()); // [Administrator] My name is Bob
+//	
+//	console.log("boardList.js");
+//})
+
+//$(window).load(function() {
+//	console.log("write: " + paramsForWrite);
+//	$("#write_btn").click(function() {
+//		location.href = "noticeBoardReg.html?" + paramsForWrite;
+//	})
+//})
 
 function checkParam() {
 	var origin_param = $(location).attr('search').split('?')[1];

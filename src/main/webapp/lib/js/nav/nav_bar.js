@@ -2,11 +2,12 @@
  * 
  */
 
-$(document).ready(function() {
-	
-	ajaxLoginCheck();
-	
-})
+
+//$(document).ready(function() {
+//	
+//	ajaxLoginCheck();
+//	
+//})
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }

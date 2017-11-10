@@ -6,11 +6,18 @@ require(['domReady'], function (domReady) {
 	require(['jquery'], function ($) {
 		
 		domReady(function() {
-			$('.login_btn').on("click", fnLogin)
+			$('.login_btn').on("click", fnLogin);
+			$('.signbtn').on("click", fnSignUp);
+			enterLogin();
 		})
 	})
 })
 
+fnAjaxFail = function(err) {
+		alert("오류 발생");
+		console.log("err message : " + err.data);
+	};
+	
 fnLogin = function () {
 	let formData = new FormData();
 	let url = "login.json";
@@ -18,7 +25,7 @@ fnLogin = function () {
 	formData.append("userID", $("#txtLoginId").val());
 	formData.append("password", $("#txtPassword").val())
 	
-	let success = function(obj) {
+	let fnSuccess = function(obj) {
 		let result = obj.jsonResult
 		if (result.state == "success") {
 			console.log("페이지 이동");
@@ -28,23 +35,16 @@ fnLogin = function () {
 		}
 	};
 	
-	let fail = function(err) {
-		alert("오류 발생");
-		console.log("err message : " + err.data);
-	};
-	
-	var check = fnLoginCheck;
-	console.log(check)
-	if(check) {
+	if(fnLoginCheck()) {
 		console.log("check 진입");
 		require(['common'], function(common) {
-			common.ajax(url, formData, success, fail, common.POST);
+			common.ajax(url, formData, fnSuccess, fnAjaxFail, common.POST);
 		})
 	}
 	
 }
 
-function fnSignUp() {
+fnSignUp = function (){
 	
 	var formData = new FormData();
 	var url = "signUp.json";
@@ -57,9 +57,21 @@ function fnSignUp() {
 	formData.append("admin", false);
 	formData.append("permission", false);
 	
-	var check = fnSignUpCheck();
-	if (check) {
-		ajaxSignUpRequest(formData, url);
+	let fnSuccess = function(obj) {
+		var result = obj.jsonResult
+		if (result.state != "success") {
+			alert(result.data)
+		} else {
+			alert("가입 되었습니다. 승인을 기다려 주세요.");
+			location.href = "login.html";
+		}
+	}
+	
+//	var check = fnSignUpCheck();
+	if (fnSignUpCheck()) {
+		require(['common'], function(common) {
+			common.ajax(url, formData, fnSuccess, fnAjaxFail, common.POST);
+		})
 	}
 	
 }
@@ -160,7 +172,7 @@ function fnSignUpCheck() {
 	return true;
 }
 
-var enterLogin = function() {
+function enterLogin() {
 	
 	$("#txtPassword").keypress(function (e) {
 		
@@ -168,9 +180,4 @@ var enterLogin = function() {
 			fnLogin();
 		}
 	});
-	
-//	$("#login_btn").click(function(e) {
-//		fnCheck();
-//	})
-	
 }    
