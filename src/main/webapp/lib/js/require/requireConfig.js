@@ -5,12 +5,13 @@
 require.config({
 	shim: {
 		"bootstrap" : {"deps"   : ['jquery']},
-		"domReady" : ["jquery"]
+		"domReady" : ["jquery"],
+		'handlebars' : {exports: 'Handlebars'}
 	},
 	
 	paths: {
-		'common': '../common',
-		'jquery' : '../jquery-3.2.1.min',
+		'common': 'common',
+		'jquery' : 'jquery',
 		'bootstrap' : '../../bootstrap/dist/js/bootstrap.min',
 		'domReady' : 'domReady',
 		'handlebars' : '../handlebars/handlebars-v4.0.11'

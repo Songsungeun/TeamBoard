@@ -7,7 +7,7 @@ require(['domReady'], function (domReady) {
 	domReady(function() {
 		require(['jquery', 'common'], function ($, common) {
 			
-			$('.logout_area').click(function(event) {
+			$('.logout_btn').click(function(event) {
 				logout();
 			})
 			

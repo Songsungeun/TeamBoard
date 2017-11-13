@@ -11,6 +11,7 @@ require(['domReady', 'jquery', 'common'], function (domReady, $, common) {
 		domReady(function() {
 			DEBUG && console.log("board_list.js domReady");
 			common.loadNav();
+			checkParam();
 //			common.setUser("이름", "포지션");
 //			console.log("aaa : " + common.getUser().name);
 //			console.log("bbb : " + common.getUser().position);
@@ -52,7 +53,7 @@ function checkParam() {
 	} else {
 		alert("parameter 값이 잘못되었습니다.")
 	}
-	
+	DEBUG && console.log("param : " + params)
 	insertBoardName(params);
 }
 
@@ -119,45 +120,72 @@ function ajaxBoardListForCategory(category_name, pageNo) {
 
 
 function ajaxRequest(formData, url) {
-	$.ajax({
-		url: url,
-		data: formData,
-		processData: false,
-		contentType: false,
-		type: "POST",
-		success : function(obj) {
-			var result = obj.jsonResult
-			if (result.state != "success") {
-				console.log("데이타 로드 실패");
-			} else {
-				console.log(result);
-				boardCnt = result.data2
-				showBoardList(result)
-			}
-		},
-		error : function(err) {
-			alert("오류 발생");
-			console.log("err message : " + err.data);
+
+	let successCallback = function(obj) {
+		var result = obj.jsonResult
+		if (result.state != "success") {
+			console.log("데이타 로드 실패");
+		} else {
+			console.log(result);
+			boardCnt = result.data2
+			showBoardList(result)
 		}
+	}; 
+	
+	let errorCallback = function(err) {
+		alert("오류 발생");
+		console.log("err message : " + err.data);
+	}
+	
+	require(['common'], function(common) {
+		common.ajax(url, formData, successCallback, errorCallback, common.POST);
 	})
+	
+	//	$.ajax({
+//		url: url,
+//		data: formData,
+//		processData: false,
+//		contentType: false,
+//		type: "POST",
+//		success : function(obj) {
+//			var result = obj.jsonResult
+//			if (result.state != "success") {
+//				console.log("데이타 로드 실패");
+//			} else {
+//				console.log(result);
+//				boardCnt = result.data2
+//				showBoardList(result)
+//			}
+//		},
+//		error : function(err) {
+//			alert("오류 발생");
+//			console.log("err message : " + err.data);
+//		}
+//	})
 }
 
 function showBoardList(result) {
-	var html;
-	var paging;
+	let html;
+	let paging;
 	if (result.data2 <= 0) {
 		html = "<tr style='background-color: #F0F0F0;'>" +
 				"<td colspan='5' style='textalign: center;'> 게시물이 없습니다. </td>";
 		
 	} else {
-		var source = $('#board_list_template').html();
-		var template = Handlebars.compile(source);
-		html = template(result);
+		let source = $('#board_list_template').html();
 		
-		paging = Paging(result.data2, 10, 5, currPage, paramFlag);
-		$('.paging').append(paging);
+		require(['handlebars'], function(Handlebars) {
+			let template = Handlebars.compile(source);
+			html = template(result);
+			console.log("template : " + html);
+			$('.board_contents').append(html);
+		})
+		
+		require(['common'], function(common) {
+			paging = common.Paging(result.data2, 10, 5, currPage, paramFlag);
+			$('.paging').append(paging);
+		})
 	}
-	$('.board_contents').append(html);
 }
 
 
