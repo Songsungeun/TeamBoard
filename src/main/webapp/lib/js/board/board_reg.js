@@ -58,7 +58,8 @@ function initTinyMCE() {
 	    theme : "modern", // TinyMCE는 여러가지 테마를 지원해준다. 그중 advanced 테마를 사용
 	    plugins : "noneditable,fullpage,help,link,contextmenu,textcolor,textpattern,save,preview,charmap,image",
 	    menubar: "insert",
-	    toolbar: "newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyf,cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,image,|,insertdate,inserttime,preview,|,forecolor,backcolor,|,font",
+//	    toolbar: "newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyf,cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,image,|,insertdate,inserttime,preview,|,forecolor,backcolor,|,font",
+	    toolbar: "undo redo | styleselect | forecolor bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table link media custom_image code ",
 	    //skin : "lightgray",
 	    forced_root_block : false,
 	    language: "ko_KR", // 사용할 언어는 한국어로 지정

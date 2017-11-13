@@ -11,6 +11,28 @@
 <script data-main="../lib/js/require/requireConfig" src="../lib/js/require/require.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 <script src="../lib/js/board/board_list.js"></script>
+<script type="text/javascript" src="../tinymce/js/tinymce/tinymce.min.js"></script>
+<!-- <script src="../lib/js/board/board_reg.js"></script> -->
+<script>
+ tinymce.init({
+     selector: "#description",
+     theme: "modern",
+     language: "ko",
+     menubar:false,
+     plugins: "autolink autosave code link media image table textcolor autoresize",
+     toolbar: "undo redo | styleselect | forecolor bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table link media custom_image code ",
+     setup: function(editor) {
+     editor.addButton('custom_image', {
+             title: '이미지삽입',
+             icon: 'image',
+             onclick: function() {
+                 window.open("POPUP_URL","tinymcePop","width=400,height=350");
+             }
+         });
+     }
+
+ });
+</script>
 </head>
 <body>
 
@@ -86,46 +108,74 @@
                                  </li>
                              </ul>
                          </div>
-                          <table class="table table-inbox table-hover">
-                          	<thead>
-                          		<tr>
-                          			<td style="width: 4%; text-align: center; font-weight: bold;">번호</td>
-                          			<td style="width: 60%; font-weight: bold;">제목</td>
-                          			<td style="width: 10%; font-weight: bold;">작성자</td>
-                          			<td style="width: 7%; text-align: center; font-weight: bold;">첨부파일</td>
-                          			<td style="width: 10%; text-align: center; font-weight: bold;">날짜</td>
-                          		</tr>
-                          	</thead>
-                            <tbody class="board_contents">
-                            
-                            <script id="board_list_template" type="text/x-handlebars-template">
+                          <table id="teamNoticeBoard">
 
-							{{#data.require}}
-                              <tr class="" style="background: blanchedalmond;">
-                                  <td class="inbox-small-cells board_no">-</td>
-                                  <td class="view-message view-message"><span style="color:red;">[필독]</span>{{title}}<span class="label label-info">family</span></td>
-                                  <td class="view-message dont-show">{{userName}}</td>
-                                  <td class="view-message inbox-small-cells"><i class="fa fa-paperclip"></i></td>
-                                  <td class="view-message text-right" style="text-align: center;">{{date}}</td>
-                              </tr>
-							{{/data.require}}
-
-							{{#data.noReq}}
-                              <tr class="">
-                                  <td class="inbox-small-cells board_no">{{showNo}}</td>
-                                  <td class="view-message view-message">{{title}}<span class="label label-info">family</span></td>
-                                  <td class="view-message dont-show">{{userName}}</td>
-                                  <td class="view-message inbox-small-cells"><i class="fa fa-paperclip"></i></td>
-                                  <td class="view-message text-right" style="text-align: center;">{{date}}</td>
-                              </tr>
-							{{/data.noReq}}
-
-							</script>
-							
-                          </tbody>
-                          </table>
+			<!-- 게시판 상세페이지 -->
+			<tr
+				style="background-color: #A0C0D7; color: white; font-weight: bold;">
+				<td style="width: 15%;">제목</td>
+				<td colspan="3" style="width: 65%;">
+					<input type="text" id="title" name="title" style="width: 90%; color: black; height: 75%;">
+				</td>
+				<td style="width: 20%;">
+					<select	id="board_type" name="board_type" style="width: 85%; height: 70%; color:black;">
+						<option value="">--카테고리 선택--</option>
+						<option value="notice">공지사항</option>
+						<option value="common_issue">시장이슈</option>
+						<option value="product_issue">제품별 시장 이슈</option>
+						<option value="process">업무프로세스</option>
+						<option value="etc_work">기타 업무 공유</option>
+						<option value="product_term">제품 관련 용어 정리</option>
+						<option value="no_name">익명 게시판</option>
+						<option value="free">자유 게시판</option>
+						<option value="pc_helper">PC 도움방</option>
+						<option value="about_work_site">업무 관련 사이트</option>
+						<option value="my_place">나의 업무 공간</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td style="width: 25%;" class="user_name"></td>
+				<td style="width: 20%;">작성일</td>
+				<td class="current_date"></td>
+				<td>
+					<select id="category_list_notice" style="width: 85%; height: 70%; color: black;">
+						<option class="notice" value="team_notice">팀 내부 공지사항</option>
+						<option class="notice" value="work_notice">업무 관련 공지사항</option>
+					</select>
+					<select id="category_list_product" style="width: 85%; height: 70%; color: black;">
+						<option class="product_issue" value="sat">SAT</option>
+						<option class="product_issue" value="room_speaker">ROOM SPEAKER</option>
+						<option class="product_issue" value="multiroom">MULTIROOM APP</option>
+						<option class="product_issue" value="band">BAND APP</option>
+						<option class="product_issue" value="bd_hes">BD/HES</option>
+						<option class="product_issue" value="pvr">PVR</option>
+						<option class="product_issue" value="ss_connect">SAMSUNG CONNECT</option>
+						<option class="product_issue" value="convergence">CONVERGENCE</option>
+						<option class="product_issue" value="alexa">ALEXA</option>
+					</select>
+					<select id="category_list_etc" style="width: 85%; height: 70%; color: black;">
+						<option class="etc_work" value="etc_work">업무</option>
+						<option class="etc_work" value="etc_nonwork">비업무</option>
+					</select>
+				</td>
+			</tr>
+			<!--         <tr style="background-color: #F0F0F0;"><td colspan="5"></td></tr> -->
+			<tr>
+				<td colspan="5"
+					style="text-align: left; padding: 30px 15px 30px 15px; background: floralwhite;">
+					<textarea class="write_desc_area" id="description"></textarea>
+				</td>
+			</tr>
+			<tr class="btn_area">
+				<td colspan="5">
+				<input type="submit" class="btn btn-info modify_btn" onclick="javascript: write_update(); return false;" value="수정">
+				<input type="submit" class="btn btn-success write_btn" onclick="javascript: write_add(); return false;" value="작성">
+			</td>
+			</tr>
+			</table>
                       </div>
-                      <div class="paging" style="text-align: center;"></div>
                   </aside>
               </div>
 </div>

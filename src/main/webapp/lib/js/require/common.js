@@ -98,15 +98,15 @@ define(function() {
 				} else {
 					s2 = pageNo - pageNo % pageSize;
 				}
-				html.push('<a href="../board/noticeBoard.html?');
+				html.push('<a href="../board/boardList.html?');
 				html.push(param);
 				html.push(s2);
-				html.push('">');
-				html.push('◀');
+				html.push('" class="np-btn">');
+				html.push('<i class="fa fa-angle-left  pagination-left"></i>');
 				html.push('</a>');
 			} else {
-				html.push('<a href="#">\n');
-				html.push('◀');
+				html.push('<a href="#" class="np-btn">\n');
+				html.push('<i class="fa fa-angle-left  pagination-left"></i>');
 				html.push('</a>');
 			}
 			
@@ -120,7 +120,7 @@ define(function() {
 					html.push('<a href="../board/noticeBoard.html?');
 					html.push(param);
 					html.push(index);
-					html.push('">');
+					html.push('" class="np-btn">');
 					html.push(index);
 					html.push('</a>');
 				}
@@ -137,12 +137,12 @@ define(function() {
 				html.push('<a href="../board/noticeBoard.html?');
 				html.push(param);
 				html.push((prevCnt + 1) * pageSize + 1);
-				html.push('">');
-				html.push('▶');
+				html.push('" class="np-btn">');
+				html.push('<i class="fa fa-angle-right pagination-right"></i>');
 				html.push('</a>');
 			} else {
-				html.push('<a href="#">');
-				html.push('▶');
+				html.push('<a href="#" class="np-btn">');
+				html.push('<i class="fa fa-angle-right pagination-right"></i>');
 				html.push('</a>');
 			}
 			
