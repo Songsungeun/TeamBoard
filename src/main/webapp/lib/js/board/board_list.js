@@ -11,6 +11,9 @@ require(['domReady', 'jquery', 'common'], function (domReady, $, common) {
 		domReady(function() {
 			DEBUG && console.log("board_list.js domReady");
 			common.loadNav();
+//			common.setUser("이름", "포지션");
+//			console.log("aaa : " + common.getUser().name);
+//			console.log("bbb : " + common.getUser().position);
 	})
 })
 //$(document).ready(function() {

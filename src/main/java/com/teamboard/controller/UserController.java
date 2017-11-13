@@ -82,6 +82,7 @@ public class UserController {
 			if (user != null) {
 				if (user.isPermission() || user.getAdmin()) {
 					session.setAttribute("user", user);
+					return JsonResult.success("로그인", user);
 				} else {
 					return JsonResult.fail("승인되지 않은 회원입니다.");
 				}
@@ -93,10 +94,6 @@ public class UserController {
 			e.printStackTrace();
 			return JsonResult.fail(e.getMessage());
 		}
-		
-
-		return JsonResult.success("로그인");
-
 	}	
 	
 	@RequestMapping(value = "/logout")

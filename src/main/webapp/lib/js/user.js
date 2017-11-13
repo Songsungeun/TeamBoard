@@ -28,8 +28,8 @@ fnLogin = function () {
 	let fnSuccess = function(obj) {
 		let result = obj.jsonResult
 		if (result.state == "success") {
-			console.log("페이지 이동");
-			location.href = "../main/Mainpage.html"
+//			location.href = "../main/Mainpage.html"
+			location.href = "../board/boardList.html"
 		} else {
 			alert(result.data);
 		}

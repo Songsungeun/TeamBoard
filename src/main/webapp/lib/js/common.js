@@ -4,10 +4,10 @@
 
 define(function() {
 	
+	let User;
 	return {
 		GET:"GET",
 		POST:"POST",
-		
 		/**
 		 * ajax 공통으로 쓰기 위한 함수
 		 * @param url
@@ -49,6 +49,17 @@ define(function() {
 		loadNav: function () {
 			DEBUG && console.log("load navigation bar");
 			$(".sm-side").load("../common_html/gnb.html");
+		},
+		
+		setUser : function(name, position, userNo) {
+			DEBUG && console.log("set user");
+			DEBUG && console.log("name : " + name);
+			DEBUG && console.log("position : " + position);
+			User = new setUserData(name, position, userNo);
+		},
+		
+		getUser : function() {
+			return User;
 		},
 		
 		// 페이징 함수
@@ -141,7 +152,11 @@ define(function() {
 	};
 });
 
-
+function setUserData(name, position, userNo) {
+	this.name = name;
+	this.position = position;
+	this.userNo = userNo;
+}
 //$(document).ready( function() {
 //	loadNav();
 //	if ($(location).attr('pathname').split('/')[3] != "mypage.html") {

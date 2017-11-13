@@ -19,9 +19,9 @@
 
 <!--                   <aside class="sm-side"> -->
                       <div class="user-head">
-                          <div class="user-name">
-                              <h5><a href="#">양희영</a></h5>
-                              <span><a href="#">팀장</a></span>
+                          <div class="user-info">
+                              <h5><a href="#" class="user_name"></a></h5>
+                              <span><a href="#" class="user_position"></a></span>
                           </div>
                       </div>
                       <div class="inbox-body">
@@ -31,7 +31,7 @@
                           
                       </div>
                       <ul class="inbox-nav inbox-divider">
-                          <li class="active">
+                          <li class="notice_dropdown">
                               <a href="#"><i class="fa fa-newspaper-o"></i> 공지사항 </a>
                                 <ul class="notice_content" >
 									<li><a href="../board/noticeBoard.html?cat=team_notice&pageNo=1">팀 내 공지사항</a></li>
@@ -41,11 +41,26 @@
                           <li>
                               <a href="#"><i class="fa fa-exclamation-circle"></i> 시장이슈</a>
                           </li>
-                          <li>
+                          <li class="issue_dropdown">
                               <a href="#"><i class="fa fa-cubes"></i> 제품별 사양 및 이슈</a>
+                              <ul class="issue_content">
+								<li><a href="../board/noticeBoard.html?cat=sat&pageNo=1">SAT</a></li>
+								<li><a href="../board/noticeBoard.html?cat=room_speaker&pageNo=1">ROOM SPEAKER</a></li>
+								<li><a href="../board/noticeBoard.html?cat=multiroom&pageNo=1">MULTIROOM APP</a></li>
+								<li><a href="../board/noticeBoard.html?cat=band&pageNo=1">BAND APP</a></li>
+								<li><a href="../board/noticeBoard.html?cat=bd_hes&pageNo=1">BD/HES</a></li>
+								<li><a href="../board/noticeBoard.html?cat=pvr&pageNo=1">PVR</a></li>
+								<li><a href="../board/noticeBoard.html?cat=ss_connect&pageNo=1">SAMSUNG CONNECT</a></li>
+								<li><a href="../board/noticeBoard.html?cat=convergence&pageNo=1">CONVERGENCE</a></li>
+								<li><a href="../board/noticeBoard.html?cat=alexa&pageNo=1">ALEXA</a></li>
+							</ul>
                           </li>
-                          <li>
+                          <li class="etc_dropdown">
                               <a href="#"><i class=" fa fa-window-restore"></i> 기타 업무 공유 </a>
+                          	<ul class="etc_content">
+								<li><a href="../board/noticeBoard.html?cat=team_notice&pageNo=1">업무</a></li>
+								<li><a href="../board/noticeBoard.html?cat=work_notice&pageNo=1">비업무</a></li>
+							</ul>
                           </li>
                           <li>
                               <a href="#"><i class=" fa fa-refresh"></i> 업무 프로세스</a>
@@ -68,7 +83,12 @@
                           <li>
                               <a href="#"><i class=" fa fa-user-circle-o"></i> 나의 업무 공간</a>
                           </li>
-                          
+                          <li style="display: none;" class="admin_menu"><a href="../admin/adminUserList.html">관리자 페이지</a>
+							<ul class="admin_content" >
+								<li><a href="../admin/adminUserList.html">유저 관리</a></li>
+								<li><a href="../admin/adminRequiredBoard.html">필독 관리</a></li>
+							</ul>
+						  </li>
                       </ul>
 
 <!--                   </aside> -->
