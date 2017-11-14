@@ -177,7 +177,6 @@ function showBoardList(result) {
 		require(['handlebars'], function(Handlebars) {
 			let template = Handlebars.compile(source);
 			html = template(result);
-			console.log("template : " + html);
 			$('.board_contents').append(html);
 		})
 		

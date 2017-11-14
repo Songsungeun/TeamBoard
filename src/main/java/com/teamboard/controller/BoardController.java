@@ -1,10 +1,13 @@
 package com.teamboard.controller;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.teamboard.service.BoardService;
 import com.teamboard.service.CommentService;
@@ -39,6 +42,9 @@ public class BoardController {
 	@Autowired
 	CommentService commentService;
 
+	@Autowired 
+	ServletContext sc;
+	
 	Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	int length = 10;
@@ -315,6 +321,25 @@ public class BoardController {
 			return JsonResult.error(e.getMessage());
 		}
 
+		return JsonResult.success();
+	}
+	
+	// file upload 관련 추가 (첨부된 파일과 게시판 내용에 첨부된 이미지 별도 관리)
+	@RequestMapping(value = "boardImage")
+	public Object boardImage(MultipartFile[] files) throws Exception {
+		
+		String newFileName = null;
+		Date dt = new Date();
+//		String filepath = dt.getYear() + "/" + dt.getMonth();
+		
+		if (files.length > 0) {
+			for (int i = 0; i < files.length; i++) {
+				File convFile = new File (files[i].getOriginalFilename());
+				convFile.mkdirs();
+				files[i].transferTo(convFile);
+			}
+		}
+		
 		return JsonResult.success();
 	}
 

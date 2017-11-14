@@ -17,16 +17,16 @@
  tinymce.init({
      selector: "#description",
      theme: "modern",
-     language: "ko",
+     language: "ko_KR",
      menubar:false,
-     plugins: "autolink autosave code link media image table textcolor autoresize",
+     plugins: "autolink code link media image table textcolor autoresize",
      toolbar: "undo redo | styleselect | forecolor bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table link media custom_image code ",
      setup: function(editor) {
      editor.addButton('custom_image', {
              title: '이미지삽입',
              icon: 'image',
              onclick: function() {
-                 window.open("POPUP_URL","tinymcePop","width=400,height=350");
+                 window.open("write_pop.html","tinymcePop","width=400,height=350");
              }
          });
      }
