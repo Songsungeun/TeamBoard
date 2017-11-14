@@ -1,94 +1,181 @@
+
+-- comment
+DROP TABLE IF EXISTS `comment` RESTRICT;
+
+-- board
+DROP TABLE IF EXISTS `board` RESTRICT;
+
+-- user
+DROP TABLE IF EXISTS `user` RESTRICT;
+
+-- attached_file
+DROP TABLE IF EXISTS `attached_file` RESTRICT;
+
+-- board_image
+DROP TABLE IF EXISTS `board_image` RESTRICT;
+
+-- 새 테이블
+DROP TABLE IF EXISTS `required_board` RESTRICT;
+
 -- user
 CREATE TABLE `user` (
-   `user_no`    INT          NOT NULL COMMENT 'user_no', -- user_no
-   `user_id`    VARCHAR(20)  NULL     COMMENT 'user_id', -- user_id
-   `user_pw`    VARCHAR(255) NULL     COMMENT 'user_pw', -- user_pw
-   `department` varchar(50)  NULL     COMMENT 'department', -- department
-   `position`   varchar(20)  NULL     COMMENT 'position', -- position
-   `name`       varchar(10)  NULL     COMMENT 'name', -- name
-   `admin`      BOOLEAN      NULL     COMMENT 'admin', -- admin
-   `permission` BOOLEAN      NULL     COMMENT 'permission' -- permission
+	`user_no`     INT          NOT NULL COMMENT 'user_no', -- user_no
+	`user_id`     VARCHAR(20)  NULL     COMMENT 'user_id', -- user_id
+	`user_pw`     VARCHAR(255) NULL     COMMENT 'user_pw', -- user_pw
+	`department`  varchar(50)  NULL     COMMENT 'department', -- department
+	`position`    varchar(20)  NULL     COMMENT 'position', -- position
+	`name`        varchar(10)  NULL     COMMENT 'name', -- name
+	`admin`       BOOLEAN      NULL     COMMENT 'admin', -- admin
+	`permission`  BOOLEAN      NULL     COMMENT 'permission', -- permission
+	`write_count` INT          NULL     COMMENT 'write_count', -- write_count
+	`level`       INT          NULL     COMMENT 'level' -- level
 )
 COMMENT 'user';
 
 -- user
 ALTER TABLE `user`
-   ADD CONSTRAINT `PK_user` -- user �⺻Ű
-      PRIMARY KEY (
-         `user_no` -- user_no
-      );
+	ADD CONSTRAINT `PK_user` -- user 기본키
+		PRIMARY KEY (
+			`user_no` -- user_no
+		);
 
 ALTER TABLE `user`
-   MODIFY COLUMN `user_no` INT NOT NULL AUTO_INCREMENT COMMENT 'user_no';
+	MODIFY COLUMN `user_no` INT NOT NULL AUTO_INCREMENT COMMENT 'user_no';
 
 -- board
 CREATE TABLE `board` (
-   `board_no`    INT          NOT NULL COMMENT 'board_no', -- board_no
-   `title`       VARCHAR(255) NULL     COMMENT 'title', -- title
-   `description` MEDIUMTEXT   NULL     COMMENT 'description', -- description
-   `board_type`  VARCHAR(30)  NULL     COMMENT 'board_type', -- board_type
-   `category`    VARCHAR(50)  NULL     COMMENT 'category', -- category
-   `cre_dt`      DATETIME     NULL     COMMENT 'cre_dt', -- cre_dt
-   `user_no`     INT          NULL     COMMENT 'user_no' -- user_no
+	`board_no`      INT          NOT NULL COMMENT 'board_no', -- board_no
+	`title`         VARCHAR(255) NULL     COMMENT 'title', -- title
+	`description`   MEDIUMTEXT   NULL     COMMENT 'description', -- description
+	`board_type`    VARCHAR(30)  NULL     COMMENT 'board_type', -- board_type
+	`category`      VARCHAR(50)  NULL     COMMENT 'category', -- category
+	`cre_dt`        DATETIME     NULL     COMMENT 'cre_dt', -- cre_dt
+	`user_no`       INT          NULL     COMMENT 'user_no', -- user_no
+	`required`      BOOLEAN      NULL     COMMENT 'required', -- required
+	`comment_count` INT(5)       NULL     DEFAULT 0 COMMENT 'comment_count', -- comment_count
+	`file_status`   BOOLEAN      NULL     COMMENT 'file_status' -- file_status
 )
 COMMENT 'board';
 
 -- board
 ALTER TABLE `board`
-   ADD CONSTRAINT `PK_board` -- board �⺻Ű
-      PRIMARY KEY (
-         `board_no` -- board_no
-      );
+	ADD CONSTRAINT `PK_board` -- board 기본키
+		PRIMARY KEY (
+			`board_no` -- board_no
+		);
 
 ALTER TABLE `board`
-   MODIFY COLUMN `board_no` INT NOT NULL AUTO_INCREMENT COMMENT 'board_no';
+	MODIFY COLUMN `board_no` INT NOT NULL AUTO_INCREMENT COMMENT 'board_no';
 
 -- comment
 CREATE TABLE `comment` (
-   `comment_no`  INT         NOT NULL COMMENT 'comment_no', -- comment_no
-   `description` VARCHAR(70) NULL     COMMENT 'description', -- description
-   `cre_dt`      DATETIME    NULL     COMMENT 'cre_dt', -- cre_dt
-   `board_no`    INT         NULL     COMMENT 'board_no', -- board_no
-   `user_no`     INT         NULL     COMMENT 'user_no' -- user_no
+	`comment_no`  INT           NOT NULL COMMENT 'comment_no', -- comment_no
+	`description` VARCHAR(1000) NULL     COMMENT 'description', -- description
+	`cre_dt`      DATETIME      NULL     COMMENT 'cre_dt', -- cre_dt
+	`board_no`    INT           NULL     COMMENT 'board_no', -- board_no
+	`user_no`     INT           NULL     COMMENT 'user_no' -- user_no
 )
 COMMENT 'comment';
 
 -- comment
 ALTER TABLE `comment`
-   ADD CONSTRAINT `PK_comment` -- comment �⺻Ű
-      PRIMARY KEY (
-         `comment_no` -- comment_no
-      );
+	ADD CONSTRAINT `PK_comment` -- comment 기본키
+		PRIMARY KEY (
+			`comment_no` -- comment_no
+		);
 
 ALTER TABLE `comment`
-   MODIFY COLUMN `comment_no` INT NOT NULL AUTO_INCREMENT COMMENT 'comment_no';
+	MODIFY COLUMN `comment_no` INT NOT NULL AUTO_INCREMENT COMMENT 'comment_no';
+
+-- attached_file
+CREATE TABLE `attached_file` (
+	`file_no`     INT         NOT NULL COMMENT 'file_no', -- file_no
+	`board_no`    INT         NULL     COMMENT 'board_no', -- board_no
+	`file_name`   VARCHAR(50) NULL     COMMENT 'file_name', -- file_name
+	`origin_name` VARCHAR(50) NULL     COMMENT 'origin_name' -- origin_name
+	'user_no' INT NULL
+)
+COMMENT 'attached_file';
+
+-- attached_file
+ALTER TABLE `attached_file`
+	ADD CONSTRAINT `PK_attached_file` -- attached_file 기본키
+		PRIMARY KEY (
+			`file_no` -- file_no
+		);
+
+ALTER TABLE `attached_file`
+	MODIFY COLUMN `file_no` INT NOT NULL AUTO_INCREMENT COMMENT 'file_no';
+
+-- board_image
+CREATE TABLE `board_image` (
+	`image_no` INT         NOT NULL COMMENT 'image_no', -- image_no
+	`board_no` INT         NULL     COMMENT 'board_no', -- board_no
+	`url`      VARCHAR(70) NULL     COMMENT 'url' -- url
+)
+COMMENT 'board_image';
+
+-- board_image
+ALTER TABLE `board_image`
+	ADD CONSTRAINT `PK_board_image` -- board_image 기본키
+		PRIMARY KEY (
+			`image_no` -- image_no
+		);
+
+ALTER TABLE `board_image`
+	MODIFY COLUMN `image_no` INT NOT NULL AUTO_INCREMENT COMMENT 'image_no';
+
+-- 새 테이블
+CREATE TABLE `required_board` (
+)
+COMMENT '새 테이블';
 
 -- board
 ALTER TABLE `board`
-   ADD CONSTRAINT `FK_user_TO_board` -- user -> board
-      FOREIGN KEY (
-         `user_no` -- user_no
-      )
-      REFERENCES `user` ( -- user
-         `user_no` -- user_no
-      );
+	ADD CONSTRAINT `FK_user_TO_board` -- user -> board
+		FOREIGN KEY (
+			`user_no` -- user_no
+		)
+		REFERENCES `user` ( -- user
+			`user_no` -- user_no
+		) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- comment
 ALTER TABLE `comment`
-   ADD CONSTRAINT `FK_board_TO_comment` -- board -> comment
-      FOREIGN KEY (
-         `board_no` -- board_no
-      )
-      REFERENCES `board` ( -- board
-         `board_no` -- board_no
-      );
+	ADD CONSTRAINT `FK_board_TO_comment` -- board -> comment
+		FOREIGN KEY (
+			`board_no` -- board_no
+		)
+		REFERENCES `board` ( -- board
+			`board_no` -- board_no
+		) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- comment
 ALTER TABLE `comment`
-   ADD CONSTRAINT `FK_user_TO_comment` -- user -> comment
-      FOREIGN KEY (
-         `user_no` -- user_no
-      )
-      REFERENCES `user` ( -- user
-         `user_no` -- user_no
-      );boardboard
+	ADD CONSTRAINT `FK_user_TO_comment` -- user -> comment
+		FOREIGN KEY (
+			`user_no` -- user_no
+		)
+		REFERENCES `user` ( -- user
+			`user_no` -- user_no
+		) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- attached_file
+ALTER TABLE `attached_file`
+	ADD CONSTRAINT `FK_board_TO_attached_file` -- board -> attached_file
+		FOREIGN KEY (
+			`board_no` -- board_no
+		)
+		REFERENCES `board` ( -- board
+			`board_no` -- board_no
+		) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- board_image
+ALTER TABLE `board_image`
+	ADD CONSTRAINT `FK_board_TO_board_image` -- board -> board_image
+		FOREIGN KEY (
+			`board_no` -- board_no
+		)
+		REFERENCES `board` ( -- board
+			`board_no` -- board_no
+		) ON DELETE CASCADE ON UPDATE CASCADE;
