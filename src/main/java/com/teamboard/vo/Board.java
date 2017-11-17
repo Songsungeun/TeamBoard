@@ -23,6 +23,7 @@ public class Board implements Serializable{
 	protected Date date;
 	protected boolean required;
 	protected int commentCount;
+	protected boolean file_status;
 	protected boolean showName;
 	
 	public int getBoardNo() {
@@ -84,6 +85,12 @@ public class Board implements Serializable{
 	}
 	public void setShowName(boolean showName) {
 		this.showName = showName;
+	}
+	public boolean isFile_status() {
+		return file_status;
+	}
+	public void setFile_status(boolean file_status) {
+		this.file_status = file_status;
 	}
 	
 	

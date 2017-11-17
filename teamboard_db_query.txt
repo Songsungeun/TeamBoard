@@ -1,18 +1,37 @@
+-- user
+ALTER TABLE `user`
+	DROP PRIMARY KEY; -- user 기본키
+
+-- board
+ALTER TABLE `board`
+	DROP PRIMARY KEY; -- board 기본키
+
+-- comment
+ALTER TABLE `comment`
+	DROP PRIMARY KEY; -- comment 기본키
+
+-- attached_file
+ALTER TABLE `attached_file`
+	DROP PRIMARY KEY; -- attached_file 기본키
+
+-- board_image
+ALTER TABLE `board_image`
+	DROP PRIMARY KEY; -- board_image 기본키
 
 -- comment
 DROP TABLE IF EXISTS `comment` RESTRICT;
+
+-- board_image
+DROP TABLE IF EXISTS `board_image` RESTRICT;
+
+-- attached_file
+DROP TABLE IF EXISTS `attached_file` RESTRICT;
 
 -- board
 DROP TABLE IF EXISTS `board` RESTRICT;
 
 -- user
 DROP TABLE IF EXISTS `user` RESTRICT;
-
--- attached_file
-DROP TABLE IF EXISTS `attached_file` RESTRICT;
-
--- board_image
-DROP TABLE IF EXISTS `board_image` RESTRICT;
 
 -- 새 테이블
 DROP TABLE IF EXISTS `required_board` RESTRICT;
@@ -53,7 +72,8 @@ CREATE TABLE `board` (
 	`user_no`       INT          NULL     COMMENT 'user_no', -- user_no
 	`required`      BOOLEAN      NULL     COMMENT 'required', -- required
 	`comment_count` INT(5)       NULL     DEFAULT 0 COMMENT 'comment_count', -- comment_count
-	`file_status`   BOOLEAN      NULL     COMMENT 'file_status' -- file_status
+	`file_status`   BOOLEAN      NULL     COMMENT 'file_status', -- file_status
+	`show_name`     BOOLEAN      NULL     COMMENT 'show_name' -- show_name
 )
 COMMENT 'board';
 
@@ -93,7 +113,6 @@ CREATE TABLE `attached_file` (
 	`board_no`    INT         NULL     COMMENT 'board_no', -- board_no
 	`file_name`   VARCHAR(50) NULL     COMMENT 'file_name', -- file_name
 	`origin_name` VARCHAR(50) NULL     COMMENT 'origin_name' -- origin_name
-	'user_no' INT NULL
 )
 COMMENT 'attached_file';
 

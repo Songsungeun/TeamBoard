@@ -21,7 +21,8 @@ public class User implements Serializable{
 	protected String name;
 	protected boolean admin;
 	protected boolean permission;
-	int writeCount;
+	protected int writeCount;
+	protected int level;
 	
 	public int getMemberNo() {
 		return memberNo;
@@ -76,6 +77,12 @@ public class User implements Serializable{
 	}
 	public void setWriteCount(int writeCount) {
 		this.writeCount = writeCount;
+	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
 	}
 	
 	
