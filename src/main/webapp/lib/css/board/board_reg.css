@@ -30,3 +30,12 @@
 .btn_area .modify_btn {
 	display: none;
 }
+
+.form-control {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.required_area {
+	margin-left: 240px;
+}

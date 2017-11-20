@@ -10,28 +10,12 @@
 <!-- <script src="../node_modules/handlebars/handlebars-v4.0.11.js"></script> -->
 <script data-main="../lib/js/require/requireConfig" src="../lib/js/require/require.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-<script src="../lib/js/board/board_list.js"></script>
-<script type="text/javascript" src="../tinymce/js/tinymce/tinymce.min.js"></script>
-<!-- <script src="../lib/js/board/board_reg.js"></script> -->
+<script src="../lib/js/ckeditor/ckeditor.js"></script>
+<script src="../lib/js/board/board_reg.js"></script>
+<!-- <script type="text/javascript" src="../tinymce/js/tinymce/tinymce.min.js"></script> -->
+<link href="../lib/css/board/board_reg.css" rel="stylesheet" />
 <script>
- tinymce.init({
-     selector: "#description",
-     theme: "modern",
-     language: "ko_KR",
-     menubar:false,
-     plugins: "autolink code link media image table textcolor autoresize",
-     toolbar: "undo redo | styleselect | forecolor bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table link media custom_image code ",
-     setup: function(editor) {
-     editor.addButton('custom_image', {
-             title: '이미지삽입',
-             icon: 'image',
-             onclick: function() {
-                 window.open("write_pop.html","tinymcePop","width=400,height=350");
-             }
-         });
-     }
 
- });
 </script>
 </head>
 <body>
@@ -52,61 +36,12 @@
                           </form>
                       </div>
                       <div class="inbox-body">
-                         <div class="mail-option">
-                             <div class="chk-all">
-                                 <input type="checkbox" class="mail-checkbox mail-group-checkbox">
-                                 <div class="btn-group">
-                                     <a data-toggle="dropdown" href="#" class="btn mini all" aria-expanded="false">
-                                         All
-                                         <i class="fa fa-angle-down "></i>
-                                     </a>
-                                     <ul class="dropdown-menu">
-                                         <li><a href="#"> None</a></li>
-                                         <li><a href="#"> Read</a></li>
-                                         <li><a href="#"> Unread</a></li>
-                                     </ul>
-                                 </div>
+                         <div class="mail-option required_area">
+                             <div class="chk-all" style="color: red;">
+                                 <input type="checkbox" class="required_check">필독
                              </div>
 
-                             <div class="btn-group">
-                                 <a data-original-title="Refresh" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips">
-                                     <i class=" fa fa-refresh"></i>
-                                 </a>
-                             </div>
-                             <div class="btn-group hidden-phone">
-                                 <a data-toggle="dropdown" href="#" class="btn mini blue" aria-expanded="false">
-                                     More
-                                     <i class="fa fa-angle-down "></i>
-                                 </a>
-                                 <ul class="dropdown-menu">
-                                     <li><a href="#"><i class="fa fa-pencil"></i> Mark as Read</a></li>
-                                     <li><a href="#"><i class="fa fa-ban"></i> Spam</a></li>
-                                     <li class="divider"></li>
-                                     <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
-                                 </ul>
-                             </div>
-                             <div class="btn-group">
-                                 <a data-toggle="dropdown" href="#" class="btn mini blue">
-                                     Move to
-                                     <i class="fa fa-angle-down "></i>
-                                 </a>
-                                 <ul class="dropdown-menu">
-                                     <li><a href="#"><i class="fa fa-pencil"></i> Mark as Read</a></li>
-                                     <li><a href="#"><i class="fa fa-ban"></i> Spam</a></li>
-                                     <li class="divider"></li>
-                                     <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
-                                 </ul>
-                             </div>
 
-                             <ul class="unstyled inbox-pagination">
-                                 <li><span>1-50 of 234</span></li>
-                                 <li>
-                                     <a class="np-btn" href="#"><i class="fa fa-angle-left  pagination-left"></i></a>
-                                 </li>
-                                 <li>
-                                     <a class="np-btn" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
-                                 </li>
-                             </ul>
                          </div>
                           <table id="teamNoticeBoard">
 
@@ -165,7 +100,7 @@
 			<tr>
 				<td colspan="5"
 					style="text-align: left; padding: 30px 15px 30px 15px; background: floralwhite;">
-					<textarea class="write_desc_area" id="description"></textarea>
+					<textarea class="write_desc_area" id="description" name="write_desc"></textarea>
 				</td>
 			</tr>
 			<tr class="btn_area">
@@ -180,6 +115,11 @@
               </div>
 </div>
 
+<script>
+CKEDITOR.replace( 'write_desc' );
+
+
+</script>
 
 
 </body>

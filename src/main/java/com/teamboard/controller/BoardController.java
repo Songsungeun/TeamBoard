@@ -1,13 +1,18 @@
 package com.teamboard.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -326,21 +331,52 @@ public class BoardController {
 	
 	// file upload 관련 추가 (첨부된 파일과 게시판 내용에 첨부된 이미지 별도 관리)
 	@RequestMapping(value = "boardImage")
-	public Object boardImage(MultipartFile[] files) throws Exception {
+	public void boardImage(MultipartFile upload, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		OutputStream out = null;
+        PrintWriter printWriter = null;
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+        
 		String newFileName = null;
-		Date dt = new Date();
-//		String filepath = dt.getYear() + "/" + dt.getMonth();
+		Calendar cal = Calendar.getInstance();
 		
-		if (files.length > 0) {
-			for (int i = 0; i < files.length; i++) {
-				File convFile = new File (files[i].getOriginalFilename());
-				convFile.mkdirs();
-				files[i].transferTo(convFile);
+		String filePath = "C:\\Users\\DEV\\Desktop\\ssong\\upload\\" + cal.get(Calendar.YEAR) + "\\" + (cal.get(Calendar.MONTH) + 1) + "\\";
+		
+		System.out.println(request.getServerName());
+		
+		try {
+			
+			File convFile = new File (filePath +  upload.getOriginalFilename());
+			if (!convFile.exists()) {
+				convFile.mkdirs();   
+				System.out.println("폴더 생성");
+			}
+			upload.transferTo(convFile);
+			
+			String callback = request.getParameter("CKEditorFuncNum");
+			printWriter = response.getWriter();
+//			String fileUrl = request.getServerName() + ":" + request.getLocalPort() + "/" + "resources/upload/" + cal.get(Calendar.YEAR) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" + upload.getOriginalFilename();
+			String fileUrl = "../../fileFolder/" + cal.get(Calendar.YEAR) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" +upload.getOriginalFilename();
+			
+			printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
+					+ callback
+					+ ",'"
+					+ fileUrl
+					+ "','이미지를 업로드 하였습니다.'"
+					+ ")</script>");
+			printWriter.flush();
+		} catch(IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (out != null) out.close();
+				if (printWriter != null) printWriter.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
-		
-		return JsonResult.success();
+		return;
 	}
 
 }
