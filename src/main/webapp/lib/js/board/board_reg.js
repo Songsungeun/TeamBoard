@@ -80,43 +80,15 @@ function write_add() {
 		return false;
 	}
 	
-	if ($("#board_type option:selected").val() == "no_name") {
-		formData.append("showName", $('.show_box').prop("checked"));
-	}
+	formData = append_formData(formData);
 	
-	// append
-	formData.append("title", $("#title").val());
-	//formData.append("description", CKEDITOR.instances.description.getData());
-	formData.append("description", "test");
-	formData.append("boardType", $("#board_type option:selected").val());
+	for (var pair of formData.entries()) {
+	console.log(pair[0] + ', ' + pair[1]);
+}
 	
-	if ($("#board_type option:selected").val() == "notice") {
-		formData.append("category", $("#category_list_notice option:selected").val());
-	} else if ($("#board_type option:selected").val() == "product_issue") {
-		formData.append("category", $("#category_list_product option:selected").val());
-	} else if ($("#board_type option:selected").val() == "etc_work") {
-		formData.append("category", $("#category_list_etc option:selected").val());
-	}
-	
-	formData.append("required", $('.required_box').prop("checked"));
-	
-	let successCallback = function(obj) {
-		var result = obj.jsonResult
-		if (result.state == "success") {
-			alert("작성되었습니다.");
-			console.log(result);
-		} else {console.log("else로 빠짐")}
-	};
-	
-	let errCallback = function(request,status,error) {
-		alert("오류 발생");
-		console.log("code:"+ request.status+"\n message:"+request.responseText+"\n error:"+error);
-	};
-	
-//	require(['common'], function(common) {
-//		common.ajax(url, formData, successCallback, errCallback, common.POST);
-//	});
-	ajaxwriteRequest(formData, url);
+	require(['common'], function(common) {
+		common.ajax(url, formData, successCallback, common.fnAjaxErr, common.POST);
+	});
 		
 }
 
@@ -142,8 +114,21 @@ function write_update() {
 	}
 	
 	formData.append("boardNo", boardNo);
+	formData = append_formData(formData);
+
+	require(['common'], function(common) {
+		common.ajax(url, formData, successCallback, common.fnAjaxErr, common.POST);
+	});
+}
+
+function append_formData(formData) {
+	if ($("#board_type option:selected").val() == "no_name") {
+		formData.append("showName", $('.show_box').prop("checked"));
+	}
+	
+	// append
 	formData.append("title", $("#title").val());
-	formData.append("description", tinyMCE.activeEditor.getContent())
+	formData.append("description", CKEDITOR.instances.description.getData());
 	formData.append("boardType", $("#board_type option:selected").val());
 	
 	if ($("#board_type option:selected").val() == "notice") {
@@ -153,42 +138,10 @@ function write_update() {
 	} else if ($("#board_type option:selected").val() == "etc_work") {
 		formData.append("category", $("#category_list_etc option:selected").val());
 	}
+	
 	formData.append("required", $('.required_box').prop("checked"));
-
-	ajaxwriteRequest(formData, url);
-}
-
-function ajaxwriteRequest(formData, url) {
-	console.log("title : " + formData.get("title"));
-	console.log("description: " + formData.get("description"));
-	console.log("boardType: " + formData.get("boardType"));
-	console.log("category: " + formData.get("category"));
-	$.ajax({
-		url: url,
-		data: JSON.stringify(formData),
-		processData: false,
-		contentType: false,
-		type: "POST",
-		success : function(obj) {
-			var result = obj.jsonResult
-			if (result.state == "success") {
-				alert("작성되었습니다.");
-				console.log(result);
-				if (result.data2 == "type") {
-//					location.href = "../board/noticeBoard.html?type=" + result.data + "&pageNo=1";
-				} else if (result.data2 == "category") {
-//					location.href = "../board/noticeBoard.html?cat=" + result.data + "&pageNo=1";
-				} else {
-					alert("문제가 있습니다. 관리자에게 문의하세요.");
-					location.href = "../main/Mainpage.html"; 
-				}
-			} else {console.log("else로 빠짐")}
-		},
-		error : function(request,status,error) {
-			alert("오류 발생");
-			console.log("code:"+ request.status+"\n message:"+request.responseText+"\n error:"+error);
-		}
-	})
+	
+	return formData;
 }
 
 function insertUserInfo() {
@@ -349,3 +302,20 @@ function isNoName() {
 		$(".show_wrap").hide();
 	}
 }
+
+//작성, 수정 공용 success 함수
+var successCallback = function(obj) {
+	var result = obj.jsonResult
+	if (result.state == "success") {
+		alert("작성되었습니다.");
+		console.log(result);
+		if (result.data2 == "type") {
+			location.href = "../board/boardList.html?type=" + result.data + "&pageNo=1";
+		} else if (result.data2 == "category") {
+			location.href = "../board/boardList.html?cat=" + result.data + "&pageNo=1";
+		} else {
+			alert("문제가 있습니다. 관리자에게 문의하세요.");
+			location.href = "../main/Mainpage.html"; 
+		}
+	} else {console.log("else로 빠짐")}
+};

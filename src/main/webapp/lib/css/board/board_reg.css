@@ -20,13 +20,6 @@
   color: white;
 }
 
-.required_wrap, .show_wrap {
-	margin-top: 20px;
-	margin-left: 15%;
-	font-size: 15px;
-	color: red;
-}
-
 .btn_area .modify_btn {
 	display: none;
 }

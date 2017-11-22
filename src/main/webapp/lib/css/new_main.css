@@ -41,6 +41,13 @@
     min-height: 80px;
     padding: 10px;
 }
+
+.home_icon {
+	font-size: 30px !important;
+    float: left;
+    margin-top: 15px;
+    color: lightgrey;
+}
 .user-head .inbox-avatar {
     float: left;
     width: 65px;
@@ -51,6 +58,7 @@
 .user-head .user-info {
     display: inline-block;
     margin: 0 0 0 10px;
+    width: 250px;
 }
 .user-head .user-info h5 {
 	display: inline-block;

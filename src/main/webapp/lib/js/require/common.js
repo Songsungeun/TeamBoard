@@ -62,6 +62,11 @@ define(function() {
 			return User;
 		},
 		
+		fnAjaxErr : function(request,status,error) {
+			alert("오류 발생");
+			console.log("code:"+ request.status+"\n message:"+request.responseText+"\n error:"+error);
+		},
+		
 		// 페이징 함수
 		Paging : function(totalCnt, dataSize, pageSize, pageNo, param) {
 			totalCnt = parseInt(totalCnt); // 전체 레코드 수
