@@ -76,53 +76,6 @@ fnSignUp = function (){
 	
 }
 
-
-function ajaxSignUpRequest(formData, url) {
-	$.ajax({
-		url: url,
-		data: formData,
-		processData: false,
-		contentType: false,
-		type: "POST",
-		success : function(obj) {
-			var result = obj.jsonResult
-			if (result.state != "success") {
-				alert(result.data)
-			} else {
-				alert("가입 되었습니다. 승인을 기다려 주세요.");
-				location.href = "login.html";
-			}
-		},
-		error : function(err) {
-			alert("오류 발생");
-			console.log("err message : " + err.data);
-		}
-	})
-}
-
-function ajaxLoginRequest(formData, url) {
-	$.ajax({
-		url: url,
-		data: formData,
-		processData: false,
-		contentType: false,
-		type: "POST",
-		success : function(obj) {
-			var result = obj.jsonResult
-			if (result.state == "success") {
-				console.log("페이지 이동");
-				location.href = "../main/Mainpage.html"
-			} else {
-				alert(result.data);
-			}
-		},
-		error : function(err) {
-			alert("오류 발생");
-			console.log("err message : " + err.data);
-		}
-	})
-}
-
 var fnLoginCheck = function () {
     if ($("#txtLoginId").val() == "") {
         alert("로그인 아이디를 입력하세요.");

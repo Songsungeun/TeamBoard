@@ -12,7 +12,7 @@ import java.sql.Date;
 
 public class Board implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
 	protected int boardNo;
 	protected String title;
@@ -25,7 +25,6 @@ public class Board implements Serializable{
 	protected int commentCount;
 	protected boolean file_status;
 	protected boolean showName;
-	
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -41,8 +40,8 @@ public class Board implements Serializable{
 	public String getDescription() {
 		return description;
 	}
-	public void setDescription(String descripition) {
-		this.description = descripition;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public int getUserNo() {
 		return userNo;
@@ -80,18 +79,20 @@ public class Board implements Serializable{
 	public void setCommentCount(int commentCount) {
 		this.commentCount = commentCount;
 	}
-	public boolean isShowName() {
-		return showName;
-	}
-	public void setShowName(boolean showName) {
-		this.showName = showName;
-	}
 	public boolean isFile_status() {
 		return file_status;
 	}
 	public void setFile_status(boolean file_status) {
 		this.file_status = file_status;
 	}
+	public boolean isShowName() {
+		return showName;
+	}
+	public void setShowName(boolean showName) {
+		this.showName = showName;
+	}
+	
+	
 	
 	
 	

@@ -84,22 +84,39 @@ function write_add() {
 		formData.append("showName", $('.show_box').prop("checked"));
 	}
 	
-		// append
-		formData.append("title", $("#title").val());
-		formData.append("description", CKEDITOR.instances.description.getData());
-		formData.append("boardType", $("#board_type option:selected").val());
-		
-		if ($("#board_type option:selected").val() == "notice") {
-			formData.append("category", $("#category_list_notice option:selected").val());
-		} else if ($("#board_type option:selected").val() == "product_issue") {
-			formData.append("category", $("#category_list_product option:selected").val());
-		} else if ($("#board_type option:selected").val() == "etc_work") {
-			formData.append("category", $("#category_list_etc option:selected").val());
-		}
-		
-		formData.append("required", $('.required_box').prop("checked"));
-		
-		ajaxwriteRequest(formData, url);
+	// append
+	formData.append("title", $("#title").val());
+	//formData.append("description", CKEDITOR.instances.description.getData());
+	formData.append("description", "test");
+	formData.append("boardType", $("#board_type option:selected").val());
+	
+	if ($("#board_type option:selected").val() == "notice") {
+		formData.append("category", $("#category_list_notice option:selected").val());
+	} else if ($("#board_type option:selected").val() == "product_issue") {
+		formData.append("category", $("#category_list_product option:selected").val());
+	} else if ($("#board_type option:selected").val() == "etc_work") {
+		formData.append("category", $("#category_list_etc option:selected").val());
+	}
+	
+	formData.append("required", $('.required_box').prop("checked"));
+	
+	let successCallback = function(obj) {
+		var result = obj.jsonResult
+		if (result.state == "success") {
+			alert("작성되었습니다.");
+			console.log(result);
+		} else {console.log("else로 빠짐")}
+	};
+	
+	let errCallback = function(request,status,error) {
+		alert("오류 발생");
+		console.log("code:"+ request.status+"\n message:"+request.responseText+"\n error:"+error);
+	};
+	
+//	require(['common'], function(common) {
+//		common.ajax(url, formData, successCallback, errCallback, common.POST);
+//	});
+	ajaxwriteRequest(formData, url);
 		
 }
 
@@ -142,9 +159,13 @@ function write_update() {
 }
 
 function ajaxwriteRequest(formData, url) {
+	console.log("title : " + formData.get("title"));
+	console.log("description: " + formData.get("description"));
+	console.log("boardType: " + formData.get("boardType"));
+	console.log("category: " + formData.get("category"));
 	$.ajax({
 		url: url,
-		data: formData,
+		data: JSON.stringify(formData),
 		processData: false,
 		contentType: false,
 		type: "POST",
@@ -154,18 +175,18 @@ function ajaxwriteRequest(formData, url) {
 				alert("작성되었습니다.");
 				console.log(result);
 				if (result.data2 == "type") {
-					location.href = "../board/noticeBoard.html?type=" + result.data + "&pageNo=1";
+//					location.href = "../board/noticeBoard.html?type=" + result.data + "&pageNo=1";
 				} else if (result.data2 == "category") {
-					location.href = "../board/noticeBoard.html?cat=" + result.data + "&pageNo=1";
+//					location.href = "../board/noticeBoard.html?cat=" + result.data + "&pageNo=1";
 				} else {
 					alert("문제가 있습니다. 관리자에게 문의하세요.");
 					location.href = "../main/Mainpage.html"; 
 				}
 			} else {console.log("else로 빠짐")}
 		},
-		error : function(err) {
+		error : function(request,status,error) {
 			alert("오류 발생");
-			console.log("err message : " + err);
+			console.log("code:"+ request.status+"\n message:"+request.responseText+"\n error:"+error);
 		}
 	})
 }
