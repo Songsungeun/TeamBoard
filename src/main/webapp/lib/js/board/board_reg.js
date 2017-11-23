@@ -153,40 +153,8 @@ function insertUserInfo() {
 	$('user_name').text($("#user_name").val());
 }
 
-function ajaxLoginCheck() {
-	var url = "/" + location.pathname.split('/')[1] + "/user/loginCheck.json";
-	$.ajax({
-		url: url,
-		type: "GET",
-		success : function(obj) {
-			var result = obj.jsonResult;
-			if (result.state != "success") {
-				alert("로그인 하세요.");
-				location.href = "../user/login.html";
-			} else {
-				$('.user_name').text(result.data.name);
-				console.log("로그인 상태");
-			}
-		},
-		error : function(err) {
-			console.log("err message: " + err.data);
-			alert("오류발생");
-			location.href = "../user/login.html";
-		}
-	})
-}
-
-//function changeType() {
-//	var chk_val = $("#board_type option:selected").val();
-//	if (chk_val != "notice" && chk_val != "product_issue") {
-//		$('#category_list').attr("disabled", true);
-//		$('#category_list').css("background-color", "gainsboro");
-//	} else {
-//		$('#category_list').css("background-color", "white");
-//	}
-//}
-
 function isEdit() {
+	DEBUG && console.log("is edit?");
 	var param = $(location).attr('search').split('?')[1];
 	console.log("param = " + param);
 	if (param == undefined) {
@@ -210,7 +178,7 @@ function isEdit() {
 				location.href = "noticeBoard.html"
 			}
 		} else { // 수정이 아닌 경우
-			console.log("수정 아님");
+			DEBUG && console.log("수정 아님");
 			if (params[0] == "type") {
 				$("#board_type").val(params[1]);
 				chained();
@@ -237,58 +205,51 @@ function isEdit() {
 }
 
 function ajaxGetBoard(formData, url) {
-	$.ajax({
-		url: url,
-		data: formData,
-		processData: false,
-		contentType: false,
-		type: "POST",
-		success : function(obj) {
-			var result = obj.jsonResult
-			if (result.state != "success") {
-				console.log("데이타 로드 실패");
+	
+	let successCallback = function(obj) {
+		var result = obj.jsonResult
+		if (result.state != "success") {
+			console.log("데이타 로드 실패");
+		} else {
+			console.log(result);
+//			insertData(result.data);
+			
+			if (result.data.userNo != result.data2.memberNo && !(result.data2.admin)) {
+				alert("수정은 관리자나 작성자만 가능합니다.");
+				location.href = "../main/Mainpage.html";
 			} else {
-				console.log(result);
-//				insertData(result.data);
+				$('.write_btn').hide();
+				$('.modify_btn').show();
+				$('#title').val(result.data.title);
+				$('.board_no').text(result.data.boardNo);
+				console.log(result.data.description);
+				CKEDITOR.instances.description.setData(result.data.description);
+				$('.cre_dt').text(result.data.date);
 				
-				if (result.data.userNo != result.data2.memberNo && !(result.data2.admin)) {
-					alert("수정은 관리자나 작성자만 가능합니다.");
-					location.href = "../main/Mainpage.html";
-				} else {
-					$('.write_btn').hide();
-					$('.modify_btn').show();
-					$('#title').val(result.data.title);
-					$('.board_no').text(result.data.boardNo);
-//					tinyMCE.activeEditor.setContent(result.data.description);
-//					tinymce.editors[0].setContent("hello world");
-					console.log(result.data.description);
-					tinymce.get('description').setContent(result.data.description);
-					
-					// 공지 or 상품 타입은 하위 카테고리 있으므로 해당 select 선택되어 있도록 설정
-					$("#board_type").val(result.data.boardType);
-					chained();
+				// 공지 or 상품 타입은 하위 카테고리 있으므로 해당 select 선택되어 있도록 설정
+				$("#board_type").val(result.data.boardType);
+				chained();
 
-					if (result.data.boardType == "notice") {
-						$('#category_list_notice').val(result.data.category);
-					} else if (result.data.boardType == "product_issue") {
-						$('#category_list_product').val(result.data.category);
-					} 
-					
-					// 필독 글인경우 기본으로 필독 체크되도록 설정
-					if (result.data.required) {
-						$("#required_box").prop('checked', true);
-					}
-					
-					// 익명인지 체크후 체크박스 이름 변경
-					isNoName();
+				if (result.data.boardType == "notice") {
+					$('#category_list_notice').val(result.data.category);
+				} else if (result.data.boardType == "product_issue") {
+					$('#category_list_product').val(result.data.category);
+				} 
+				
+				// 필독 글인경우 기본으로 필독 체크되도록 설정
+				if (result.data.required) {
+					$("#required_box").prop('checked', true);
 				}
+				
+				// 익명인지 체크후 체크박스 이름 변경
+				isNoName();
 			}
-		},
-		error : function(err) {
-			alert("오류 발생");
-			console.log("err message : " + err.data);
 		}
-	})
+	};
+	
+	require(['common'], function(common) {
+		common.ajax(url, formData, successCallback, common.fnAjaxErr, common.POST);
+	});
 }
 
 function isNoName() {

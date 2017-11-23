@@ -169,6 +169,7 @@ function insertData(data) {
 		$('.board_type').attr("href", "noticeBoard.html?type=" + data.boardType);
 	}
 	getCommentList();
+	
 }
 
 function ajaxAddComment(formData, url) {
@@ -228,14 +229,15 @@ function getCommentList() {
 function showBoardList(data) {
 	let source = $('#board_comment_template').html();
 	
-	require(['handlebars'], function(Handlebars) {
+	require(['handlebars', 'common'], function(Handlebars, common) {
 		let template = Handlebars.compile(source);
 		let html = template(data);
 		$('.tmp').append(html);
+		
+		paging = common.Paging(data.data2, 10, 5, currPage, paramFlag);
+		$('.paging').append(paging);
 	})
-//	var template = Handlebars.compile(source);
-//	var html = template(data);
-//	$('.tmp').append(html);
+	
 }
 
 function LimitString() {
@@ -249,7 +251,7 @@ function LimitString() {
 }
 
 function moveToUpdate() {
-	location.href = "../board/board_write.html?no=" + $('.board_no').val();
+	location.href = "../board/write_board.html?no=" + $('.board_no').val();
 }
 
 function moveToList() {

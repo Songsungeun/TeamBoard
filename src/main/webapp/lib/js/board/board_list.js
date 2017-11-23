@@ -58,40 +58,12 @@ function checkParam() {
 }
 
 function insertBoardName(params) {
-	var showText;
-	if (params[0] == "type") {
-		switch (params[1]) {
-		case "notice" : showText = "[공지사항]"; break;
-		case "common_issue" : showText = "[시장이슈]"; break;
-		case "product_issue" : showText = "[제품별 사양 및 이슈]"; break;
-		case "process" : showText = "[업무프로세스]"; break;
-		case "product_term" : showText = "[제품 관련 용어 정리]"; break;
-		case "no_name" : showText = "[익명 게시판]"; break;
-		case "free" : showText = "[자유 게시판]"; break;
-		case "pc_helper" : showText = "[PC 도움방]"; break;
-		case "about_work_site" : showText = "[업무 관련 사이트]"; break;
-		case "my_place" : showText = "[나의 업무 공간]"; break;
-		case "etc_work" : showText = "[기타 업무 공유]"; break;
-		}
-	} else {
-		console.log("else")
-		switch (params[1]) {
-		case "team_notice" : showText = "[팀 내 공지사항]"; break;
-		case "work_notice" : showText = "[업무 관련 공지사항]"; break;
-		case "sat" : showText = "[SAT]"; break;
-		case "room_speaker" : showText = "[ROOM SPEAKER]"; break; 
-		case "multiroom" : showText = "[MULTIROOM APP]"; break;
-		case "band" : showText = "[BAND APP]"; break;
-		case "bd_hes" : showText = "[BD/HES]"; break;
-		case "pvr": showText = "[PVR]"; break;
-		case "ss_connect" : showText = "[SAMSUNG CONNECT]"; break;
-		case "convergence" : showText = "[CONVERGENCE]"; break;
-		case "alexa" : showText = "[ALEXA]"; break;
-		case "etc_work" : showText = "[업무]"; break;
-		case "etc_nonwork" : showText = "[비업무]"; break;
-		}
-	}
-	$('.type_name').text(showText);
+	let showText;
+	
+	require(['common'], function(common) {
+		showText = common.setTypeName(params);
+		$('.type_name').text(showText);
+	})
 }
 
 function ajaxBoardListForType(type_name, pageNo) {
@@ -132,36 +104,10 @@ function ajaxRequest(formData, url) {
 		}
 	}; 
 	
-	let errorCallback = function(err) {
-		alert("오류 발생");
-		console.log("err message : " + err.data);
-	}
-	
 	require(['common'], function(common) {
-		common.ajax(url, formData, successCallback, errorCallback, common.POST);
+		common.ajax(url, formData, successCallback, common.fnAjaxErr, common.POST);
 	})
 	
-	//	$.ajax({
-//		url: url,
-//		data: formData,
-//		processData: false,
-//		contentType: false,
-//		type: "POST",
-//		success : function(obj) {
-//			var result = obj.jsonResult
-//			if (result.state != "success") {
-//				console.log("데이타 로드 실패");
-//			} else {
-//				console.log(result);
-//				boardCnt = result.data2
-//				showBoardList(result)
-//			}
-//		},
-//		error : function(err) {
-//			alert("오류 발생");
-//			console.log("err message : " + err.data);
-//		}
-//	})
 }
 
 function showBoardList(result) {
