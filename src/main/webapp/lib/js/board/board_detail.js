@@ -1,9 +1,19 @@
 /**
  * 
  */
-$(document).ready(function() {
-	getBoardDetail();
-	addComment();
+//$(document).ready(function() {
+//	getBoardDetail();
+//	addComment();
+//})
+
+require(['domReady', 'jquery', 'common'], function (domReady, $, common) {
+		
+		domReady(function() {
+			DEBUG && console.log("board_detail.js domReady");
+			common.loadNav();
+			getBoardDetail();
+			addComment();
+		})
 })
 
 var returnType;
@@ -16,18 +26,22 @@ function addComment() {
 			return false;
 		}
 		
-		var formData = new FormData();
-		var url = "inserComment.json";
-		var boardNo = Number($('.board_no').val());
-		console.log(typeof($('.board_no').val()));
-		console.log(typeof(boardNo));
-		console.log(boardNo);
-		
+		let formData = new FormData();
+		let url = "inserComment.json";
+		let boardNo = Number($('.board_no').val());
+		let successCallback = function() {
+			alert("등록 되었습니다.");
+			location.reload(true);
+		}		
 		formData.append("boardNo", boardNo);
 		formData.append("commentDescription", $('.comment_content').val());
-		var limit = LimitString();
+		
+		let limit = LimitString();
+		
 		if (limit) {
-			ajaxAddComment(formData, url);
+			require(['common'], function(common) {
+				common.ajax(url, formData, successCallback, common.fnAjaxErr, common.POST);
+			})
 		} else {
 			alert("글자수를 초과하였습니다. 최대 글자수는 1000자입니다.");
 		}
@@ -38,71 +52,77 @@ function getBoardDetail() {
 	var param = $(location).attr('search').split('?')[1];
 	var params = param.split('=');
 	
+	let successCallback = function(obj) {
+		var result = obj.jsonResult
+		if (result.state != "success") {
+			console.log("데이타 로드 실패");
+		} else {
+			DEBUG && console.log(result);
+			returnType = result.data.boardType; // 목록 돌아가기 위해 type 저장
+			
+			// Data 삽입
+			insertData(result.data);
+			
+			if (result.data.userNo == result.data2.memberNo || result.data2.admin) {
+				$('.login_user_btn').show();
+			}
+		}
+	}
+	
 	var formData = new FormData();
 	var url = "detail.json";
 	
 	if (params[1]) {
 		formData.append("boardNo", params[1])
-		ajaxGetBoard(formData, url)
+		
+		require(['common'], function(common) {
+				common.ajax(url, formData, successCallback, common.fnAjaxErr, common.POST);
+		})
 	} else {
 		alert("오류 발생");
-		location.href = "noticeBoard.html"
+		location.href = "boardList.html"
 	}
 	
 }
 
-function ajaxGetBoard(formData, url) {
-	$.ajax({
-		url: url,
-		data: formData,
-		processData: false,
-		contentType: false,
-		type: "POST",
-		success : function(obj) {
-			var result = obj.jsonResult
-			if (result.state != "success") {
-				console.log("데이타 로드 실패");
-			} else {
-				console.log(result);
-				returnType = result.data.boardType;
-				insertData(result.data);
-				if (result.data.userNo == result.data2.memberNo || result.data2.admin) {
-					$('.login_user_btn').show();
-				}
-			}
-		},
-		error : function(err) {
-			alert("오류 발생");
-			console.log("err message : " + err.data);
-		}
-	})
-}
-
 function ajaxDeleteBoard() {
-	var param = $(location).attr('search').split('?')[1];
-	var boardNo = param.split('=')[1];
+	let param = $(location).attr('search').split('?')[1];
+	let boardNo = param.split('=')[1];
+	let dataNo= "boardNo=" + boardNo;
+	let confirm_del = confirm("삭제하시겠습니까?");
 	
-	var confirm_del = confirm("삭제하시겠습니까?");
+	let successCallback = function(obj) {
+		var result = obj.jsonResult
+		if (result.state != "success") {
+			alert(obj.data);
+		} else {
+			alert("삭제 되었습니다.");
+			location.href = "../main/Mainpage.html";
+		}
+	};
 	
 	if (confirm_del) {
-		$.ajax({
-			url : "delete.json",
-			data: "boardNo=" + boardNo,
-			processData: false,
-			contentType: false,
-			success : function(obj) {
-				var result = obj.jsonResult
-				if (result.state != "success") {
-					alert(obj.data);
-				} else {
-					alert("삭제 되었습니다.");
-					location.href = "../main/Mainpage.html";
-				}
-			},
-			error : function(err) {
-				alert("오류 발생");
-			}
+		require(['common'], function(common) {
+			common.ajax("delete.json", dataNo, successCallback, common.fnAjaxErr, common.GET);
 		})
+//		$.ajax({
+//			url : "delete.json",
+//			data: dataNo,
+//			processData: false,
+//			contentType: false,
+//			success : function(obj) {
+//				var result = obj.jsonResult
+//				if (result.state != "success") {
+//					alert(obj.data);
+//				} else {
+//					alert("삭제 되었습니다.");
+//					location.href = "../main/Mainpage.html";
+//				}
+//			},
+//			error : function(err) {
+//				alert("오류 발생");
+//			}
+//		})
 	} else {
 		return false;
 	}
@@ -206,10 +226,16 @@ function getCommentList() {
 }
 
 function showBoardList(data) {
-	var source = $('#board_comment_template').html();
-	var template = Handlebars.compile(source);
-	var html = template(data);
-	$('.tmp').append(html);
+	let source = $('#board_comment_template').html();
+	
+	require(['handlebars'], function(Handlebars) {
+		let template = Handlebars.compile(source);
+		let html = template(data);
+		$('.tmp').append(html);
+	})
+//	var template = Handlebars.compile(source);
+//	var html = template(data);
+//	$('.tmp').append(html);
 }
 
 function LimitString() {
@@ -223,13 +249,13 @@ function LimitString() {
 }
 
 function moveToUpdate() {
-	location.href = "../board/noticeBoardReg.html?no=" + $('.board_no').val();
+	location.href = "../board/board_write.html?no=" + $('.board_no').val();
 }
 
 function moveToList() {
 	
 	if (document.referrer.split('/')[5] == "Mainpage.html") {
-		location.href = "../board/noticeBoard.html?type=" + returnType + "&pageNo=1"; 
+		location.href = "../board/boardList.html?type=" + returnType + "&pageNo=1"; 
 	} else {
 		history.go(-1);
 	}

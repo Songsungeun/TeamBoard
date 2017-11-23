@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>MainPage</title>
+<!-- <script src="../node_modules/handlebars/handlebars-v4.0.11.js"></script> -->
+<script data-main="../lib/js/require/requireConfig" src="../lib/js/require/require.js"></script>
+<script src="../lib/jquery/dist/jquery.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+<script src="../lib/js/ckeditor/ckeditor.js"></script>
+<script src="../lib/js/board/board_detail.js"></script>
+<link href="../lib/css/board/board_reg.css" rel="stylesheet" />
+<script>
+
+</script>
+</head>
+<body>
+
+	<div class="container contents_wrap">
+ <div class="mail-box">
+                  <aside class="sm-side">
+                  </aside>
+                  
+                  <aside class="lg-side">
+                      <div class="inbox-head">
+                          <h3 class="type_name"></h3>
+                          <form action="#" class="pull-right position">
+                              <div class="input-append">
+                                  <input type="text" class="sr-input" placeholder="Search">
+                                  <button class="btn sr-btn" type="button"><i class="fa fa-search"></i></button>
+                              </div>
+                          </form>
+                      </div>
+                      <div class="board_no" style="display:hidden;"></div>
+                      <div class="inbox-body">
+                          <table id="teamNoticeBoard" class="table-striped">
+			        <!-- 게시판 상세페이지 -->
+			        <tr style="background-color: #A0C0D7; color: white; font-weight: bold;">
+			          <td style="width: 15%;">제목</td>
+			          <td colspan="3" style="width: 60%;" class="board_title"></td>
+			          <td style="width: 25%;"><a href="" class="board_type"></a></td>
+			        </tr>
+			        <tr>
+			          <td>작성자</td>
+			          <td colspan="3" class="author_name"></td>
+			          <td style="width: 10%;" class="cre_dt"></td>
+			        </tr>
+			        <tr style="background-color: #F0F0F0;"><td colspan="5" style="height: 2px;"></td></tr>
+			        <tr>
+			          <td colspan="5" style="text-align: left; padding: 30px 15px 30px 15px; background: snow;" class="board_content">
+			          </td>
+			        </tr>
+			        <tr class="btn_area">
+						<td colspan="5">
+							<input type="submit" class="btn btn-danger delete_btn login_user_btn" onclick="javascript: ajaxDeleteBoard();" value="삭제"> 
+							<input type="submit" class="btn btn-info modify_btn login_user_btn" onclick="javascript: moveToUpdate();" value="수정">
+							<input type="submit" class="btn btn-success list_btn" onclick="javascript: moveToList();" value="목록">
+						</td>
+					</tr>
+			        
+			        <!-- 댓글 부분 -->
+			        <tbody class="tmp">
+			        <script id="board_comment_template" type="text/x-handlebars-template">
+		
+					{{#data}}   
+						<tr style="background-color: #F0F0F0;">
+          				<td><b>{{userName}}</b></td>
+          				<td colspan="3" style="text-align: left; padding-left: 30px;">{{commentDescription}}</td>
+          				<td>{{cre_dt}}</td>
+        				</tr>
+					{{/data}}
+					</script>
+					</tbody>
+			        <!-- 댓글 입력 부분 -->
+			        <tr>
+			          <td><b>댓글</b></td>
+			          <td colspan="3" style="padding-top: 5px; padding-bottom: 2px;">
+			            <textarea rows="3" cols="70" class="comment_content" style="width: 95%;"></textarea>
+			          </td>
+			          <td>
+			            <input type="button" value="등록" style="width:50%; height: 50%;" class="add_comment btn btn-warning"/>
+			          </td>
+			        </tr>
+			        
+			        
+			      </table>
+                      </div>
+                  </aside>
+              </div>
+</div>
+
+</body>
+</html>
