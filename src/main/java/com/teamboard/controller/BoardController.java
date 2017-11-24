@@ -56,12 +56,13 @@ public class BoardController {
 	int length = 10;
 	
 	@RequestMapping(path = "add")
-	public Object insertBoard(Board board, HttpSession session) {
+	public Object insertBoard(Board board, MultipartFile[] files, HttpSession session) {
 
 		try {
 			User user = (User)session.getAttribute("user");
 			board.setUserNo(user.getMemberNo());
 			boardService.saveBoard(board);
+			System.out.println("file length: " + files.length);
 		} catch (Exception e) {
 			logger.error("{}", e);
 			e.printStackTrace();

@@ -141,6 +141,10 @@ function append_formData(formData) {
 	
 	formData.append("required", $('.required_box').prop("checked"));
 	
+	$($("#InputFile")[0].files).each(function(index, file) {
+		formData.append("files", file)
+	});
+	
 	return formData;
 }
 
