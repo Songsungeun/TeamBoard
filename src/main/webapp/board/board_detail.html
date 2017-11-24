@@ -38,7 +38,7 @@
                       <div class="inbox-body">
                       	<div class="mail-option required_area">
                              <div class="chk-all required_wrap" style="color: red;">
-                                 <input type="submit" class="required_check required_box btn btn-default" value="글쓰기">
+                                 <input type="submit" class="required_check required_box btn btn-default" onclick="javascript: moveToList();" value="목록">
                              </div>
                          </div>
                          
@@ -63,7 +63,6 @@
 						<td colspan="5">
 							<input type="submit" class="btn btn-danger delete_btn login_user_btn" onclick="javascript: ajaxDeleteBoard();" value="삭제"> 
 							<input type="submit" class="btn btn-info modify_btn login_user_btn" onclick="javascript: moveToUpdate();" value="수정">
-							<input type="submit" class="btn btn-success list_btn" onclick="javascript: moveToList();" value="목록">
 						</td>
 					</tr>
 			        

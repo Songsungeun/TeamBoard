@@ -12,10 +12,11 @@ require(['domReady', 'jquery', 'common'], function (domReady, $, common) {
 			DEBUG && console.log("board_list.js domReady");
 			common.loadNav();
 			checkParam();
-//			common.setUser("이름", "포지션");
-//			console.log("aaa : " + common.getUser().name);
-//			console.log("bbb : " + common.getUser().position);
-	})
+		})
+		
+		$(".write_btn").click(function() {
+			location.href = "write_board.html?" + paramsForWrite;
+		})
 })
 //$(document).ready(function() {
 //	
@@ -29,13 +30,6 @@ require(['domReady', 'jquery', 'common'], function (domReady, $, common) {
 //	console.log("boardList.js");
 //})
 
-//$(window).load(function() {
-//	console.log("write: " + paramsForWrite);
-//	$("#write_btn").click(function() {
-//		location.href = "noticeBoardReg.html?" + paramsForWrite;
-//	})
-//})
-
 function checkParam() {
 	var origin_param = $(location).attr('search').split('?')[1];
 	var split_param = origin_param.split('&');
@@ -43,6 +37,7 @@ function checkParam() {
 	var params = split_param[0].split('=');
 	paramsForWrite = split_param[0]; //writepage에 파라미터 전달할 변수
 	
+	DEBUG && console.log("paramsForWrite = " + paramsForWrite);
 	paramFlag = split_param[0] + "&" + split_param[1].split('=')[0] + "=";
 	currPage = split_param[1].split('=')[1];
 	
