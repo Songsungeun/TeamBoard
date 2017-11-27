@@ -54,7 +54,11 @@
                                   <td class="inbox-small-cells board_no">-</td>
                                   <td class="view-message view-message"><a href="board_detail.html?no={{boardNo}}"><span style="color:red;">[필독]</span>{{title}}</a><span class="label label-info">family</span></td>
                                   <td class="view-message dont-show">{{userName}}</td>
-                                  <td class="view-message inbox-small-cells"><i class="fa fa-paperclip"></i></td>
+                                  {{#if fileStatus}}
+                                  		<td class="view-message inbox-small-cells"><i class="fa fa-paperclip"></i></td>
+									{{else}}
+                                  		<td class="view-message inbox-small-cells"></td>
+									{{/if}}
                                   <td class="view-message text-right" style="text-align: center;">{{date}}</td>
                               </tr>
 							{{/data.require}}
@@ -64,7 +68,11 @@
                                   <td class="inbox-small-cells board_no">{{showNo}}</td>
                                   <td class="view-message view-message"><a href="board_detail.html?no={{boardNo}}">{{title}}</a><span class="label label-info">family</span></td>
                                   <td class="view-message dont-show">{{userName}}</td>
-                                  <td class="view-message inbox-small-cells"><i class="fa fa-paperclip"></i></td>
+									{{#if fileStatus}}
+                                  		<td class="view-message inbox-small-cells"><i class="fa fa-paperclip"></i></td>
+									{{else}}
+                                  		<td class="view-message inbox-small-cells"></td>
+									{{/if}}
                                   <td class="view-message text-right" style="text-align: center;">{{date}}</td>
                               </tr>
 							{{/data.noReq}}

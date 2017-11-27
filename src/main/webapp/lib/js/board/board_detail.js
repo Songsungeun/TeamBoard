@@ -53,16 +53,26 @@ function getBoardDetail() {
 	var params = param.split('=');
 	
 	let successCallback = function(obj) {
-		var result = obj.jsonResult
+		let result = obj.jsonResult
+		let fileList = '';
 		if (result.state != "success") {
 			console.log("데이타 로드 실패");
 		} else {
 			DEBUG && console.log(result);
-			returnType = result.data.boardType; // 목록 돌아가기 위해 type 저장
+			returnType = result.data.board.boardType; // 목록 돌아가기 위해 type 저장
 			
 			// Data 삽입
-			insertData(result.data);
-			
+			insertData(result.data.board);
+			if(result.data.files.length > 0) {
+				for (var i = 0; i < result.data.files.length; i++) {
+					fileList += "<a id='fileListArea'" +"href='" + result.data.files[i].fileUrl + "' download='" + result.data.files[i].originName + "'>"
+					+ (i+1) + "." + result.data.files[i].originName + "</div>"
+					if (i != result.data.files.length - 1) {
+						fileList += "<br>"
+					}
+				}
+				$(".file_contents").html(fileList);
+			}
 			if (result.data.userNo == result.data2.memberNo || result.data2.admin) {
 				$('.login_user_btn').show();
 			}

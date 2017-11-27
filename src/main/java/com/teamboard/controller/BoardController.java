@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,16 +18,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.teamboard.Util.FileUploadUtil;
 import com.teamboard.service.BoardService;
 import com.teamboard.service.CommentService;
+import com.teamboard.service.FileService;
+import com.teamboard.vo.AttachFile;
 import com.teamboard.vo.Board;
 import com.teamboard.vo.BoardList;
 import com.teamboard.vo.Comment;
 import com.teamboard.vo.User;
+import com.teamboard.vo.common.Constants;
 import com.teamboard.vo.common.JsonResult;
 
 import lombok.extern.slf4j.Slf4j;
@@ -48,12 +50,13 @@ public class BoardController {
 	@Autowired
 	CommentService commentService;
 
-	@Autowired 
-	ServletContext sc;
+	@Autowired
+	FileService fileService;
 	
 	Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	int length = 10;
+	Calendar cal = Calendar.getInstance();
 	
 	@RequestMapping(path = "add")
 	public Object insertBoard(Board board, MultipartFile[] files, HttpSession session) {
@@ -61,8 +64,45 @@ public class BoardController {
 		try {
 			User user = (User)session.getAttribute("user");
 			board.setUserNo(user.getMemberNo());
-			boardService.saveBoard(board);
+			
 			System.out.println("file length: " + files.length);
+			
+			// 게시물 리스트에서 첨부파일 여부 확인하기 위함
+			if (files.length != 0) {
+				board.setFileStatus(true);
+			} else {
+				board.setFileStatus(false);
+			}
+			
+			boardService.saveBoard(board);
+			
+			String newFileName = null;
+			if (files.length != 0) {
+				for (int i = 0; i < files.length; i++) {
+					AttachFile boardFile = new AttachFile();
+					boardFile.setOriginName(files[i].getOriginalFilename());
+					newFileName = FileUploadUtil.getNewFilename(files[i].getOriginalFilename());
+					boardFile.setFileName(newFileName);
+					boardFile.setBoardNo(board.getBoardNo());
+					
+					String filePath = Constants.filePathAttach + cal.get(Calendar.YEAR) + "\\" + (cal.get(Calendar.MONTH) + 1) + "\\";
+					
+					boardFile.setFileUrl("../../fileFolder/Attach_File/" +  cal.get(Calendar.YEAR) + "\\" + (cal.get(Calendar.MONTH) + 1) + "\\" + newFileName);
+					
+					File convFile = new File (filePath +  newFileName);
+					
+					if (!convFile.exists()) {
+						convFile.mkdirs();   
+						System.out.println("폴더 생성");
+					}
+					
+					files[i].transferTo(convFile);
+					
+					fileService.insertFile(boardFile);;
+				} 
+			}
+			
+			
 		} catch (Exception e) {
 			logger.error("{}", e);
 			e.printStackTrace();
@@ -118,6 +158,12 @@ public class BoardController {
 		try {
 			BoardList board = boardService.findOne(boardNo);
 			User user = (User)session.getAttribute("user");
+			List<AttachFile> fileList = fileService.getFileList(boardNo);
+			
+			Map<String, Object> maps = new HashMap<>();
+			
+			maps.put("board", board);
+			maps.put("files", fileList);
 			
 			if (user == null) {
 				throw new RuntimeException("회원정보가 없습니다.");
@@ -125,10 +171,11 @@ public class BoardController {
 			if (board == null) {
 				throw new RuntimeException("해당 게시물이 존재하지 않습니다.");
 			}
-			return JsonResult.success(board, user);
+			return JsonResult.success(maps, user);
 
 		} catch (RuntimeException e) {
 			logger.error("{}", e);
+			e.printStackTrace();
 			return JsonResult.error(e.getMessage());
 		}
 	}
@@ -341,11 +388,8 @@ public class BoardController {
         response.setContentType("text/html;charset=utf-8");
         
 		String newFileName = null;
-		Calendar cal = Calendar.getInstance();
 		
-		String filePath = "C:\\Users\\DEV\\Desktop\\ssong\\upload\\" + cal.get(Calendar.YEAR) + "\\" + (cal.get(Calendar.MONTH) + 1) + "\\";
-		
-		System.out.println(request.getServerName());
+		String filePath = Constants.filePathImage + "\\";
 		
 		try {
 			
@@ -359,7 +403,7 @@ public class BoardController {
 			String callback = request.getParameter("CKEditorFuncNum");
 			printWriter = response.getWriter();
 //			String fileUrl = request.getServerName() + ":" + request.getLocalPort() + "/" + "resources/upload/" + cal.get(Calendar.YEAR) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" + upload.getOriginalFilename();
-			String fileUrl = "../../fileFolder/" + cal.get(Calendar.YEAR) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" +upload.getOriginalFilename();
+			String fileUrl = "../../fileFolder/Image/" + upload.getOriginalFilename();
 			
 			printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
 					+ callback

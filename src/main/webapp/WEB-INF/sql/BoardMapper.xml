@@ -15,6 +15,7 @@
     <result column="required" property="required"/>
     <result column="comment_count" property="commentCount"/>
     <result column="show_name" property="showName"/>
+    <result column="file_status" property="fileStatus"/>
   </resultMap>
   
   <resultMap type="BoardList" id="boardListMap">
@@ -31,11 +32,12 @@
     <result column="required" property="required"/>
     <result column="comment_count" property="commentCount"/>
     <result column="show_name" property="showName"/>
+    <result column="file_status" property="fileStatus"/>
   </resultMap>
   
-  <insert id="insertBoard" parameterType="Board">
-		insert into board(title, description, user_no, board_type, category, cre_dt, required, show_name)
-		values(#{title}, #{description}, #{userNo}, #{boardType}, #{category}, now(), #{required}, #{showName})
+  <insert id="insertBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="boardNo">
+		insert into board(title, description, user_no, board_type, category, cre_dt, required, show_name, file_status)
+		values(#{title}, #{description}, #{userNo}, #{boardType}, #{category}, now(), #{required}, #{showName}, #{fileStatus})
   </insert>
 
   <update id="updateBoard" parameterType="Board">
@@ -74,7 +76,7 @@
   </select>
 
   <select id="findAllbyType" resultMap="boardListMap" parameterType="map">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, bo.comment_count, bo.show_name, mem.name, mem.position, mem.admin
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, bo.comment_count, bo.show_name, bo.file_status, mem.name, mem.position, mem.admin
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
 		where board_type = #{type} and required = #{required}
@@ -83,7 +85,7 @@
   </select>
   
   <select id="findAllbyTypeForNoName" resultMap="boardListMap" parameterType="map">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, bo.comment_count, bo.show_name, mem.name, mem.position, mem.admin
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, bo.comment_count, bo.show_name, bo.file_status, mem.name, mem.position, mem.admin
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
 		where board_type = #{type} and bo.user_no = #{userNo}
@@ -100,7 +102,7 @@
   </select>
   
   <select id="findAllbyTypeForMain" resultMap="boardListMap" parameterType="String">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, mem.name, mem.position, mem.admin
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.file_status, mem.name, mem.position, mem.admin
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
 		where board_type = #{value}
@@ -113,7 +115,7 @@
   </select>
   
   <select id="findAllbyCategory" resultMap="boardListMap" parameterType="map">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, bo.comment_count, bo.show_name, mem.name, mem.position, mem.admin
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, bo.comment_count, bo.show_name, bo.file_status, mem.name, mem.position, mem.admin
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
 		where category = #{category} and required = #{required}
@@ -122,7 +124,7 @@
   </select>
   
   <select id="findAllbyCategoryForMain" resultMap="boardListMap" parameterType="map">
-    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, mem.name, mem.position, mem.admin
+    select bo.board_no,bo.title,bo.description,bo.user_no,bo.board_type,bo.category, bo.cre_dt, bo.required, bo.file_status, mem.name, mem.position, mem.admin
 		from board bo
 		left join user mem on bo.user_no = mem.user_no
 		where category = #{category} and required = #{required}

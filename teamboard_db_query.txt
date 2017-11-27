@@ -112,7 +112,8 @@ CREATE TABLE `attached_file` (
 	`file_no`     INT         NOT NULL COMMENT 'file_no', -- file_no
 	`board_no`    INT         NULL     COMMENT 'board_no', -- board_no
 	`file_name`   VARCHAR(50) NULL     COMMENT 'file_name', -- file_name
-	`origin_name` VARCHAR(50) NULL     COMMENT 'origin_name' -- origin_name
+	`origin_name` VARCHAR(50) NULL     COMMENT 'origin_name', -- origin_name
+	`file_url`    VARCHAR(200) NULL     COMMENT 'file_url' -- file_url
 )
 COMMENT 'attached_file';
 

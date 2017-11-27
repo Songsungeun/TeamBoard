@@ -23,7 +23,7 @@ public class FileServiceImpl implements FileService {
 	
 	@Override
 	public void insertFile(AttachFile file) throws Exception {
-		fileDao.insertFile(file);
+		fileDao.addAttachFile(file);
 	}
 
 	@Override

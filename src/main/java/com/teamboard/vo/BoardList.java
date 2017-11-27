@@ -28,6 +28,7 @@ public class BoardList implements Serializable{
 	protected int showNo;
 	protected int commentCount;
 	protected boolean showName;
+	protected boolean fileStatus;
 	
 	public int getBoardNo() {
 		return boardNo;
@@ -112,6 +113,12 @@ public class BoardList implements Serializable{
 	}
 	public void setShowName(boolean showName) {
 		this.showName = showName;
+	}
+	public boolean isFileStatus() {
+		return fileStatus;
+	}
+	public void setFileStatus(boolean fileStatus) {
+		this.fileStatus = fileStatus;
 	}
 	
 	

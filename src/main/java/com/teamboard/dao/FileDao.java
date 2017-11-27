@@ -13,7 +13,7 @@ import com.teamboard.vo.AttachFile;
 
 public interface FileDao {
 
-	int insertFile(AttachFile file) throws Exception;
+	int addAttachFile(AttachFile file) throws Exception;
 	int deleteFile(int fileNo);
 	
 	List<AttachFile> getAttachFileListbyBoardNo(int boardNo);
