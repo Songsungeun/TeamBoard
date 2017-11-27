@@ -115,24 +115,6 @@ function ajaxDeleteBoard() {
 		require(['common'], function(common) {
 			common.ajax("delete.json", dataNo, successCallback, common.fnAjaxErr, common.GET);
 		})
-//		$.ajax({
-//			url : "delete.json",
-//			data: dataNo,
-//			processData: false,
-//			contentType: false,
-//			success : function(obj) {
-//				var result = obj.jsonResult
-//				if (result.state != "success") {
-//					alert(obj.data);
-//				} else {
-//					alert("삭제 되었습니다.");
-//					location.href = "../main/Mainpage.html";
-//				}
-//			},
-//			error : function(err) {
-//				alert("오류 발생");
-//			}
-//		})
 	} else {
 		return false;
 	}

@@ -205,13 +205,16 @@ function isEdit() {
 			}
 		}
 	}
+	$('.file_area').show();
 	
 }
 
 function ajaxGetBoard(formData, url) {
 	
 	let successCallback = function(obj) {
-		var result = obj.jsonResult
+		let result = obj.jsonResult
+		let fileList = "";
+		
 		if (result.state != "success") {
 			console.log("데이타 로드 실패");
 		} else {
@@ -224,27 +227,37 @@ function ajaxGetBoard(formData, url) {
 			} else {
 				$('.write_btn').hide();
 				$('.modify_btn').show();
-				$('#title').val(result.data.title);
-				$('.board_no').text(result.data.boardNo);
-				console.log(result.data.description);
-				CKEDITOR.instances.description.setData(result.data.description);
-				$('.cre_dt').text(result.data.date);
+				$('#title').val(result.data.board.title);
+				$('.board_no').text(result.data.board.boardNo);
+				console.log(result.data.board.description);
+				CKEDITOR.instances.description.setData(result.data.board.description);
+				$('.cre_dt').text(result.data.boarddate);
 				
 				// 공지 or 상품 타입은 하위 카테고리 있으므로 해당 select 선택되어 있도록 설정
-				$("#board_type").val(result.data.boardType);
+				$("#board_type").val(result.data.board.boardType);
 				chained();
 
-				if (result.data.boardType == "notice") {
-					$('#category_list_notice').val(result.data.category);
+				if (result.data.board.boardType == "notice") {
+					$('#category_list_notice').val(result.data.board.category);
 				} else if (result.data.boardType == "product_issue") {
-					$('#category_list_product').val(result.data.category);
+					$('#category_list_product').val(result.data.board.category);
 				} 
 				
 				// 필독 글인경우 기본으로 필독 체크되도록 설정
-				if (result.data.required) {
+				if (result.data.board.required) {
 					$("#required_box").prop('checked', true);
 				}
 				
+				if(result.data.files.length > 0) {
+					for (var i = 0; i < result.data.files.length; i++) {
+						fileList += "<a id='fileListArea'" +"href='" + result.data.files[i].fileUrl + "' download='" + result.data.files[i].originName + "'>"
+						+ (i+1) + "." + result.data.files[i].originName + "</a>" + "<span style='margin-left: 15px;'><input class='btn btn-danger' type='button' value='삭제' onclick='javascript: fnDeleteFile(" + result.data.files[i].fileNo + ");'/>" 
+						if (i != result.data.files.length - 1) {
+							fileList += "<br>"
+						}
+					}
+					$(".file_contents").html(fileList);
+				}
 				// 익명인지 체크후 체크박스 이름 변경
 				isNoName();
 			}
@@ -284,3 +297,7 @@ var successCallback = function(obj) {
 		}
 	} else {console.log("else로 빠짐")}
 };
+
+function fnDeleteFile(fileNo) {
+	// todo : file 삭제기능
+}
