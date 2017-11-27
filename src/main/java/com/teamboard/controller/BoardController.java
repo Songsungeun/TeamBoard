@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -408,7 +409,7 @@ public class BoardController {
 			printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
 					+ callback
 					+ ",'"
-					+ fileUrl
+					+ new String(fileUrl.getBytes("UTF-8"), "UTF-8")
 					+ "','이미지를 업로드 하였습니다.'"
 					+ ")</script>");
 			printWriter.flush();
