@@ -299,5 +299,16 @@ var successCallback = function(obj) {
 };
 
 function fnDeleteFile(fileNo) {
-	// todo : file 삭제기능
+	let url = "deleteFile.json";
+	let formData = new FormData();
+	formData.append("fileNo", fileNo);
+	
+	let successCallback = function() {
+		alert("삭제 되었습니다.");
+		location.reload();
+	}
+	
+	require(['common'], function(common) {
+		common.ajax(url, formData, successCallback, common.fnAjaxErr, common.POST);
+	})
 }

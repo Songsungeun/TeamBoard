@@ -425,5 +425,17 @@ public class BoardController {
 		}
 		return;
 	}
+	
+	@RequestMapping(value= "deleteFile")
+	public Object deleteAttachedFile(int fileNo) {
+		try {
+			fileService.deleteFile(fileNo);
+			
+			return JsonResult.success();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return JsonResult.error("해당 파일이 없습니다.");
+		}
+	}
 
 }

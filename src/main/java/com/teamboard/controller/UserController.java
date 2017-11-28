@@ -41,6 +41,12 @@ public class UserController {
 			if (originUser != null) {
 				return JsonResult.fail("이미 존재하는 ID입니다.");
 			} else {
+				
+				// for 최초 admin
+				if (user.getUserID().equals("admin")) {
+					user.setAdmin(true);
+					user.setPermission(true);
+				}
 				userService.signUpUser(user);
 			}
 			
