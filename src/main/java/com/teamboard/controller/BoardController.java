@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -26,6 +25,7 @@ import com.teamboard.Util.FileUploadUtil;
 import com.teamboard.service.BoardService;
 import com.teamboard.service.CommentService;
 import com.teamboard.service.FileService;
+import com.teamboard.service.UserService;
 import com.teamboard.vo.AttachFile;
 import com.teamboard.vo.Board;
 import com.teamboard.vo.BoardList;
@@ -53,6 +53,9 @@ public class BoardController {
 
 	@Autowired
 	FileService fileService;
+	
+	@Autowired
+	UserService userService;
 	
 	Logger logger = LoggerFactory.getLogger(UserController.class);
 	
@@ -103,6 +106,9 @@ public class BoardController {
 				} 
 			}
 			
+			if (!board.getBoardType().equals("no_name") && !board.getBoardType().equals("free") && !board.getBoardType().equals("my_place")) {
+				userService.increaseWriteCount(user.getMemberNo());
+			}
 			
 		} catch (Exception e) {
 			logger.error("{}", e);

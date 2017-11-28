@@ -2,12 +2,17 @@
  * 
  */
 
-require(['domReady'], function (domReady) {
+require(['domReady', 'common', 'handlebars'], function (domReady, common, Handlebars) {
 		
 		domReady(function() {
 			require(['jquery'], function(jquery) {
 				console.log("!13211");
+				common.loadNav();
 				tabsFunc();
+				var source = $('#product_list').html();
+				var template = Handlebars.compile(source);
+				tabsFunc(source, template);
+				ajaxRequest(source, template);
 			})
 		})
 })
@@ -27,7 +32,7 @@ function tabsFunc(source, template) {
         $("ul.tabs li").removeClass("active").css("color", "#333");
         $(this).addClass("active").css("color", "white");
         var activeTab = $(this).attr("value");
-//        ajaxProductRequest($(this).attr("value"), source, template);
+        ajaxProductRequest($(this).attr("value"), source, template);
     });
 }
 
@@ -93,17 +98,22 @@ function ajaxProductRequest(category, source, template) {
 
 function showWorkList(data) {
 	var source = $('#main_notice').html();
-	var template = Handlebars.compile(source);
 	
-	var html = template(data);
-	$('.notice_table').append(html);
+	require(['handlebars'], function(Handlebars) {
+		var template = Handlebars.compile(source);
+		var html = template(data);
+		$('.notice_table').append(html);
+	})
 }
 
 function showTeamList(data) {
 	var source = $('#issue_notice').html();
-	var template = Handlebars.compile(source);
-	var html = template(data);
-	$('.issue_table').append(html);
+	
+	require(['handlebars'], function(Handlebars) {
+		var template = Handlebars.compile(source);
+		var html = template(data);
+		$('.issue_table').append(html);
+	})
 }
 
 function showProductList(data, source, template) {

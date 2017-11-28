@@ -14,6 +14,9 @@ require(['domReady'], function (domReady) {
 			showContent();
 			DEBUG && console.log("loading nav.js");
 			
+			$('.home_icon').click(function(event) {
+				location.href = "../main/Mainpage.html";
+			})
 			insertUserData(common.getUser().name, common.getPostion(common.getUser().position));
 		})
 		

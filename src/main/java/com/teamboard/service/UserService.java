@@ -28,4 +28,5 @@ public interface UserService {
 	public User checkID(String userId);
 	
 	public void approveUser(int userNo) throws Exception;
+	public void increaseWriteCount(int userNo) throws UserNotFoundException;
 }

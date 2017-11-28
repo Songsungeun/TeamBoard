@@ -108,5 +108,10 @@ public class UserServiceImpl implements UserService {
 		userDao.setAdminUser(map);
 	}
 
+	@Override
+	public void increaseWriteCount(int userNo) throws UserNotFoundException {
+		userDao.increaseWriteCount(userNo);
+	}
+
 	
 }

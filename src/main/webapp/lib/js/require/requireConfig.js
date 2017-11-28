@@ -3,19 +3,19 @@
  */
 
 require.config({
-	shim: {
-		"bootstrap" : {"deps"   : ['jquery']},
-		"domReady" : ["jquery"],
-		'handlebars' : {exports: 'Handlebars'}
-	},
-	
 	paths: {
 		'common': 'common',
 		'jquery' : 'jquery',
 		'bootstrap' : '../../bootstrap/dist/js/bootstrap.min',
 		'domReady' : 'domReady',
-		'handlebars' : '../handlebars/handlebars-v4.0.11'
+		'handlebars' : 'handlebars'
+	},
+	shim: {
+		"bootstrap" : {"deps"   : ['jquery']},
+		"domReady" : ["jquery"],
+		'handlebars' : {exports: 'Handlebars'}
 	}
+	
 })
 
 // debug에서만 콘솔 찍기위해 선언한 변수

@@ -159,7 +159,7 @@ define(function() {
 					html.push(index);
 					html.push('</strong>');
 				} else {
-					html.push('<a href="../board/noticeBoard.html?');
+					html.push('<a href="../board/boardList.html?');
 					html.push(param);
 					html.push(index);
 					html.push('" class="np-btn">');
@@ -176,7 +176,7 @@ define(function() {
 			
 			// 다음 화살표
 			if (pageCnt > (prevCnt + 1) * pageSize) {
-				html.push('<a href="../board/noticeBoard.html?');
+				html.push('<a href="../board/boardList.html?');
 				html.push(param);
 				html.push((prevCnt + 1) * pageSize + 1);
 				html.push('" class="np-btn">');
@@ -199,55 +199,3 @@ function setUserData(name, position, userNo) {
 	this.position = position;
 	this.userNo = userNo;
 }
-//$(document).ready( function() {
-//	loadNav();
-//	if ($(location).attr('pathname').split('/')[3] != "mypage.html") {
-//		console.log("마이 페이지 아님");
-//		ajaxLoginCheck();
-//	} 
-//	console.log("common.js")
-//});
-//
-//function ajaxRequest(formData, url) {
-//	$.ajax({
-//		url: url,
-//		data: formData,
-//		processData: false,
-//		contentType: false,
-//		type: "POST",
-//		success : function(obj) {
-//			var result = obj.jsonResult
-//			if (result.state != "success") {
-//				alert(result.data)
-//			} else {DEBUG && console.log(result.data)}
-//		},
-//		error : function(err) {
-//			alert("오류 발생");
-//			console.log("err message : " + err.data);
-//		}
-//	})
-//}
-//
-//function ajaxLoginCheck() {
-//	var url = "/" + location.pathname.split('/')[1] + "/user/loginCheck.json";
-//	$.ajax({
-//		url: url,
-//		type: "GET",
-//		success : function(obj) {
-//			var result = obj.jsonResult;
-//			if (result.state != "success") {
-//				alert(result.data);
-//				location.href = "../user/login.html";
-//			} else {
-//				console.log("로그인 상태");
-//			}
-//		},
-//		error : function(err) {
-//			console.log("err message: " + err.data);
-//			alert("오류발생");
-//			location.href = "../user/login.html";
-//		}
-//	})
-//}
-//
-//

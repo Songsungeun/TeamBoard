@@ -13,6 +13,8 @@
     <result column="name" property="name"/>
     <result column="admin" property="admin"/>
     <result column="permission" property="permission"/>
+    <result column="write_count" property="writeCount"/>
+    <result column="level" property="level"/>
   </resultMap>
   
   <insert id="signUpUser" parameterType="User">
@@ -66,5 +68,9 @@
     update user set
     admin=#{admin}
     where user_no=#{userNo}
+  </update>
+  
+  <update id="increaseWriteCount" parameterType="int">
+  	update user set write_count = write_count + 1 where user_no = #{value}
   </update>
 </mapper>

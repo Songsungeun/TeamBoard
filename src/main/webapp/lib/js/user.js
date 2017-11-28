@@ -28,8 +28,7 @@ fnLogin = function () {
 	let fnSuccess = function(obj) {
 		let result = obj.jsonResult
 		if (result.state == "success") {
-//			location.href = "../main/Mainpage.html"
-			location.href = "../board/boardList.html"
+			location.href = "../main/Mainpage.html"
 		} else {
 			alert(result.data);
 		}
@@ -118,6 +117,7 @@ function fnSignUpCheck() {
 	
 	var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
     if( !idReg.test( $("#user_id").val() ) ) {
+    	if ($("#user_id").val() == "admin") { return true; } // 편의를 위해 관리자 최초 가입시 admin으로 가입하면 바로 관리자 권한 획득
         alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
         return;
     }

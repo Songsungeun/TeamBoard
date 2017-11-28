@@ -46,8 +46,8 @@ CREATE TABLE `user` (
 	`name`        varchar(10)  NULL     COMMENT 'name', -- name
 	`admin`       BOOLEAN      NULL     COMMENT 'admin', -- admin
 	`permission`  BOOLEAN      NULL     COMMENT 'permission', -- permission
-	`write_count` INT          NULL     COMMENT 'write_count', -- write_count
-	`level`       INT          NULL     COMMENT 'level' -- level
+	`write_count` INT          NULL     DEFAULT 0 COMMENT 'write_count', -- write_count
+	`level`       INT          NULL     DEFAULT 0 COMMENT 'level' -- level
 )
 COMMENT 'user';
 

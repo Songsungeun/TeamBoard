@@ -32,6 +32,7 @@ function addComment() {
 		let successCallback = function() {
 			alert("등록 되었습니다.");
 			location.reload(true);
+//			getCommentList();
 		}		
 		formData.append("boardNo", boardNo);
 		formData.append("commentDescription", $('.comment_content').val());
@@ -164,30 +165,6 @@ function insertData(data) {
 	
 }
 
-function ajaxAddComment(formData, url) {
-	$.ajax({
-		url: url,
-		data: formData,
-		processData: false,
-		contentType: false,
-		type: "POST",
-		success : function(obj) {
-			var result = obj.jsonResult
-			if (result.state != "success") {
-				console.log("데이타 로드 실패");
-				console.log(result)
-			} else {
-				alert("등록 되었습니다.");
-				location.reload(true);
-			}
-		},
-		error : function(err) {
-			alert("오류 발생");
-			console.log("err message : " + err);
-		}
-	})
-}
-
 function getCommentList() {
 	var boardNo = Number($('.board_no').val());
 	var formData = new FormData();
@@ -195,30 +172,24 @@ function getCommentList() {
 	
 	formData.append("boardNo", boardNo);
 	
-	$.ajax({
-		url: url,
-		data: formData,
-		processData: false,
-		contentType: false,
-		type: "POST",
-		success : function(obj) {
-			var result = obj.jsonResult
-			if (result.state != "success") {
-				console.log("댓글 로드 실패");
-				console.log(result)
-			} else {
-				console.log(result);
-				showBoardList(result);
-			}
-		},
-		error : function(err) {
-			alert("오류 발생");
-			console.log("err message : " + err);
+	let successCallback = function(obj) {
+		var result = obj.jsonResult
+		if (result.state != "success") {
+			console.log("댓글 로드 실패");
+			console.log(result)
+		} else {
+			console.log(result);
+			showCommentList(result);
 		}
+	}
+	
+	require(['common'], function(common) {
+		common.ajax(url, formData, successCallback, common.fnAjaxErr, common.POST);
 	})
+	
 }
 
-function showBoardList(data) {
+function showCommentList(data) {
 	let source = $('#board_comment_template').html();
 	
 	require(['handlebars', 'common'], function(Handlebars, common) {

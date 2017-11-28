@@ -26,4 +26,5 @@ public interface UserDao {
 	List<User> findAll();
 	
 	int approveUser(int userNo) throws Exception;
+	int increaseWriteCount(int userNo);
 }

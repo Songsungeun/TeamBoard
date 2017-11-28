@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>MainPage</title>
+<!-- <script src="../node_modules/handlebars/handlebars-v4.0.11.js"></script> -->
+<script data-main="../lib/js/require/requireConfig" src="../lib/js/require/require.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+<script src="../lib/js/main.js"></script>
+<link href="../lib/css/main.css" rel="stylesheet" />
+</head>
+<body>
+
+	<div class="container contents_wrap">
+ <div class="mail-box">
+                  <aside class="sm-side">
+                  </aside>
+                  
+                  <aside class="lg-side">
+                      <div class="inbox-head">
+                          <h3 class="type_name"></h3>
+                          <form action="#" class="pull-right position">
+                              <div class="input-append">
+                                  <input type="text" class="sr-input" placeholder="Search">
+                                  <button class="btn sr-btn" type="button"><i class="fa fa-search"></i></button>
+                              </div>
+                          </form>
+                      </div>
+                      <div class="inbox-body">
+                         <div class="mail-option required_area">
+                             <div class="chk-all required_wrap" style="color: red;">
+                                 <input type="submit" class="write_btn btn btn-default " value="글쓰기">
+                             </div>
+                         </div>
+                          
+                          
+                          <div class="table_area">
+    			<!-- 공지사항 게시판 -->
+				<table class="sptTable notice_table" style="display: inline-block;">
+    			
+    			<script id="main_notice" type="text/x-handlebars-template">
+			      <tr>
+			        <td colspan="3" style="padding-left: 10px; font-weight: bold; background-color: #A0C0D7; color: white;">* 팀 공지 사항</td>
+			      </tr>
+			    
+				{{#teamReq}}
+			      <tr style="background: blanchedalmond;">
+			        <td style="width: 70%; padding-left: 10px;"><a href="../board/noticeBoardDetail.html?no={{boardNo}}"><span style="color: red">[필독]</span>{{title}}</a></td>
+			        <td style="width: 15%; text-align: center;">{{userName}}</td>
+			        <td style="width: 15%; text-align: center;">{{date}}</td>
+			      </tr>
+			    {{/teamReq}}
+
+				{{#teamNoReq}}
+			      <tr style="background-color: #F0F0F0;">
+			        <td style="width: 70%; padding-left: 10px;"><a href="../board/noticeBoardDetail.html?no={{boardNo}}">{{title}}</a></td>
+			        <td style="width: 15%; text-align: center;">{{userName}}</td>
+			        <td style="width: 15%; text-align: center;">{{date}}</td>
+			      </tr>
+			    {{/teamNoReq}}
+			      <tr>
+			        <td colspan="3" style="text-align: right; padding-right: 15px;"><a href="../board/noticeBoard.html?cat=team_notice&pageNo=1">More</a></td>
+			      </tr>
+				</script>
+			    
+			    </table>
+			    <!-- 공지사항 게시판 끝-->
+			    
+			    <!-- 이슈사항 게시판 -->
+			    <table class="sptTable issue_table" style="margin-left: 50px; display: inline-block;">
+			    
+			    <script id="issue_notice" type="text/x-handlebars-template">
+				<tr>
+			        <td colspan="3" style="padding-left: 10px; font-weight: bold; background-color: #A3D8C4; color: white;">* 업무 공지 사항</td>
+			      </tr>
+			    
+				{{#workReq}}
+			      <tr style="background: blanchedalmond;">
+			        <td style="width: 70%; padding-left: 10px;"><a href="../board/noticeBoardDetail.html?no={{boardNo}}"><span style="color: red">[필독]</span>{{title}}</a></td>
+			        <td style="width: 15%; text-align: center;">{{userName}}</td>
+			        <td style="width: 15%; text-align: center;">{{date}}</td>
+			      </tr>
+			    {{/workReq}}
+
+				{{#workNoReq}}
+			      <tr style="background-color: #F0F0F0;">
+			        <td style="width: 70%; padding-left: 10px;"><a href="../board/noticeBoardDetail.html?no={{boardNo}}">{{title}}</a></td>
+			        <td style="width: 15%; text-align: center;">{{userName}}</td>
+			        <td style="width: 15%; text-align: center;">{{date}}</td>
+			      </tr>
+			    {{/workNoReq}}
+			      <tr>
+			        <td colspan="3" style="text-align: right; padding-right: 15px;"><a href="../board/noticeBoard.html?cat=work_notice&pageNo=1">More</a></td>
+			      </tr>
+				</script>
+				
+			    </table>
+			    <!-- 이슈사항 게시판 끝-->
+			    
+			    <div id="container">
+		  <div style="font-weight: bold; margin-bottom: 10px;">*제품별 사양 및 이슈</div>
+		    <ul class="tabs">
+		        <li class="active" rel="tab" value="sat">SAT</li>
+		        <li rel="tab" value="room_speaker">ROOM SPEAKER</li>
+		        <li rel="tab" value="multiroom">MULTIROOM APP</li>
+		        <li rel="tab" value="band">BAND APP</li>
+		        <li rel="tab" value="bd_hes">BD/HES</li>
+		        <li rel="tab" value="pvr">PVR</li>
+		        <li rel="tab" value="ss_connect">SAMSUNG CONNECT</li>
+		        <li rel="tab" value="convergence">CONVERGENCE</li>
+		        <li rel="tab" value="alexa">ALEXA</li>
+		    </ul>
+		    <div class="tab_container">
+		        <div id="tab1" class="tab_content">
+		        
+		    			
+			        <table id="tabTable" class="product_tab">
+					      
+<script id="product_list" type="text/x-handlebars-template">
+	{{#productReq}}
+		<tr style="background: blanchedalmond;">
+			<td style="width: 70%; padding-left: 10px;"><a href="../board/noticeBoardDetail.html?no={{boardNo}}"><span style="color: red">[필독]</span>{{title}}</a></td>
+			<td style="width: 15%; text-align: center;">{{userName}}</td>
+			<td style="width: 15%; text-align: center;">{{date}}</td>
+		</tr>
+	{{/productReq}}
+
+	{{#productNoReq}}
+		<tr style="background-color: #F0F0F0;">
+			<td style="width: 70%; padding-left: 10px;"><a href="../board/noticeBoardDetail.html?no={{boardNo}}">{{title}}</a></td>
+			<td style="width: 15%; text-align: center;">{{userName}}</td>
+			<td style="width: 15%; text-align: center;">{{date}}</td>
+		</tr>
+      {{#if @last}}
+	  <tr>
+	      <td colspan="3" style="text-align: right; padding-right: 15px;"><a href="../board/noticeBoard.html?cat={{category}}&pageNo=1">More</a></td>
+	  </tr>
+	  {{/if}}
+    {{/productNoReq}}
+</script>
+				    </table>
+					    
+		        </div>
+		    </div>
+		    <!-- .tab_container -->
+		</div>	
+    		</div>
+                      </div>
+                      <div class="paging" style="text-align: center;"></div>
+                  </aside>
+              </div>
+</div>
+
+
+
+</body>
+</html>
